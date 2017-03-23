@@ -18,7 +18,7 @@ and another email about the state change is sent.
 
 Here is an example for simple JavaScript condition; we can make a REST call to create an
 alert named `xyz` which emails to `someone@company.com` when the number of running
-applications is greater than 5 for at least 60 seconds; the JSON object is the payload:
+applications is greater than 5 for at least 60 seconds; the disabled flag indicates whether the alert is enabled or disabled; the JSON object is the payload:
 
 ### PUT /ws/v2/systemAlerts/alerts/xyz
 ```json
@@ -26,14 +26,15 @@ applications is greater than 5 for at least 60 seconds; the JSON object is the p
   "condition":"_topic['cluster.metrics'].numAppsRunning > 5",
   "email":"someone@company.com",
   "description": "No.of apps running is more than 5",
-  "timeThresholdMillis":"60000"
+  "timeThresholdMillis":"60000",
+  "disabled":"false"
 }
 ```
 
-When the number of running applications is greater than 5 for more than 60 seconds, a simple
+When the number of running applications is greater than 5 for more than 60 seconds with the alert status being enabled, a simple
 email will be sent to `someone@company.com`, stating that the alert is in effect, and when
 the number of running applications drops below 6, another email will be sent, stating that
-the alert is no longer in effect.
+the alert is no longer in effect. If an alert is disabled, an email will be sent to indicate the change.
 
 The condition is a simple JavaScript expression which the user can build
 from various system or application-specific values. These values are available as fields
@@ -140,6 +141,13 @@ user to re-enter the previous password. Note that the JSON sample following the 
 The GET API returns the existing SMTP configuration in the gateway. As mentioned above, the SMTP-password
 value is never returned for security reasons.
 
+## Authorization Support for Alerts and Topics
+
+Starting with RTS 3.8, access to alerts will be restricted based on alert owner. A user can view and manage only his own alerts. A user with admin role will have complete access to all alerts including those of other users.
+
+A user will also have restricted access to topics. A user can only view and access topics for applications started by him. Access to topics "cluster.metrics" and "applications" will be restricted to users who have permission to view global configuration(VIEW_GLOBAL_CONFIG). A user with admin role will have access to all topics of all users as well as cluster.metrics and applications.
+
+With the above restriction on topic data, the alert condition provided while creating system alerts can only utilize alert topics which are accessible to alert owner. Hence, a non-admin user A cannot create alerts with conditions using topic data of application(s) started by another user B.
 
 ## Managing and viewing alerts
 
@@ -158,7 +166,7 @@ The following operations are available in the Gateway REST API:
 ## Creating an alert
 
 To create an alert, the user needs to specify the alert name, condition,
-email address and duration in milliseconds. As explained above, the condition
+email address, duration in milliseconds and alert status using disabled flag. As explained above, the condition
 can refer to values in various topic objects including system metrics,
 application metrics, and custom application counters and must yield a Boolean
 value.
@@ -175,7 +183,8 @@ when the `WordCount` app is not in the `RUNNING` state for at least 60 seconds.
   "condition": "_topic['applications.application_1480063135007_0543']['state'] != 'RUNNING'",
   "email":"phil@company.com, mike@company.com",
   "description": "WordCount Application is not running",
-  "timeThresholdMillis":"60000"
+  "timeThresholdMillis":"60000",
+  "disabled":"false"
 }
 ```
 
@@ -216,7 +225,8 @@ with the revised complex expression compressed to a single line:
   "condition": "var alert=false;var appId=undefined;var appsInfo=_topic['applications'].apps;for(i=0;i<appsInfo.length;i++){if(appsInfo[i].name=='WordCount'){appId=appsInfo[i].id;break}}if(appId!=undefined){alert=_topic['applications.'+appId]['state']!='RUNNING'}alert;",
    "email":"phil@company.com, mike@company.com",
    "description": "WordCount Application is not running",
-   "timeThresholdMillis":"60000"
+   "timeThresholdMillis":"60000",
+   "disabled":"false"
 }
 ```
 
@@ -268,6 +278,7 @@ It returns a result of the following form:
  "email": "phil@company.com, mike@company.com",
  "description": "checking latency > 50",
  "timeThresholdMillis": "10000",
+ "disabled":"false",
  "alertStatus": {
    "isInAlert": true,
    "inTime": "1481264665450",
@@ -277,8 +288,8 @@ It returns a result of the following form:
 }
 ```
 
-The result includes the alert name, condition, email addresses, description and duration.
-It also alert status info such as `isInAlert` which indicates whether it is still active
+The result includes the alert name, condition, email addresses, description, duration and enabled/disabled status.
+It also includes alert status info such as `isInAlert` which indicates whether it is still active
 or not, `inTime` which represents the time the alert became active, `emailSent` which,
 as the name suggests, indicates if email was sent, and `message` which is similar to the
 description.
