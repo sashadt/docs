@@ -1,4 +1,4 @@
-# DataTorrent Documentation
+# Table of Contents
 
 * [ DataTorrent RTS](docs/index.md)
 * [ Demos](docs/)

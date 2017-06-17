@@ -1,6 +1,19 @@
-{ 
-  "gitbook": "2.5.2",
-  "structure": { 
-    "summary": "docs/SUMMARY.md" 
-  } 
+{
+  "gitbook": "3.2.2",
+  "title": "DataTorrent Docs",
+  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/sashadt/docs/tree/master",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/sashadt/docs/"
+    },
+    "theme-default": {
+      "styles": {
+        "website": "gitbook.css"
+      }
+    }
+  }
 }
