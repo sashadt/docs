@@ -1,6 +1,5 @@
 .book-summary ul.summary li span {
-  cursor: not-allowed;
-  opacity: 0.3;
+  font-weight: bold;
 }
 
 .book-summary ul.summary li a:hover {
@@ -19,4 +18,8 @@ pre[class*="language-"] {
 
 .token.operator {
   background: none;
+}
+
+.gitbook-link {
+    display: none !important;
 }

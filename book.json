@@ -1,19 +1,34 @@
 {
   "gitbook": "3.2.2",
+  "root": "./docs",
   "title": "DataTorrent Docs",
-  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
+  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs", "versions"],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/sashadt/docs/tree/master",
+      "base": "https://github.com/DataTorrent/docs/tree/master/docs",
       "label": "Edit This Page"
     },
     "github": {
-      "url": "https://github.com/sashadt/docs/"
+      "url": "https://github.com/DataTorrent/docs/"
     },
     "theme-default": {
       "styles": {
         "website": "gitbook.css"
       }
+    },
+    "versions": {
+      "gitbookConfigURL": "https://raw.githubusercontent.com/DataTorrent/docs/gh-pages/book.json",
+      "options": [
+        {
+          "value": "http://docs.datatorrent.com/3.8.0/",
+          "text": "Version 3.8.0"
+        },
+        {
+          "value": "http://docs.datatorrent.com/3.8.1/",
+          "text": "Version 3.8.1",
+          "selected": true
+        }
+      ]
     }
   }
 }

@@ -1,8 +1,7 @@
 Glossary of Terms
 ================================================================================
 
-Apache Apex
------------
+# Apache Apex
 
 - **Apache Hadoop** -  [Apache Hadoop](http://hadoop.apache.org/) is a programming framework that supports the processing of large data sets in a distributed computing environment.
 - **Application** - unified batch and real-time stream processing application running on Apache Apex platform.
@@ -22,12 +21,10 @@ Apache Apex
 - **Stream** - A stream consists of data tuples that flow from one port of an operator to another.
 - **YARN** - [Apache Hadoop YARN](http://hadoop.apache.org/docs/current2/hadoop-yarn/hadoop-yarn-site/YARN.html) (Yet Another Resource Negotiator) is a cluster resource management technology, introduced with Hadoop 2.0.
 
-DataTorrent RTS
----------------
+
+# DataTorrent RTS
 
 - **dtAssemble** - graphical application assembly tool used to develop applications.
 - **dtDashboard** - graphical visualization tool to view and query system and application data.
 - **dtGateway** - HTTP server used by dtManage to interact with STRAM, YARN Resource Manager, and HDFS
 - **dtManage** - the web based interface to install, configure, manage & monitor Apache Apex applications running in a Hadoop Cluster
-
-
