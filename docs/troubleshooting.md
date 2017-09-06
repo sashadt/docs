@@ -6,31 +6,12 @@
 
 DataTorrent products are available for download from [https://www.datatorrent.com/download/](https://www.datatorrent.com/download)
 
--  **Community Edition**:  It is a packaged version of Apache Apex and enables developers to quickly develop their big data streaming and batch projects.
 -  **Enterprise Edition**:  Designed for enterprise production deployment and includes security, advanced monitoring and troubleshooting, graphical application assembly, and application data visualization.
 -  **Sandbox Edition**:  Enterprise Edition and demo applications pre-installed and configured with a single-node Hadoop cluster running in a virtual machine.  Optimized for evaluation and training purposes.
 
 ###  What is the difference between DataTorrent RTS editions?
 
 Please refer to [DataTorrent RTS editions overview](https://www.datatorrent.com/product/edition-overview/)
-
-###  What are DataTorrent RTS package contents of Community vs Enterprise edition?
-
-Package contents for Community edition:
-
--   Apache Apex
--   DataTorrent Demo Applications
--   DataTorrent dtManage
-
-Package contents for Enterprise edition:
-
--   Apache Apex
--   DataTorrent Demo Applications
--   DataTorrent Operator Library
--   DataTorrent Enterprise Security
--   DataTorrent dtManage
--   DataTorrent dtAssemble
--   DataTorrent dtDashboard
 
 ###  How do I confirm the package downloaded correctly?
 
@@ -201,7 +182,7 @@ You can contact us at [https://www.datatorrent.com/contact](https://www.datatorr
 
 # Installation
 
-There are multiple installations available e.g. Sandbox Edition, Community Edition, Enterprise Edition, dtIngest. Supported operating systems are which support Hadoop platform (tested on CentOS 6.x and Ubuntu 12.04).
+There are multiple installations available e.g. Sandbox Edition, Enterprise Edition, dtIngest. Supported operating systems are which support Hadoop platform (tested on CentOS 6.x and Ubuntu 12.04).
 
 ### Minimum hardware requirements, what happens if certain minimum configuration requirement has not been met?
 
