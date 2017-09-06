@@ -253,6 +253,10 @@ This section lists features and capabilities that have been either removed or pl
 * [SPOI-12332] - AppFactory - after importing appPackage, buttons should be refreshed automatically
 * [SPOI-12339] - Unable to retarget datasource in dashboard settings after adding widget
 
+### Appendix 
+#### Known Issues
+* [SPOI-11483] -  For FAILED application, containers state is shown as ACTIVE
+
 
 
 
@@ -277,6 +281,7 @@ This minor release primarily addresses issues related to installation of DataTor
 
 [APEXCORE-737] : Buffer server may stop processing tuples when backpressure is enabled
 [APEXCORE-745] : AppMaster does not shut down because numRequestedContainers becomes negative
+
 
 
 
