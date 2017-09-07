@@ -255,7 +255,8 @@ This section lists features and capabilities that have been either removed or pl
 
 ### Appendix 
 #### Known Issues
-* [SPOI-11483] -  For FAILED application, containers state is shown as ACTIVE
+* [SPOI-11483] -  For FAILED applications, container state is shown as ACTIVE. Yarn returns containers of failed application as active.   
+  *Workaround* - Check for app status first.
 
 
 
