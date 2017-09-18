@@ -10,7 +10,7 @@ issue is discussed in more detail in the Appendix entitled _Further Explorations
 
 > Note: If you are have trouble with any of the following steps, or have not
 complete the preceding sections in this tutorial, you can import _Word Count Demo_
-from AppHub. The _Word Count Demo_ Application Package contains the
+from AppFactory. The _Word Count Demo_ Application Package contains the
 TopNWordsWithQueries Application.
 
 Step I: Add files to the monitored directory
