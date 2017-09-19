@@ -12,15 +12,10 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 1. Click on the AppFactory tab from the top navigation bar.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
+   Page listing the applications available on AppFactory is displayed. 
+1. Search for HDFS to see all applications related to HDFS.
+1. Click on import button for `HDFS to HDFS Line Copy App.` Notification is displayed on the top right corner after application package is successfully imported.
 
-1. Page listing the applications available on AppFactory is displayed.
-Search for HDFS to see all applications related to HDFS.
-   ![AppHub search for HDFS](images/hdfs-line-copy/apphub-search.png)
-
-   Click on import button for `HDFS to HDFS Line Copy App`
-
-1. Notification is displayed on the top right corner after application package is successfully
-   imported.
    ![App import Notification](images/hdfs-line-copy/import-notification.png)
 
 1. Click on the link in the notification which navigates to the page for this application package.
