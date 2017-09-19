@@ -10,10 +10,10 @@ Please send feedback or feature requests to: [feedback@datatorrent.com](mailto:f
 
 ## <a name="steps_to_launch">Steps to launch application</a>
 
-1. Click on the AppHub tab from the top navigation bar.
+1. Click on the AppFactory tab from the top navigation bar.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
 
-1. Page listing the applications available on AppHub is displayed.
+1. Page listing the applications available on AppFactory is displayed.
 Search for Kafka to see all applications related to Kafka.
    ![AppHub search for Kafka](images/hdfs-to-kafka-sync/apphub-search.png)
     Click on import button for `HDFS to Kafka Sync App`
