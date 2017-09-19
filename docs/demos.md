@@ -1,12 +1,12 @@
 Running Demo Applications
 =================================
 
-DataTorrent RTS includes a number of demo applications and they are available for import from the **AppHub** section of the DataTorrent management console.
+DataTorrent RTS includes a number of demo applications and they are available for import from the **AppFactory** section of the DataTorrent management console.
 
 Importing Demo Applications
 --------------------------------------------------------------------------------
 
-1.  Navigate to **AppHub** section of the DataTorrent console.
+1.  Navigate to **AppFactory** section of the DataTorrent console.
 2.  Select one of the available packages, such as *Pi Demo* and click *Import* button.
 3.  Imported application packages and included applications will be listed under **Develop > Application Packages** page.
 
@@ -36,7 +36,7 @@ Configuring Launch Parameters
 
 Some applications may require additional configuration changes prior to launching.  Configuration changes can be made on the launch confirmation screen or manually applied to `~/.dt/dt-site.xml` configuration file.  These typically include adding Twitter API keys for twitter demo, or changing performance settings for larger applications.
 
-1.  Navigate to **AppHub** of the DataTorrent console.  In this example, we will use **Twitter Demo** application package. Click *Import* button. 
+1.  Navigate to **AppFactory** of the DataTorrent console.  In this example, we will use **Twitter Demo** application package. Click *Import* button. 
 
 2.  Navigate to **Develop > Application Packages**. From the list of Applications, select TwitterDemo and press the corresponding launch button.
 
