@@ -14,16 +14,14 @@ This document has a step-by-step guide to configure, customize, and launch this 
 ## <a name="steps_to_launch">Steps to launch application</a>
 
 1. Click on the AppFactory tab from the top navigation bar.
-   ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppFactory is displayed.
-Search for Database to see all applications related to Database.
-   ![AppHub search for Database](images/database-to-hdfs/apphub-search.png)
-
-    Click on import button for `Database dump to HDFS Sync App`
-
-1. Notification is displayed on the top right corner after application package is successfully imported.
+   ![AppHub link from top navigation bar](images/common/apphub_link.png). Page listing the applications available on AppFactory is displayed.
+1. Search for Database to see all applications related to Database.
+1. Click on import button for `Database dump to HDFS Sync App.`
+Notification is displayed on the top right corner after application package is successfully imported.
+   
    ![App import Notification](images/database-to-hdfs/import-notification.png)
+   
+   
 
 1. Click on the link in the notification which navigates to the page for this application package.
    ![App details page](images/database-to-hdfs/app-details-page.png)
