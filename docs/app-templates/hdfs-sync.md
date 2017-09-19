@@ -10,10 +10,10 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 ## Steps to launch application<a name="steps_to_launch"></a>
 
-1. Click on the AppHub tab from the top navigation bar.
+1. Click on the AppFactory tab from the top navigation bar.
   ![AppHub link from top navigation bar](images/common/apphub_link.png)
 
-1. Page listing the applications available on AppHub is displayed.
+1. Page listing the applications available on AppFactory is displayed.
 Search for HDFS to see all applications related to HDFS.
 
   ![AppHub search for HDFS](images/hdfs-sync/apphub-search.png)
