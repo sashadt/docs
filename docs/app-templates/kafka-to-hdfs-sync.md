@@ -10,11 +10,10 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 ## <a name="steps_to_launch">Steps to launch application</a>
 
-1. Click on the AppHub tab from the top navigation bar.
+1. Click on the AppFactory tab from the top navigation bar. Page listing the applications available on AppFactory is displayed.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
 
-1. Page listing the applications available on AppHub is displayed.
-Search for Kafka to see all applications related to Kafka.
+1. Search for Kafka to view all the applications related to Kafka.
    ![AppHub search for Kafka](images/kafka-to-hdfs-sync/apphub-search.png)
    Click on import button for `Kafka to HDFS Sync App`.
 
