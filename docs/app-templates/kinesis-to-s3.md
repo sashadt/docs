@@ -12,12 +12,9 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 1. Click on the AppFactory tab from the top navigation bar.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppFactory is displayed.
-Search for Kinesis to see all applications related to Kinesis.
-   ![AppHub search for Kinesis_or_s3](images/kinesis-to-s3/apphub-search.png)
-   Click on import button for `Kinesis to S3 App`.
-
+   The Page listing the applications available on AppFactory is displayed.
+1. Search for Kinesis to see all applications related to Kinesis.
+1. Click on import button for `Kinesis to S3 App`.
 1. Notification is displayed on the top right corner after application package is successfully
    imported.
    ![App import Notification](images/kinesis-to-s3/import-notification.png)
