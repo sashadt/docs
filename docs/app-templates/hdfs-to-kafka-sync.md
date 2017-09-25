@@ -12,13 +12,9 @@ Please send feedback or feature requests to: [feedback@datatorrent.com](mailto:f
 
 1. Click on the AppFactory tab from the top navigation bar.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppFactory is displayed.
-Search for Kafka to see all applications related to Kafka.
-   ![AppHub search for Kafka](images/hdfs-to-kafka-sync/apphub-search.png)
-    Click on import button for `HDFS to Kafka Sync App`
-
-1. Notification is displayed on the top right corner after application package is successfully
+   Page listing the applications available on AppFactory is displayed.
+1. Search for Kafka to see all applications related to Kafka.
+1. Click on import button for `HDFS to Kafka Sync App`Notification is displayed on the top right corner after application package is successfully
    imported.
    ![App import Notification](images/hdfs-to-kafka-sync/import-notification.png)
 
