@@ -12,15 +12,9 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 1. Click on the AppHub tab from the top navigation bar.
   ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppHub is displayed.
-Search for HDFS to see all applications related to HDFS.
-
-  ![AppHub search for HDFS](images/hdfs-sync/apphub-search.png)
-
-   Click on import button for `HDFS Sync App`.
-
-1. Notification is displayed on the top right corner after application package is successfully
+  Page listing the applications available on AppHub is displayed.
+1. Search for HDFS to see all applications related to HDFS.
+1. Click on import button for `HDFS Sync App`. Notification is displayed on the top right corner after application package is successfully
    imported.
  ![App import Notification](images/hdfs-sync/import-notification.png)
 
