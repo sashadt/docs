@@ -12,24 +12,15 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 1. Click on the AppFactory tab from the top navigation bar.
   ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppFactory is displayed.
-Search for HDFS to see all applications related to HDFS.
-
-  ![AppHub search for HDFS](images/hdfs-sync/apphub-search.png)
-
-   Click on import button for `HDFS Sync App`.
-
-1. Notification is displayed on the top right corner after application package is successfully
-   imported.
+  Page listing the applications available on AppFactory is displayed.
+1. Search for HDFS to see all applications related to HDFS.
+1. Click on import button for `HDFS Sync App`. Notification is displayed on the top right corner after application package is imported successfully
  ![App import Notification](images/hdfs-sync/import-notification.png)
-
+1. Search for HDFS to see all applications related to HDFS.
 1. Click on the link in the notification which navigates to the page for this application package.
    ![App details page](images/hdfs-sync/app-details-page.png)
    Detailed information about the application package like version, last modified time, and short description is available on this page. Click on launch button for `HDFS-Sync-App`
-   application.
-
-1. <a name="launch-dialogue"></a>`Launch HDFS-Sync-App` dialogue is displayed. One can configure name of this instance of the application from this dialogue.
+   application. <a name="launch-dialogue"></a>`Launch HDFS-Sync-App` dialogue is displayed. One can configure name of this instance of the application from this dialogue.
    ![Launch dialogue](images/hdfs-sync/launch.png)
 
 1. Select `Use saved configuration` option. This displays list of pre-saved configurations.
