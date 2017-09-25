@@ -663,7 +663,7 @@ Additional information on tools related to both types of dumps is available
 *  Thread local + partition parallel configuration
 *  What to do when downstream operators are slow than the input  operators.
 *  I am seeing high latency, what to do?
-*  appConf in ADT (inside apa file) vs conf option in Apex CLI
+*  conf option in Apex CLI
 *  Application keeps restarting (has happened once due to license agent during upgrade)
 *  Operator getting killed after every 60 secs (Timeout issue)
 *  How to change commit frequency

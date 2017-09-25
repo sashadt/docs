@@ -67,7 +67,7 @@ The Cluster Overview page shows overall cluster statistics as well as a list of 
 
 ![Cluster Overview Page](images/dtmanage/console-monitor-home.png)
 
-The cluster statistics include some performance statistics and memory usage information. As for the application list, there are two options to take note of: **ended apps** and **system apps**. The first option will include all ended applications that are still in the resource manager history. The second option will include system apps, which are apps like the App Data Tracker that are developed by DataTorrent and used to add functionality to your DataTorrent cluster.
+The cluster statistics include some performance statistics and memory usage information. As for the application list, take note of: **ended apps** This includes all the ended applications that are still in the resource manager history.
 
 ### Instance Page
 
