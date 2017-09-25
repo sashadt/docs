@@ -12,13 +12,10 @@ This document has a step-by-step guide to configure, customize, and launch this 
 
 1. Click on the AppFactory tab from the top navigation bar.
    ![AppHub link from top navigation bar](images/common/apphub_link.png)
-
-1. Page listing the applications available on AppFactory is displayed.
-Search for Kafka to see all applications related to Kafka.
-   ![AppHub search for Kafka](images/kafka-to-hdfs-filter/apphub-search.png)
-   Click on import button for `Kafka to HDFS Filter App`.
-
-1. Notification is displayed on the top right corner after application package is successfully
+   Page listing the applications available on AppFactory is displayed.
+1. Search for Kafka to see all applications related to Kafka.
+1. Click on import button for `Kafka to HDFS Filter App`.
+Notification is displayed on the top right corner after application package is successfully
    imported.
    ![App import Notification](images/kafka-to-hdfs-filter/import-notification.png)
 
