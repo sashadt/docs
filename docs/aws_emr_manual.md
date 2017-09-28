@@ -1,6 +1,6 @@
 
 ## Overview
-This document describes steps to run DT apps on AWS cluster. Users can easily try out apps from the [AppHub](https://www.datatorrent.com/apphub/#/) by downloading the app installers from the DataTorrent website. A zip package containing `bash` scripts will be downloaded on user’s machine and user needs to follow the instructions below to deploy apps.
+This document describes steps to run DT apps on AWS cluster. Users can easily try out apps from the [AppFactory](https://www.datatorrent.com/apphub/#/) by downloading the app installers from the DataTorrent website. A zip package containing `bash` scripts will be downloaded on user’s machine and user needs to follow the instructions below to deploy apps.
 
 ## Setup
 + Install the AWS Command Line Interface
@@ -94,7 +94,7 @@ The zip file (see [end-to-end steps](#end-to-end-workflow) below) will contain f
 
 
 ## End to End workflow
-The steps below describe the end to end flow to run any app provided in the AppHub. Let's consider that we want to run Kinesis to S3 app on the AWS cluster.
+The steps below describe the end to end flow to run any app provided in the AppFactory. Let's consider that we want to run Kinesis to S3 app on the AWS cluster.
 
 1. Download the zip file for the app.
 [https://www.datatorrent.com/downloads/aws-apps/app-kinesis-to-s3.zip](https://www.datatorrent.com/downloads/aws-apps/app-kinesis-to-s3.zip)
