@@ -28,8 +28,6 @@ The zip file (see [end-to-end steps](#end-to-end-workflow) below) will contain f
 - **config.properties** - This file contains properties used by the script. File has sample values for the properties as mentioned below.
 <br>(**Note:** *Sample values for the properties should be sufficient unless it needs to be changed.*)
 
-- **configuration.json** - This file contains hdfs block size,replication factor and virtual to physical memory ratio.
-
 <table>
     <colgroup>
         <col width="33%" />
@@ -89,6 +87,8 @@ The zip file (see [end-to-end steps](#end-to-end-workflow) below) will contain f
         </tr>
     </tbody>
 </table>
+
+- **configuration.json** - This file contains hdfs block size,replication factor and virtual to physical memory ratio.
 
 - **DTapp-EMR-Terminate.sh** - Script to terminate the cluster
 
