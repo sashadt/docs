@@ -88,6 +88,8 @@ The zip file (see [end-to-end steps](#end-to-end-workflow) below) will contain f
     </tbody>
 </table>
 
+- **configuration.json** - This file contains hdfs block size,replication factor and virtual to physical memory ratio.
+
 - **DTapp-EMR-Terminate.sh** - Script to terminate the cluster
 
 - **README** - Readme file with instructions
@@ -106,43 +108,45 @@ The steps below describe the end to end flow to run any app provided in the AppF
 3. Verify the files. The directory structure should be as follows:
 
         user@localhost:~/Downloads/app-kinesis-to-s3$ ls
-        config.properties  DTapp-EMR-Deploy.sh  DTapp-EMR-Terminate.sh README
+        config.properties  DTapp-EMR-Deploy.sh  DTapp-EMR-Terminate.sh README configuration.json 
 
 4. Edit `config.properties` file. Modify the properties as described in the [Package Contents](#package-contents) section.
 
-5. Assign Execute permissions.
+5. Check the `configuration.json` file which contains properties like blocksize, replication factor etc. User can change this  configuration, if required.
+
+6. Assign Execute permissions.
 
          user@localhost:~/Downloads/app-kinesis-to-s3$ chmod u+x /path/to/app-kinesis-to-s3/DTapp-EMR-*
 
-6. Execute the shell script.
+7. Execute the shell script.
 
          user@localhost:~/Downloads/app-kinesis-to-s3$ ./DTapp-EMR-Deploy.sh
 
-7. Wait till the EMR cluster is up. Once the cluster is up, a link to configure the DT-RTS will be provided. Click on the link. E.g  `http://ec2-54-91-43-25.compute-1.amazonaws.com:9090`
+8. Wait till the EMR cluster is up. Once the cluster is up, a link to configure the DT-RTS will be provided. Click on the link. E.g  `http://ec2-54-91-43-25.compute-1.amazonaws.com:9090`
 
-8. DT-RTS Welcome Screen will appear. Click `continue`
+9. DT-RTS Welcome Screen will appear. Click `continue`
   ![aws-emr-1](images/aws_emr/aws-emr-1.png)
 
-9. Default paths for Hadoop and the DFS root will be automatically populated, e.g. `/usr/bin/hadoop` and `/user/dtadmin/datatorrent`. You can leave these values alone unless you have some specific reason to change them. Click `continue`
+10. Default paths for Hadoop and the DFS root will be automatically populated, e.g. `/usr/bin/hadoop` and `/user/dtadmin/datatorrent`. You can leave these values alone unless you have some specific reason to change them. Click `continue`
   ![aws-emr-2](images/aws_emr/aws-emr-2.png)
 
-10. A valid license would be needed to continue further. Click on `Request License`.
+11. A valid license would be needed to continue further. Click on `Request License`.
     ![aws-emr-3](images/aws_emr/aws-emr-3.png)
 
-11. Download the appropriate license.
+12. Download the appropriate license.
     ![aws-emr-4](images/aws_emr/aws-emr-4.png)
 
-12. Upload the license. Once the license is successfully uploaded, Click Continue
+13. Upload the license. Once the license is successfully uploaded, Click Continue
     ![aws-emr-5](images/aws_emr/aws-emr-5.png)
     ![aws-emr-6](images/aws_emr/aws-emr-6.png)
 
-13. Once the configuration is complete, Click Continue
+14. Once the configuration is complete, Click Continue
   ![aws-emr-7](images/aws_emr/aws-emr-7.png)
 
-14. The app is imported and is ready to launch
+15. The app is imported and is ready to launch
   ![aws-emr-8](images/aws_emr/aws-emr-8.png)
   To know more about how to configure a particular app, visit the `App Templates` section of our [documentation](http://docs.datatorrent.com)
 
-15. To terminate the AWS cluster, execute the termination script:
+16. To terminate the AWS cluster, execute the termination script:
 
          user@localhost:~/Downloads/app-kinesis-to-s3$ ./DTapp-EMR-Terminate.sh
