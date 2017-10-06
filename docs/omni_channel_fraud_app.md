@@ -392,7 +392,7 @@ To delete the dashboard, make sure that dashboard is available in the list. Dash
 
 - **My Enrichment operator crashes.**
 
-  _Solution:_ Check if you have enrichment data in place. Also verify if enrichment file/data store is accessible from node. Also check right if the configuration is provided to the operator.
+  _Solution:_ Check if you have enrichment data in place. Also verify if enrichment file/data store is accessible from node. Also check  if the correct configuration is provided to the operator.
 
 - **Latency of my application increases**
 
