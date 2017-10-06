@@ -329,6 +329,7 @@ Packaged dashboards are the set of following dashboards in which various visuali
 ## Importing Dashboards
 
 To view the dashboards, you need to import the dashboards. To import the dashboards, do the following:
+
 1. On DataTorrent Console, click &#39;Visualize&#39; tab.
 2. Click &#39;Import&#39; button to view &quot;Packaged Dashboards&quot; screen.
 
@@ -337,7 +338,8 @@ Packaged Dashboards consists of:
 - Realtime FraudPrevention Analysis
 - Realtime FraudPrevention Operations
 
-To import the dashboard in the application from the list of packaged dashboards, do the following 
+To import the dashboard in the application from the list of packaged dashboards, do the following:
+
 1. Click on &#39;Import&#39; button from &#39;actions&#39; column from the above screen.
 2. Populate the data in the above screen and click on Import button to import selected dashboard in the application.
 3. Once dashboards are imported, user can see in the list.
@@ -352,6 +354,7 @@ If the dashboard file is available on your local machine, it can be uploaded usi
 ## Viewing Dashboard
 
 To view the dashboard, make sure that dashboard is available. Dashboard can be created or imported or uploaded and in turn it will display in the list. To view the dashboard, do the following:
+
 1. On DataTorrent Console, click **Visualize** tab. 
 2. In the displayed list of dashboards, select dashboard using checkbox. The **view** button is displayed only when you select one dashboard. If you select more dashboards, **view** button disappears.
 3. Select the dashboard to view in detail and click **view** button. This shows  the following screen: 
@@ -369,12 +372,14 @@ To copy the dashboard, make sure that dashboard is available in the list. Dashbo
 ## Downloading Dashboard
 
 To download the dashboard, make sure that dashboard is available in the list. Dashboard can be created or imported or uploaded and in turn it will display in the list.
+
 1. On DataTorrent Console, click **Visualize** tab. In the displayed list of dashboard(s), select a dashboard using checkbox. **download** button will be displayed only after selecting only one dashboard.
 2. Select the dashboard to be downloaded and click **download** button. The downloaded dashboard can be seen in the **Downloads** folder. The extension of the downloaded file will be .dtdashboard.
 
 ## Deleting Dashboard
 
 To delete the dashboard, make sure that dashboard is available in the list. Dashboard can be created or imported or uploaded and in turn it will display in the list.
+
 1. On DataTorrent Console, click **Visualize** tab. In the displayed list of dashboard(s), select dashboard using checkbox. The **download** button will be displayed only after you select the dashboard. Depending on the selection of number of dashboards, the count will be displayed on the **download** button.
 2. Select dashboard(s) to be deleted and click **delete** button. This shows following confirmation popup.        
 3. Click **Okay** to delete the selected dashboard(s). This will delete the dashboard and list will be updated.
