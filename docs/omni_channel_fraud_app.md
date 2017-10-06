@@ -22,7 +22,7 @@ The following table lists the various processing phases of the incoming data tup
 | 2 | Transaction Enrichment | Data is enriched with the lookup information such as user profile data, card data, geo data, store profile data etc.The following operators are involved in the transaction enrichment phase: *Enricher*, *Geo Data*, *Customer Data*, *Card Data*, *Product Data*.|
 | 3 | Fraud Rule Execution | Fraud detection rules are applied to the enriched data using drools as CEP engine. The following operators are involved in the Fraud Rule Execution phase: *Fraud Rule Executor*.|
 | 4 | Analytics | Dimension computation is performed on the results and it is stored in a queryable format. The UI dashboards queries the data from the dimension compute store as well as from the auto metrics that are published by different DAG operators of the application. A unified view of the multiple app level widgets is provided, which helps to take actions in real time. For example, dedicated dashboards are shipped with application for executives, IT operations, and analytics. As per the role, a user can get their applicable metrics.The following operators are involved in the Analytics phase: *Dimension Computation*, *Store*, *Top Rules*, *Top N operators.* |
-| 5 | Fraud Triggers and Alerts | Triggers are activated based on the output of the upstream processing. The processed transactions are written onto HDFS to run any historical analysis in future. Also, transactions are published on message bus such as kafka to take real time actions. The application is also integrated with alerting systems that send real time alerts to applicable users.  Email alerts are sent by default.The following operator is involved in the Fraud Triggers and Alerts phase: *Alert Mail*|
+| 5 | Fraud Triggers and Alerts | Triggers are activated based on the output of the upstream processing. The processed transactions are written onto HDFS to run any historical analysis in future. Also, transactions are published on message bus such as kafka to take real time actions. The application is also integrated with alerting systems that send real time alerts to applicable users.  Email alerts are sent by default.The following operators are involved in the Fraud Triggers and Alerts phase: *Alert Mail*, *DataWriter*, *Kafka Output Operator*.|
 
 # Setting the Application
 
@@ -77,10 +77,10 @@ The application configurations can be set as per your requirement. You can confi
 - Validator / Filter
 - Transformer
 - Enricher
-- Geo Data Enricher
-- Customer Data Enricher
-- Card Data Enricher
-- Product Data Enricher
+ - Geo Data Enricher
+ - Customer Data Enricher
+ - Card Data Enricher
+ - Product Data Enricher
 - Fraud Rule Executor
 - Data Writer
 - Alert Mail
@@ -151,7 +151,7 @@ The following properties must be set for enricher:
 | --- | --- | --- | --- |
 | **dt.connectEnricherErrorPorts** | Logs the failure tuples to console. | boolean | FALSE |
 
-## Geo Data Enricher
+### Geo Data Enricher
 
 GeoData Enrichment operator refers maxmind database to fetch geo information provided ip address of transaction location. Copy the maxmind city database (GeoLite2 City) to HDFS.
 
