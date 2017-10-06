@@ -315,7 +315,7 @@ Packaged dashboards are the set of following dashboards in which various visuali
 - Realtime FraudPrevention Operations
 
 ### Realtime FraudPrevention Summary
-This is a high level summary view of  Real time fraud prevention analysis.
+This is a high level summary view of real time fraud prevention analysis.
 
 ![](images/applications/omni_channel_fraud_app/summary_dashboard.png)
  
