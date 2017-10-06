@@ -168,7 +168,7 @@ The following properties must be set for geo data enricher:
 | **dt.operator.GeoDataEnricher.lookupFieldsString** | Comma separated list of fields to lookup from the database (or any other store) corresponding to the lookup fields of the POJO. | String | deviceIP |
 | **dt.operator.GeoDataEnricher.passThroughOnErrors** | Should forward tuples on enrich failures. | boolean | TRUE |
 
-## Customer Data Enricher
+### Customer Data Enricher
 
 Customer details are important to evaluate transactions for potential frauds.
 
@@ -195,7 +195,7 @@ The following properties must be set for custom data enricher:
 
 **Note:** Ensure that the driver jar is in classpath. The driver jar can be added in classpath using config package.
 
-## Card Data Enricher
+### Card Data Enricher
 
 Lookup the card data in your database. If you do not have a database you can use file input source. Please put your json input file on HDFS and configure operator accordingly.
 
@@ -218,7 +218,7 @@ The following properties must be set for card data enricher:
 
 **Note** You must ensure that the driver jar is in classpath. The driver jar can be added in classpath using config package.
 
-## Product Data Enricher
+### Product Data Enricher
 
 Lookup product details in your json records stored in HDFS files.
 
