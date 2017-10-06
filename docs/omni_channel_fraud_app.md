@@ -386,16 +386,20 @@ To delete the dashboard, make sure that dashboard is available in the list. Dash
 
 # Troubleshooting
 
-- **My App crashes immediately with Error stating:** _ **Failed to construct kafka consumer** _
-_Solution_: Ensure that your kafka instance is up and running. Also check if your kafka server is accessible from your cluster hosts. Also check right if the kafka server configuration is provided to the operator.
+- **My App crashes immediately with Error stating:** _**Failed to construct kafka consumer**_
+
+  _Solution_: Ensure that your kafka instance is up and running. Also check if your kafka server is accessible from your cluster hosts. Also check right if the kafka server configuration is provided to the operator.
 
 - **My Enrichment operator crashes.**
-_Solution:_ Check if you have enrichment data in place. Also verify if enrichment file/data store is accessible from node. Also check right if the configuration is provided to the operator.
+
+  _Solution:_ Check if you have enrichment data in place. Also verify if enrichment file/data store is accessible from node. Also check right if the configuration is provided to the operator.
 
 - **Latency of my application increases**
-_Solution:_ From DataTorrent RTS UI, check the operator which is a bottleneck. Increase operator memory by referring to the instructions on [datatorrent.com](http://docs.datatorrent.com). Also check Scaling section to add more resources for processing.
+
+  _Solution:_ From DataTorrent RTS UI, check the operator which is a bottleneck. Increase operator memory by referring to the instructions on [datatorrent.com](http://docs.datatorrent.com). Also check Scaling section to add more resources for processing.
 
 - **I don&#39;t see as many number of processed tuple at end operators as I receive from kafka / My tuples are getting filtered out.**
-_Solution:_ Check the following:
+
+  _Solution:_ Check the following:
   - Check if the filter condition on the **Validator** operator is filtering out most of tuples. You can check that by looking at count of received tuples and processed tuples by the operator.
   - Check if enrichment is failing due to missing data. In case lookup data is missing enrichment operator can fail. By default, tuples are not passed on to the next operator if enrichment is failed. Based on your requirements either validate your lookup data or configure operators to pass on tuples in case of enrichment failures.
