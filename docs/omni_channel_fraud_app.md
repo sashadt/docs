@@ -77,10 +77,10 @@ The application configurations can be set as per your requirement. You can confi
 - Validator / Filter
 - Transformer
 - Enricher
- - Geo Data Enricher
- - Customer Data Enricher
- - Card Data Enricher
- - Product Data Enricher
+  - Geo Data Enricher
+  - Customer Data Enricher
+  - Card Data Enricher
+  - Product Data Enricher
 - Fraud Rule Executor
 - Data Writer
 - Alert Mail
