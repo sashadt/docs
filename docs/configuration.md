@@ -510,14 +510,10 @@ ElasticSearch users can use Kibana reporting tool for analysis and diagnostic. S
 
 Links to 3rd party tools:
 
-Logstash: https://www.elastic.co/products/logstash
-
-ElasticSearch: https://www.elastic.co/products/elasticsearch
-
-Kibana: https://www.elastic.co/products/kibana
-
-Splunk: https://www.splunk.com
-
+* Logstash: [www.elastic.co/products/logstash](https://www.elastic.co/products/logstash) 
+* ElasticSearch: [www.elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)
+* Kibana: [www.elastic.co/products/kibana](https://www.elastic.co/products/kibana)
+* Splunk: [www.splunk.com](https://www.splunk.com)
 
 ## Custom log4j Properties for Application Packages
 
