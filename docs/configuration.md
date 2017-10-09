@@ -506,7 +506,7 @@ output {
 ```
 ElasticSearch users can use Kibana reporting tool for analysis and diagnostic. Splunk users can use Splunkweb.
 
-![](images/configuration/Conf_3rdparty2.png)
+![](images/configuration/Conf_3rdparty3.png)
 
 Links to 3rd party tools:
 
