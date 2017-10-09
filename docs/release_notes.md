@@ -39,12 +39,12 @@ The following enhancements are done to the **Import Packaged Dashboards** sectio
 * The purpose of the application state can be viewed when you hover over the dashboard name. 
 * The name of the user who packaged the dashboards is now no longer visible against the name of the dashboard. 
  
-#### Enhancements to Import Packaged Dashboards Section
+#### Artifact Query API Filter
 
 The artifact query API now supports expansion to all versions, including older ones, as well as specifying exact RTS Version and limiting the results. 
 
-### DataTorrent RTS Bug Fixes 
-#### Bugs
+### DataTorrent RTS Defect Fixes 
+#### Defects
 
 * [SPOI-12617] - Restrict import/download of apps having higher min RTS version than current RTS version
 * [SPOI-12431] - Add apphub API support to restrict premium apps
