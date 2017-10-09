@@ -315,17 +315,17 @@ Packaged dashboards are the set of following dashboards in which various visuali
 - Realtime FraudPrevention Operations
 
 ### Realtime FraudPrevention Summary
-This is a high level summary view of real time fraud prevention analysis.
+The summary dashboard provides high-level, real-time summary metrics around the current state of fraud in the system. It shows metrics such as fraud breakdown by channels, percentage of fraud transactions etc.
 
 ![](images/applications/omni_channel_fraud_app/summary_dashboard.png)
  
 ### Realtime FraudPrevention Analysis
-This is a real time analytical view of all the perspectives of fraud prevention.
+The analysis dashboard provides a more granular set of metrics for analysis of the fraudulent transactions to allow for real-time decision making and modifying rules accordingly. It shows metrics such as time series of fraud transaction amount vs all transaction amount, time series of fraud transaction count vs all transaction count, fraud breakdown by channels, devices, geolocation etc.
 
 ![](images/applications/omni_channel_fraud_app/realtimefraudpreventionanalysis.png)
 
 ### Realtime FraudPrevention Operations
-This dashboard provides the details of all the processes and operations involved in fraud prevention application.
+The operations dashboard provides an operational view of the application so that the operations team can monitor the current performance of the application. It has metrics such as time series on latency of the rule executor, available free memory for rule executor, latency across the application, top 10 rules executed, number of process failures, and number of dropped transactions over time etc.
 
 ![](images/applications/omni_channel_fraud_app/realtimefraudpreventionoperations.png)
 
