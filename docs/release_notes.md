@@ -46,61 +46,9 @@ The artifact query API now supports expansion to all versions, including older o
 ### DataTorrent RTS Defect Fixes 
 #### Defects
 
-* [SPOI-12617] - Restrict import/download of apps having higher min RTS version than current RTS version
-* [SPOI-12431] - Add apphub API support to restrict premium apps
-* [SPOI-12434] - Add supporting of the new license property **category** to License Generator UI
-* [SPOI-12432] - Add supporting of the new license property **category** to License Generator and Gateway code
-* [SPOI-12433] - Prevent launching of priority applications from Gateway and Apex
-* [SPOI-12236] - Restrict download and import of premium apps based on License Type in UI Console
-* [SPOI-12367] - Restrict download of premium apps on DT Website
-* [SPOI-12430] - Restrict launch for premium apps in UI Console
-* [SPOI-12734] - User can see licensing category for AppFactory applications
-* [SPOI-12346] - Single Value widgets for all App Templates for Data Synchronization, Data Ingestion to be added to the packaged Dashboards
-* [SPOI-11577] - Stateful Highlevel API support : For Actions
-* [SPOI-10452] - Stateless High Level API support for Python
-* [SPOI-12394] - [Installer/AppHub/Build] Remove ADT reference
-* [SPOI-12392] - [UI] Remove references to ADT
-* [SPOI-12393] - Remove references to ADT from Documentation
-* [SPOI-11786] - Licensing for the metrics module
-* [SPOI-12324] - Historical time range selection results should be inclusive of "from" and "to" values
-* [SPOI-12343] - Improvements in launch modal for "Import Packaged Dashboards" option
-* [SPOI-12616] - Artifact query API should support various filtering parameters
-* [SPOI-11611] - Deprecate AppDataTracker, Update RTS Documentation
-* [SPOI-12615] - Flat list returned by ws/v1/artifacts should include suites and verticals an artifact belongs to
-* [SPOI-12580] - Fraud app and operators should check for license
-* [SPOI-12630] - Implement licensing for premium operators
-* [SPOI-12668] - Remove references of AppHub and change it to AppFactory
-* [SPOI-12071] - [Gateway] Remove references to ADT
-* [SPOI-12345] - AppFactory API - new parameter allArtifactsVersions
-* [SPOI-12382] - Javadocs for moodi on docs.datatorrent.com
-* [SPOI-11875] - Missing links in app templates README
-* [SPOI-12671] - Vertical/Suites information is missing on AppFactory list view
-* [SPOI-12347] - Issue with a data source in Metric App
-* [SPOI-12685] - License Information on UI does not show the category of license (Premium/Plus)
-* [SPOI-12686] - Historical time range selection results contains one extra entry when streaming option is selected
-* [SPOI-12371] - Sorting does not work for applications and description column on a dashboard page
-* [SPOI-12318] - Providing date range from before-application-start-time gives wrong results on dashboard
-* [SPOI-12673] - Application state is Running but most of the operators have operator error
-* [SPOI-12665] - Autometric values of an operator is showing wrongly in App master
-* [SPOI-12621] - Changing the property of the Transaction Validator operator thr’ UI doesn’t take effect
-* [SPOI-12300] - Dashboards for apps restarted from UI get stuck at original metrics data
-* [SPOI-12503] - Filtering using requiresApexVersion/requiresRTSVersion does not work
-* [SPOI-11483] - For FAILED application, containers state is shown as ACTIVE
-* [SPOI-12689] - Fraud App - Create new configuration give JSONObject["dag"] is not a JSONObject error
-* [SPOI-12614] - Gateway says *License file is corrupted* when in fact it is not corrupted
-* [SPOI-12325] - Getting launch error when launching with invalid schema
-* [SPOI-12415] - Issues with AppFactory table view
-* [SPOI-12377] - JSON widget should not have **Chart Axes** settings
-* [SPOI-12670] - Launching applications with metric datasources fails with **NoClassDefFoundError**
-* [SPOI-12672] - Notification is not given for License issue
-* [SPOI-12605] - Persist table formatting widgets in dashboard
-* [SPOI-12697] - Property **launchDisabled** is always false
-* [SPOI-12328] - Search/Filtering in AppFactory breadcrumb should include app version also
-* [SPOI-12414] - Sorting does not work for AppFactory table view
-* [SPOI-12699] - Test jars are not generating while building the kafka-connectors.
-* [SPOI-12635] - Unable to deploy container for an application after Running AWS script
-* [SPOI-12733] - Unable to import non-premium demo application with premium license
-* [SPOI-12350] - Widget Bug - Key Combinations and Aggregates selection and save does not work
+* [SPOI-11219] - Add a new recovery mode where the operator instance before a failure event can be reused in certain cases without reloading from checkpoint.
+* [SPOI-12665] - Autometric values of an operator is showing wrongly in App master.
+* [SPOI-12633] - Operator fails with catastrophic error message.
 
 
 Version: 3.9
