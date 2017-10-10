@@ -6,6 +6,7 @@ Version: 3.9.1
 Release date: Oct 10, 2017
 
 ### Features
+The following features and enhancements are included in the DataTorrent RTS 3.9.1 release:
 
 #### Premium Applications Licensing
 DataTorrent applications and operators are now offered under the following license categories:
@@ -44,6 +45,8 @@ The following enhancements are done to the **Import Packaged Dashboards** sectio
 The artifact query API now supports expansion to all versions, including older ones, as well as specifying exact RTS Version and limiting the results. 
 
 ### DataTorrent RTS Defect Fixes 
+The following resolved issues are included in the DataTorrent RTS 3.9.1 release:
+
 #### Defects
 
 * [SPOI-11219] - Add a new recovery mode where the operator instance before a failure event can be reused in certain cases without reloading from checkpoint.
