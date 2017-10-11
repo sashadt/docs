@@ -14,11 +14,11 @@ After the obtained license file is uploaded from the RTS UI, it gets stored in h
 
 The details of the license capacity as well as the capabilities offered for your subscription are also displayed on the **License Information page** as shown in these images:
 
-![](images/configuration/License.png)  ![](images/configuration/License1.png)
+![](images/configuration/License.png)![](images/configuration/License2.png)
 
 The following table provides the details of the license offerings for each of the license types:
 
-| **License Parameters** | **Free Trial** | **DataTorrent - Service Plus ®****   **|** DataTorrent - Premium Suite ® **** ** |
+|**License Parameters** |**Free Trial** |**DataTorrent - Service Plus ®**|**DataTorrent - Premium Suite ®**|
 | --- | --- | --- | --- |
 | Memory Limit | 40 GB | Based on memory requirements | Based on memory requirements |
 | Subscription Term | 90 Days | Yearly | Yearly |
