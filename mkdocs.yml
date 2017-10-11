@@ -87,6 +87,7 @@ pages:
     - Apache Apex: apex.md
     - Apache Apex-Malhar: apex_malhar.md
 - Deployment and Operations:
+    - Licensing: Licensing.md
     - Installation: installation.md
     - Configuration: configuration.md
     - Security: dtgateway_security.md
