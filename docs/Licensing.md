@@ -61,4 +61,6 @@ When the license term expires, the   **Launch**, **Visualize**, and **Develop** 
 
 DataTorrent has updated the software licensing mechanism from RTS 3.9 version. Therefore, to integrate this mechanism, you must obtain a new software license file from DataTorrent or upgrade to version 3.9. Existing customers must contact DataTorrent to obtain an updated license for 3.9.
 
-RTS versions 3.9 or later is not backward compatible with previous RTS versions due to older gateway. Therefore, you must reinstall DT RTS before installing the new license. If the gateway is not compatible, the following license error message is displayed: The License File is Corrupted.
+RTS versions 3.9 or later is not backward compatible with previous RTS versions due to older gateway. Therefore, you must reinstall DT RTS before installing the new license. If the gateway is not compatible, the following license error message is displayed:
+
+`The License File is Corrupted`
