@@ -7,6 +7,7 @@ DataTorrent offers three types of licenses for subscription:
 - **DataTorrent Premium Suite** 
 
 Each of the license type is a combination of the allocated [License Category](#LC), [Memory Capacity](#ML), and [Term](#TRM). You can request for a new license as well as upload the license file from the **License Information page** on the DataTorrent RTS UI.
+
 **Note:** Existing customers must obtain a new license to upgrade to 3.9. Refer to [Backward Compatibility](#BC) for more details. 
 
 After the obtained license file is uploaded from the RTS UI, it gets stored in hadoop at the following location:
@@ -44,7 +45,7 @@ With **DT Premium**, you can access and download pre-built stream applications a
 
 ### <a name="ML"></a>Memory Limit
 
-Memory is the capacity allotted to you, based on your license subscription, that can be used to launch the RTS applications.  The sum total memory consumed by all the running RTS applications defines the memory limit. For example, in a free trial version 40 GB memory limit is allotted and a minimum number of applications can be launched within this  limit.  To launch more applications in the same limit, you must terminate a running application.
+Memory is the capacity allotted to you, based on your license subscription, that can be used to launch the RTS applications.  The total memory consumed by all the running RTS applications defines the memory limit. For example, in a free trial version 40 GB memory limit is allotted and a minimum number of applications can be launched within this  limit.  To launch more applications in the same limit, you must terminate a running application.
 
 In case your memory exceeds beyond the subscribed capacity, the **Launch**, **Visualize**, and **Develop** functions get disabled. The streaming applications keep running in the background but you cannot launch any more applications unless the license violation is corrected.
 
