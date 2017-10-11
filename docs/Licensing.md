@@ -6,8 +6,8 @@ DataTorrent offers three types of licenses for subscription:
 - **DataTorrent -Service Plus** 
 - **DataTorrent Premium Suite** 
 
-Each of the license type is a combination of the allocated **License Category**, **Memory Capacity**, and **Term**. You can request for a new license as well as upload the license file from the **License Information page** on the DataTorrent RTS UI.
-**Note:** Existing customers must obtain a new license to upgrade to 3.9. Refer to Backward Compatibility for more details. 
+Each of the license type is a combination of the allocated [License Category](#LC), [Memory Capacity](#ML), and [Term](#TRM). You can request for a new license as well as upload the license file from the **License Information page** on the DataTorrent RTS UI.
+**Note:** Existing customers must obtain a new license to upgrade to 3.9. Refer to [Backward Compatibility](#BC) for more details. 
 
 After the obtained license file is uploaded from the RTS UI, it gets stored in hadoop at the following location:
 **/user/&lt;hadoop user&gt;/datatorrent/licenses.** For example: **/user/hduser/datatorrent/licenses**.
@@ -28,7 +28,7 @@ The following table provides the details of the license offerings for each of th
 
 The **Free Trial** license can be directly obtained from the [DataTorrent website](https://www.datatorrent.com/license-upgrade/). For **DataTorrent - Service Plus ®** and **DataTorrent - Premium Suite ®** licenses, you must contact the DataTorrent Sales Team.
 
-## License Category
+### <a name="LC"></a>License Category
 
 The license category determines the type of access that you can have for premium applications and operators that are available in DataTorrent&#39;s AppFactory.  Based on your business requirements, you can subscribe to any of the following license category:
 
@@ -42,7 +42,7 @@ With **DT Plus**, you can download only non-premium applications and operators t
 
 With **DT Premium**, you can access and download pre-built stream applications and operators such as the Omni-Channel Fraud Prevention application and operators such as Drools-based rule engine for complex event processing.
 
-## Memory Limit
+### <a name="ML"></a>Memory Limit
 
 Memory is the capacity allotted to you, based on your license subscription, that can be used to launch the RTS applications.  The sum total memory consumed by all the running RTS applications defines the memory limit. For example, in a free trial version 40 GB memory limit is allotted and a minimum number of applications can be launched within this  limit.  To launch more applications in the same limit, you must terminate a running application.
 
@@ -50,13 +50,13 @@ In case your memory exceeds beyond the subscribed capacity, the **Launch**, **Vi
 
 You will receive a warning **30 minutes** before these functions gets disabled. To increase the memory limit, you must renew or upgrade the license.
 
-## Term
+### <a name="TRM"></a>Term
 
 The stipulated period agreed in the subscription is the license term allotted to you. You will be notified with an alert **30 days prior** to your license term expiry.  This alert notification is displayed as a banner on top of the RTS UI.
 
 When the license term expires, the   **Launch**, **Visualize**, and **Develop** functions get disabled.  Although the streaming applications keeps running in the background, you cannot launch new applications unless the license is renewed. To increase the license term, you must renew or upgrade the license.
 
-## Backward Compatibility
+### <a name="BC"></a>Backward Compatibility
 
 DataTorrent has updated the software licensing mechanism from RTS 3.9 version. Therefore, to integrate this mechanism, you must obtain a new software license file from DataTorrent or upgrade to version 3.9. Existing customers must contact DataTorrent to obtain an updated license for 3.9.
 
