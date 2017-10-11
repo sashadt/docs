@@ -1,5 +1,58 @@
 DataTorrent RTS Release Notes
 ========================================================================================================================
+Version: 3.9.1
+------------------------------------------------------------------------------------------------------------------------
+
+Release date: Oct 10, 2017
+
+### Features
+The following features and enhancements are included in the DataTorrent RTS 3.9.1 release:
+
+#### Premium Applications Licensing
+DataTorrent applications and operators are now offered under the following license categories:
+
+* DataTorrent Premium Suite 
+* DataTorrent Service Plus 
+ 
+These categories determine the type of access that you have for the premium applications and operators that are available in DataTorrent's AppFactory.
+
+With **DT Premium**, you can access  and download premium applications from the DataTorrent AppFactory such as the Omni-Channel Fraud Prevention application and operators such as Drools-based rule engine for complex event processing. 
+
+With **DT Plus**, you can download only non-premium applications and operators that can be used for data ingestion.  Premium applications,  although visible on the AppFactory,  can be downloaded only if you subscribe to DataTorrent - Premium Suite ®.
+
+In this release, licensing support is extended to **Metrics module** and to **Omni Channel Fraud Prevention** application.
+
+#### Python Support
+DataTorrent now provides support to Python for building applications in Apex. You can create a DAG with Python as high level API support.
+
+#### Single Value Widget
+The Single Value widget can be now added to a dashboard of Application Templates.
+ 
+#### Historical Time Range Results 
+The Historical time range selection results now includes the  **From** and **To** values.
+
+#### Enhancements to Import Packaged Dashboards Section
+The following enhancements are done to the **Import Packaged Dashboards** section of the **Launch < Application >** dialog box:
+
+* On the UI, the default selection for the replacement application is now the same as the currently launching application.
+* The **Name** field is now changed to **Dashboard Name**
+* A detailed description is now provided for the **Select Replacement Applications** field. 
+* The purpose of the application state can be viewed when you hover over the dashboard name. 
+* The name of the user who packaged the dashboards is now no longer visible against the name of the dashboard. 
+ 
+#### Artifact Query API Filter
+
+The artifact query API now supports expansion to all versions, including older ones, as well as specifying exact RTS Version and limiting the results. 
+
+### DataTorrent RTS Defect Fixes 
+The following resolved issues are included in the DataTorrent RTS 3.9.1 release:
+
+#### Defects
+
+* [SPOI-11219] - Add a new recovery mode where the operator instance before a failure event can be reused in certain cases without reloading from checkpoint.
+* [SPOI-12665] - Autometric values of an operator is showing wrongly in App master.
+* [SPOI-12633] - Operator fails with catastrophic error message.
+
 
 Version: 3.9
 ------------------------------------------------------------------------------------------------------------------------
