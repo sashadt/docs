@@ -27,7 +27,7 @@ The following table provides the details of the license offerings for each of th
 | Technical Support SLA | DT Community Forum | Production and Non-Production SLAs available | Production and Non-Production SLAs available |
 | License Category (Access to premium applications) | No | No | Yes |
 
-The **Free Trial** license can be directly obtained from the [DataTorrent website](https://www.datatorrent.com/license-upgrade/). For **DataTorrent - Service Plus** and **DataTorrent - Premium Suite** licenses, you must contact the DataTorrent Sales Team.
+The **Free Trial** license can be directly obtained from the [DataTorrent website](https://www.datatorrent.com/license-upgrade/). For **DataTorrent Service Plus** and **DataTorrent Premium Suite** licenses, you must contact the DataTorrent Sales Team.
 
 ### <a name="LC"></a>License Category
 
@@ -39,7 +39,7 @@ The license category determines the type of access that you can have for premium
 
 With **Free**, you can download limited non-premium applications based on the allocated memory capacity.
 
-With **DT Plus**, you can download only non-premium applications and operators that can be used for data ingestion. Premium applications, although visible on the AppFactory, can be downloaded only if you subscribe to **DataTorrent - Premium Suite**. Customers who are interested in developing their own streaming applications using DataTorrent RTS can subscribe to this category.
+With **DT Plus**, you can download only non-premium applications and operators that can be used for data ingestion. Premium applications, although visible on the AppFactory, can be downloaded only if you subscribe to **DataTorrent Premium Suite**. Customers who are interested in developing their own streaming applications using DataTorrent RTS can subscribe to this category.
 
 With **DT Premium**, you can access and download pre-built stream applications and operators such as the Omni-Channel Fraud Prevention application and operators such as Drools-based rule engine for complex event processing.
 
