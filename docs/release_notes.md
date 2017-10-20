@@ -11,16 +11,16 @@ The following features and enhancements are included in the DataTorrent RTS 3.9.
 #### Premium Applications Licensing
 DataTorrent applications and operators are now offered under the following license categories:
 
-* DataTorrent Premium Suite 
-* DataTorrent Service Plus 
+* DataTorrent Premium Suite®
+* DataTorrent Service Plus® 
  
 These categories determine the type of access that you have for the premium applications and operators that are available in DataTorrent's AppFactory.
 
 With **DT Premium**, you can access  and download premium applications from the DataTorrent AppFactory such as the Omni-Channel Fraud Prevention application and operators such as Drools-based rule engine for complex event processing. 
 
-With **DT Plus**, you can download only non-premium applications and operators that can be used for data ingestion.  Premium applications,  although visible on the AppFactory,  can be downloaded only if you subscribe to DataTorrent - Premium Suite ®.
+With **DT Plus**, you can download only non-premium applications and operators that can be used for data ingestion.  Premium applications, although visible on the AppFactory, can be downloaded only if you subscribe to DataTorrent Premium Suite.
 
-In this release, licensing support is extended to **Metrics module** and to **Omni Channel Fraud Prevention** application.
+In this release, licensing support is extended to **Metrics module** and to **Omni-Channel Fraud Prevention** application.
 
 #### Python Support
 DataTorrent now provides support to Python for building applications in Apex. You can create a DAG with Python as high level API support.
