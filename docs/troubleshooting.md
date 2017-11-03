@@ -4,14 +4,15 @@
 
 ###  Where can I get DataTorrent RTS software?
 
-DataTorrent products are available for download from [https://www.datatorrent.com/download/](https://www.datatorrent.com/download)
+DataTorrent RTS software can be downloaded from [https://www.datatorrent.com/download/](https://www.datatorrent.com/download)
 
--  **Enterprise Edition**:  Designed for enterprise production deployment and includes security, advanced monitoring and troubleshooting, graphical application assembly, and application data visualization.
--  **Sandbox Edition**:  Enterprise Edition and demo applications pre-installed and configured with a single-node Hadoop cluster running in a virtual machine.  Optimized for evaluation and training purposes.
+The following deployment options are available for downloading DataTorrent RTS:
+- **DataTorrent RTS - Sandbox Appliance**
+- **DataTorrent RTS - Installable Binary**
+- **DataTorrent RTS - Cloud Instance**
 
-###  What is the difference between DataTorrent RTS editions?
-
-Please refer to [DataTorrent RTS editions overview](https://www.datatorrent.com/product/edition-overview/)
+###  What are the DT licenses that can be obtained with subscription?
+Refer to http://docs.datatorrent.com/Licensing/#datatorrent-licensing
 
 ###  How do I confirm the package downloaded correctly?
 
