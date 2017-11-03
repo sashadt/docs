@@ -72,7 +72,7 @@ are HDFS paths: the first is the destination and the second the source).
 |dt.operator.HDFSInputModule.prop.files|<ul><li>/user/appuser/input/dir1</li><li>/user/appuser/input/dir2/file1.log</li><li>hdfs://node1.corp1.com/user/appuser/input</li></ul>|
 
 ### Advanced properties
-There are pre-saved configurations based on the application environment. Recommended settings for [datatorrent sandbox edition](https://www.datatorrent.com/download/datatorrent-rts-sandbox-edition-download/) are in `sandbox-memory-conf.xml` and for a cluster environment in `cluster-memory-conf.xml`.
+There are pre-saved configurations based on the application environment. Recommended settings for [datatorrent sandbox](https://www.datatorrent.com/download/datatorrent-rts-sandbox-edition-download/) are in `sandbox-memory-conf.xml` and for a cluster environment in `cluster-memory-conf.xml`.
 
 |Property|Description|Type|Default for <br/>cluster-<br/>memory- <br/>conf.xml|Default for  <br/>sandbox-<br/>memory<br/> -conf.xml
 |---|---|---|---|---|
