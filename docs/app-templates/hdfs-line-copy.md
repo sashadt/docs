@@ -76,7 +76,7 @@ End user must specify the values for these properties (all properties are string
 |<p style="font-size:12px">dt.operator.fileOutput.prop.filePath|HDFS path for the output directory. Generally, this refers to path on the hadoop cluster on which app is running.|/user/appuser/output|
 
 ### Advanced properties
-There are pre-saved configurations based on the application environment. Recommended settings for [datatorrent sandbox edition](https://www.datatorrent.com/download/datatorrent-rts-sandbox-edition-download/) are in `sandbox-memory-conf.xml` and for a cluster environment in `cluster-memory-conf.xml`.
+There are pre-saved configurations based on the application environment. Recommended settings for [datatorrent sandbox](https://www.datatorrent.com/download/datatorrent-rts-sandbox-edition-download/) are in `sandbox-memory-conf.xml` and for a cluster environment in `cluster-memory-conf.xml`.
 
 |Property|Description|Type|Default for<br/> cluster<br/>-memory<br/>-conf.xml|Default for<br/>sandbox<br/>-memory<br/>-conf.xml
 |-|-|-|-|-|
