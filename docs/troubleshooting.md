@@ -101,7 +101,7 @@ DataTorrent Sandbox is a deployment option that provides a quick and simple way 
 
 ###  Where do I get DataTorrent Sandbox download link?
 
-Sandbox can be downloaded by visiting [datatorrent.com/download](https://www.datatorrent.com/download/)
+Sandbox can be downloaded from [datatorrent.com/download](https://www.datatorrent.com/download/)
 
 ###  What are the system requirements for sandbox deployment?
 
@@ -178,8 +178,6 @@ You can contact us at [https://www.datatorrent.com/contact](https://www.datatorr
 
 
 # Installation
-
-Refer to http://docs.datatorrent.com/installation/
 
 ### Minimum hardware requirements, what happens if certain minimum configuration requirement has not been met?
 
