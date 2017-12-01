@@ -4,14 +4,15 @@
 
 ###  Where can I get DataTorrent RTS software?
 
-DataTorrent products are available for download from [https://www.datatorrent.com/download/](https://www.datatorrent.com/download)
+DataTorrent RTS software can be downloaded from [https://www.datatorrent.com/download/](https://www.datatorrent.com/download)
 
--  **Enterprise Edition**:  Designed for enterprise production deployment and includes security, advanced monitoring and troubleshooting, graphical application assembly, and application data visualization.
--  **Sandbox Edition**:  Enterprise Edition and demo applications pre-installed and configured with a single-node Hadoop cluster running in a virtual machine.  Optimized for evaluation and training purposes.
+The following deployment options are available for downloading DataTorrent RTS:
+- **DataTorrent RTS - Sandbox Appliance**
+- **DataTorrent RTS - Installable Binary**
+- **DataTorrent RTS - Cloud Instance**
 
-###  What is the difference between DataTorrent RTS editions?
-
-Please refer to [DataTorrent RTS editions overview](https://www.datatorrent.com/product/edition-overview/)
+###  What are the DT licenses that can be obtained with subscription?
+Refer to http://docs.datatorrent.com/Licensing/#datatorrent-licensing
 
 ###  How do I confirm the package downloaded correctly?
 
@@ -96,18 +97,15 @@ Apache Hadoop 2.x based distribution.
 
 ###  What is the Datatorrent Sandbox?
 
-The Sandbox provides a quick and simple way to experience DataTorrent RTS without setting up and managing a complete Hadoop cluster. The Sandbox contains pre-installed DataTorrent RTS Enterprise Edition along with all the Hadoop services required to launch and run the included demo applications.
+DataTorrent Sandbox is a deployment option that provides a quick and simple way to experience DataTorrent RTS without setting up and managing a complete Hadoop cluster. The latest version of DataTorrent RTS is pre-installed on it along with all the Hadoop services required to launch and run the included demo applications. See also http://docs.datatorrent.com/sandbox/
 
 ###  Where do I get DataTorrent Sandbox download link?
 
-Sandbox can be downloaded by visiting [datatorrent.com/download](https://www.datatorrent.com/download/)
+Sandbox can be downloaded from [datatorrent.com/download](https://www.datatorrent.com/download/)
 
 ###  What are the system requirements for sandbox deployment?
 
-The DataTorrent RTS Sandbox is a complete, stand-alone, instance of the
-Enterprise Edition as a single-node Hadoop cluster on your local
-machine. Following are prerequisites for DataTorrent RTS:
-
+The system requirements for Sandbox deployment are as follows:
 -  [VirtualBox](https://www.virtualbox.org/) 4.3 or greater installed.
 -  6GB RAM or greater available for Sandbox VM.
 
@@ -179,10 +177,7 @@ You can refer Apex page for more details: [Apache Apex](http://apex.apache.org)
 You can contact us at [https://www.datatorrent.com/contact](https://www.datatorrent.com/contact)
 
 
-
 # Installation
-
-There are multiple installations available e.g. Sandbox Edition, Enterprise Edition, dtIngest. Supported operating systems are which support Hadoop platform (tested on CentOS 6.x and Ubuntu 12.04).
 
 ### Minimum hardware requirements, what happens if certain minimum configuration requirement has not been met?
 
