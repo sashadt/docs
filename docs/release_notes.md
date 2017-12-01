@@ -1,5 +1,19 @@
 DataTorrent RTS Release Notes
 ========================================================================================================================
+Version: 3.9.2
+------------------------------------------------------------------------------------------------------------------------
+
+Release date: Dec 1, 2017
+
+#### Resolved Issues
+The following resolved issues are included in this release:
+
+* [SPOI-12791] - With anti affinity STRAM not getting enough containers from RM to run all the operators.
+* [SPOI-12794] - Files configured by the user are not available when upgraded.
+* [SPOI-12795] - Metrics platform not supported with DT_Plus license.
+* [SPOI-12832] - Application exiting because of NPE in application master.
+* [SPOI-12855] - Update CassandraStore to support more than 1 cassandra nodes.
+
 Version: 3.9.1
 ------------------------------------------------------------------------------------------------------------------------
 
