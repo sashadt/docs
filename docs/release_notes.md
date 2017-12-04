@@ -5,14 +5,33 @@ Version: 3.9.2
 
 Release date: Dec 1, 2017
 
-#### Resolved Issues
-The following resolved issues are included in this release:
+The following issues are fixed in DataTorrent RTS 3.9.2 release:
 
-* [SPOI-12791] - With anti affinity STRAM not getting enough containers from RM to run all the operators.
-* [SPOI-12794] - Files configured by the user are not available when upgraded.
-* [SPOI-12795] - Metrics platform not supported with DT_Plus license.
-* [SPOI-12832] - Application exiting because of NPE in application master.
-* [SPOI-12855] - Update CassandraStore to support more than 1 cassandra nodes.
+#### Resolved Issues
+
+**[SPOI-12791]**
+
+In the application when the anti-affinity is enabled, the application master gets containers from the Resource Manager for sometime only.  After this no more containers are received even after periodically requesting the STRAM for containers. Thus the functioning of the application gets disrupted.
+This issue is now resolved. 
+
+**[SPOI-12794]**
+
+While upgrading to RTS 3.9.1 with the latest rpm, the installation do not remain seamless. The LDAP configurations of the user are cleared from conf directory and the configurations had to be manually set up again. 
+This issue is now resolved. 
+
+**[SPOI-12795]**
+
+Metrics platform was not supported with DT-Plus license and was only available with DT_Premium license as part of 3.9.1 release. 
+This issue is now resolved. 
+
+**[SPOI-12832]**
+
+The application exits due to java.lang.NullPointerException in the application master. This issue is now resolved.
+
+**[SPOI-12855]**
+
+CassandraStore class only supports single node.  The CassandraStore must be enabled to support more than one cassandra nodes.
+This issues is now resolved. 
 
 Version: 3.9.1
 ------------------------------------------------------------------------------------------------------------------------
