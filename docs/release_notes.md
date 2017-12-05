@@ -3,16 +3,80 @@ DataTorrent RTS Release Notes
 Version: 3.9.2
 ------------------------------------------------------------------------------------------------------------------------
 
-Release date: Dec 1, 2017
+Release date: Dec 6, 2017
+
+The following issues are fixed in DataTorrent RTS 3.9.2 release:
 
 #### Resolved Issues
-The following resolved issues are included in this release:
 
-* [SPOI-12791] - With anti affinity STRAM not getting enough containers from RM to run all the operators.
-* [SPOI-12794] - Files configured by the user are not available when upgraded.
-* [SPOI-12795] - Metrics platform not supported with DT_Plus license.
-* [SPOI-12832] - Application exiting because of NPE in application master.
-* [SPOI-12855] - Update CassandraStore to support more than 1 cassandra nodes.
+**[SPOI-12791]**
+
+In the application when the anti-affinity is enabled, the application master gets containers from the Resource Manager for sometime only.  After this no more containers are received even after periodically requesting the STRAM for containers. Thus the functioning of the application gets disrupted.
+
+**[SPOI-12794]**
+
+While upgrading to RTS 3.9.1 with the latest rpm, the installation do not remain seamless. The LDAP configurations of the user are cleared from conf directory and the configurations had to be manually set up again. 
+
+**[SPOI-12795]**
+
+Metrics platform was not supported with DT-Plus license and was only available with DT_Premium license as part of 3.9.1 release. 
+
+**[SPOI-12832]**
+
+The application exits due to *java.lang.NullPointer* exception in the application master. 
+
+**[SPOI-12855]**
+
+CassandraStore class only supports single node.  The CassandraStore must be enabled to support more than one cassandra nodes.
+
+**[SPOI-12820]**
+
+A new License API must be added to check the license restriction inside the Apex application container.
+
+**[SPOI-12898]**
+
+License is required for deploying RTS 3.9.2 on Sandbox. 
+
+**[SPOI-12843]**
+
+The App Metrics platform must be updated with the new license checking code to support DT Premium or DT Plus license category.
+
+**[SPOI-12842]**
+
+The Drools CEP Rule Engine operator must be updated with the new license checking code to support DT Premium or DT Plus license category.
+
+**[SPOI-12841]**
+
+The Omni-channel Fraud Prevention v1 premium application must be updated with the new license checking code that supports DT Premium or DT Plus license category.
+
+**[SPOI-12932]**
+
+For Alert configurations, an e-mail address with hypen(-) character is not accepted. 
+
+**[SPOI-12888]**
+
+The metrics data is generated even when the platform license was not set.
+
+**[SPOI-12872]**
+
+*isValidLicense API* returns as **True** in cases where the license is not even configured.
+
+**[SPOI-12867]**
+
+The method *context.getAttributes().get()*, that is used in License API, do not function properly in getting the application name property in the Apex Container code. This method must be replaced with *context.getValue()* method.
+
+**[SPOI-12811]**
+
+The filtering of auto complete list in tags do not input correctly.
+
+**[SPOI-12774]**
+
+If the key value contains a space in the key-combination, then that space is converted into hypen(-).
+For example: If the key is **Las Vegas**, then it gets converted to **Las-Vegas**.
+
+**[SPOI-12749]**
+
+Nullpointer exception in found in FSWindowDataManager.
 
 Version: 3.9.1
 ------------------------------------------------------------------------------------------------------------------------
