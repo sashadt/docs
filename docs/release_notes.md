@@ -12,26 +12,55 @@ The following issues are fixed in DataTorrent RTS 3.9.2 release:
 **[SPOI-12791]**
 
 In the application when the anti-affinity is enabled, the application master gets containers from the Resource Manager for sometime only.  After this no more containers are received even after periodically requesting the STRAM for containers. Thus the functioning of the application gets disrupted.
-This issue is now resolved. 
 
 **[SPOI-12794]**
 
 While upgrading to RTS 3.9.1 with the latest rpm, the installation do not remain seamless. The LDAP configurations of the user are cleared from conf directory and the configurations had to be manually set up again. 
-This issue is now resolved. 
 
 **[SPOI-12795]**
 
 Metrics platform was not supported with DT-Plus license and was only available with DT_Premium license as part of 3.9.1 release. 
-This issue is now resolved. 
 
 **[SPOI-12832]**
 
-The application exits due to java.lang.NullPointerException in the application master. This issue is now resolved.
+The application exits due to java.lang.NullPointerException in the application master. 
 
 **[SPOI-12855]**
 
 CassandraStore class only supports single node.  The CassandraStore must be enabled to support more than one cassandra nodes.
-This issues is now resolved. 
+
+**[SPOI-12820]**
+Add a new License API to check the license restriction inside the Apex application container.
+
+**[SPOI-12898]**
+Required license for deploying RTS 3.9.2 on Sandbox. 
+
+**[SPOI-12843]**
+
+The App Metrics platform must be updated with the new license checking code to support DT Premium or DT Plus license category.
+
+**[SPOI-12842]**
+The Drools CEP Rule Engine operator must be updated with the new license checking code to support DT Premium or DT Plus license category.
+
+**[SPOI-12841]**
+The Omni-channel Fraud Prevention v1 premium applications must be updated with the new license checking code that supports DT Premium or DT Plus license category.
+
+**[SPOI-12932]**
+For Alert configurations, an e-mail address with hypen character ('-') is not accepted. 
+
+**[SPOI-12888]**
+The Metrics platform generated metrics data even when the platform license was not set.
+
+**[SPOI-12872]**
+*isValidLicense API* returns as **True** in cases where the license is not configured.
+
+**[SPOI-12867]**
+The method *context.getAttributes().get()*, that is used in License API, do not function properly in getting the application name property in the Apex Container code. This method must be replaced with *context.getValue()* method.
+
+**[SPOI-12811]**
+The filter auto complete list in tags input correctly.
+**[SPOI-12774]**
+**[SPOI-12749]**
 
 Version: 3.9.1
 ------------------------------------------------------------------------------------------------------------------------
