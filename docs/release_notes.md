@@ -3,7 +3,7 @@ DataTorrent RTS Release Notes
 Version: 3.9.2
 ------------------------------------------------------------------------------------------------------------------------
 
-Release date: Dec 1, 2017
+Release date: Dec 6, 2017
 
 The following issues are fixed in DataTorrent RTS 3.9.2 release:
 
@@ -23,16 +23,18 @@ Metrics platform was not supported with DT-Plus license and was only available w
 
 **[SPOI-12832]**
 
-The application exits due to java.lang.NullPointerException in the application master. 
+The application exits due to *java.lang.NullPointer* exception in the application master. 
 
 **[SPOI-12855]**
 
 CassandraStore class only supports single node.  The CassandraStore must be enabled to support more than one cassandra nodes.
 
 **[SPOI-12820]**
+
 Add a new License API to check the license restriction inside the Apex application container.
 
 **[SPOI-12898]**
+
 Required license for deploying RTS 3.9.2 on Sandbox. 
 
 **[SPOI-12843]**
@@ -40,27 +42,41 @@ Required license for deploying RTS 3.9.2 on Sandbox.
 The App Metrics platform must be updated with the new license checking code to support DT Premium or DT Plus license category.
 
 **[SPOI-12842]**
+
 The Drools CEP Rule Engine operator must be updated with the new license checking code to support DT Premium or DT Plus license category.
 
 **[SPOI-12841]**
+
 The Omni-channel Fraud Prevention v1 premium applications must be updated with the new license checking code that supports DT Premium or DT Plus license category.
 
 **[SPOI-12932]**
+
 For Alert configurations, an e-mail address with hypen character ('-') is not accepted. 
 
 **[SPOI-12888]**
+
 The Metrics platform generated metrics data even when the platform license was not set.
 
 **[SPOI-12872]**
+
 *isValidLicense API* returns as **True** in cases where the license is not configured.
 
 **[SPOI-12867]**
+
 The method *context.getAttributes().get()*, that is used in License API, do not function properly in getting the application name property in the Apex Container code. This method must be replaced with *context.getValue()* method.
 
 **[SPOI-12811]**
-The filter auto complete list in tags input correctly.
+
+The filtering of auto complete list in tags do not input correctly.
+
 **[SPOI-12774]**
+
+If the key value contains a space in the key-combination, then that space is converted into hypen(-).
+For example: If the key is **Las Vegas**, then it gets converted to **Las-Vegas**.
+
 **[SPOI-12749]**
+
+Nullpointer exception in found in FSWindowDataManager.
 
 Version: 3.9.1
 ------------------------------------------------------------------------------------------------------------------------
