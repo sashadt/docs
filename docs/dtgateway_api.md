@@ -598,7 +598,7 @@ The options (start, end) and (lastNbytes) are mutually exclusive.
 ```json
 {
     "lines": [
-        { "byteOffset":"{byteOffset}", "line": "{line}" }, …
+        { "byteOffset":"{byteOffset}", "line": "{line}" }, { "byteOffset":"{byteOffset}", "line": "RandomNumber : {Line}" } …
      ]
 }
 ```
