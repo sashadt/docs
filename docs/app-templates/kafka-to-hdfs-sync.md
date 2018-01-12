@@ -89,7 +89,7 @@ There are pre-saved configurations based on the application environment. Recomme
 |---|---|---|---|---|
 |dt.operator.fileOutput.prop.maxLength|Maximum length for output file after which file is rotated|long|Long.MAX_VALUE|Long.MAX_VALUE|
 
-You can override default values for advanced properties by specifying custom values for these properties in the step [specify custom property](#property-editor) step mentioned in [steps](#steps_to_launch) to launch an apphttps://www.datatorrent.com/download/lication.
+You can override default values for advanced properties by specifying custom values for these properties in the step [specify custom property](#property-editor) step mentioned in [steps](#steps_to_launch) to launch an application [https://www.datatorrent.com/download/](https://www.datatorrent.com/download/).
 
 ## Steps to customize the application
 
