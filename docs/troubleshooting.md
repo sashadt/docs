@@ -12,7 +12,7 @@ The following deployment options are available for downloading DataTorrent RTS:
 - **DataTorrent RTS - Cloud Instance**
 
 ###  What are the DT licenses that can be obtained with subscription?
-Refer to http://docs.datatorrent.com/Licensing/#datatorrent-licensing
+Refer to [http://docs.datatorrent.com/Licensing/#datatorrent-licensing](http://docs.datatorrent.com/Licensing/#datatorrent-licensing)
 
 ###  How do I confirm the package downloaded correctly?
 
