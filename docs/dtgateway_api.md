@@ -588,17 +588,17 @@ Return:
 }
 ```
 
-### GET /ws/v2/applications/{appid}/physicalPlan/containers/{containerId}/logs/{logName}[?start={startPos}&end={endPos}&grep={regexp}&includeOffset={true/false}]
+### GET /ws/v2/applications/{appid}/physicalPlan/containers/{containerId}/logs/{logName}[?start={startPos}&end={endPos}&grep={regexp}&includeOffset={true/false}&lastNbytes={N}]
 
-Function: Return the raw log
+Function: Return the log with provided options
 
-Return: if includeOffset=false or not provided, return raw log content
-(Content-Type: text/plain). Otherwise (Content-Type: application/json):
+Return: if includeOffset=false or not provided, return raw log content (Content-Type: text/plain). Otherwise (Content-Type: application/json).
+The options (start, end) and (lastNbytes) are mutually exclusive.
 
 ```json
 {
     "lines": [
-        { "byteOffset":"{byteOffset}", "line": "{line}" }, …
+        { "byteOffset":"{byteOffset}", "line": "{line}" }, { "byteOffset":"{byteOffset}", "line": "RandomNumber : {Line}" } …
      ]
 }
 ```
