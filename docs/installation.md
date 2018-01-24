@@ -152,7 +152,7 @@ For disaster recovery, you can install multiple instances of gateways on a singl
 1. Create dtadmin user. This user must have uid > 1000. (adduser -u 1100 dtadmin).
 2. Switch to dtadmin user.
 3. Copy the hadoop **conf** dir from both the hadoop clusters to the home of dtadmin user. Name them such that you can differentiate between them (For example, $HOME/hadoop_conf1 and $HOME/hadoop_conf2).
-4. Download **datatorrent-rts-3.9.2.bin**.
+4. Download the latest version of the DT RTS installable binary file (datatorrent-rts-<version>.bin).
 5. Export JAVA_HOME, HADOOP_HOME and add in PATH. For example:
    * export HADOOP_HOME=/opt/hadoop-2.6.5 
    * export JAVA_HOME=/usr 
