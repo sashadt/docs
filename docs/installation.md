@@ -145,7 +145,7 @@ DataTorrent installation can be verified by running included demo applications. 
 
 Disaster Recovery Setup
 --------------------------------------------------------------------------------
-For disaster recovery, you can install multiple instances of gateways on a single machine using single service accounts.
+If you have multiple Hadoop clusters for handling the disasters, then you can install multiple instances of the Gateway on the same machine & service account with each gateway pointing to different cluster.
 
 ### Installing Gateway with dtuser(or any other) User
 
