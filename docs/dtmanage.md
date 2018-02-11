@@ -253,10 +253,7 @@ The RTS configuration menu is accessed by the cog button on the top-right corner
 This page displays details of the following:
 * Gateway Information - Displays all the details of the gateway properties that are configured in the current DT RTS installation.
 * Hadoop Information - Displays the details of Hadoop properties that are configured in the current DT RTS installation.
-* Phone Home Information - Displays the data from the current DT RTS installation, such as usage statistics, which is dynamically aggregated over the time period of 24 hours and sent to the DT servers. The data is aggregated in three different time frames: 
-  * Total - Includes data from the start of the gateway installation to present.
-  * Previous - Includes data from the previous period of 24 hours when data was sent back.
-  * Current - Includes data evolved in the past 24 hours.
+* Phone Home Information - Displays the data from the current DT RTS installation, such as usage statistics, which is dynamically aggregated over the time period of 24 hours and sent to the DT servers. The data is aggregated in total time frames that is it includes data from the start of the gateway installation to present.
 
 ![System Configuration Page](images/dtmanage/console-system-screen2.png)
 
