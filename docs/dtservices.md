@@ -38,19 +38,17 @@ Drools Workbench is the web application and repository to manage Drools assets. 
 
 For more details refer to [&lt;Drools Workbench documentation&gt;]()
 
-<a name="superset"></a>
-
 #### Superset
 
 Superset is a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using the Superset services, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
 
 For more details refer to [&lt;Superset dashboard documentation&gt;]()
 
-## Management
+# Management
 
 You can manage the services from the Services page. To access and manage the services, do the following:
 
-1. Click the Settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon  located on the upper most right section of the page.
+1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the page.
 2. Select **Services**. The **Services** page is displayed with the list of installed services. You can perform the following actions:
 
     * [Create new service](#create_new_service)
@@ -61,8 +59,7 @@ You can manage the services from the Services page. To access and manage the ser
     * [Clone service](#clone_service)
     * [Delete services](#delete_services)
 
-<a name="create_new_service"></a>
-
+<a name=""></a>
 #### Create New Service
 
 To create a new service, do the following:
@@ -89,7 +86,9 @@ The **Create Service** page is displayed.
 
 4. Click **Create** button. The new service is installed. 
 
-#### <a name="import_packaged_service"></a>Import Packaged Service
+<a name="import_packaged_service"></a>
+
+#### Import Packaged Service
 
 1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**.
 2. On the **Services** page, click **Import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in the application.
@@ -97,7 +96,9 @@ The **Create Service** page is displayed.
 4. An **Import Packaged Service** dialogue is shown.
 5. Edit the applicable entries and click the **Import** button to install the service.
 
-#### <a name="view_service_instance"></a>View Service Instance
+<a name="view_service_instance"></a>
+
+#### View Service Instance
 
 1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**.
 2. On the **Services** page, click the service name to navigate to the service instance page.
@@ -108,7 +109,9 @@ The **Create Service** page is displayed.
     | Name | The service name |
     | list all most common items in this table | ... |
 
-#### <a name="edit_service"></a>Edit Service
+<a name="edit_service"></a>
+
+#### Edit Service
 
 The services are automatically launched when the application is launched. However, you can change the settings of the service based on your requirements and re-launch the service.  Only stopped services can be edited.
 
@@ -118,7 +121,9 @@ To edit the services, do the following:
 2. Select a **Service** from the service list and then click the **Edit** button. The **Edit Service** dialogue is shown. 
 3. Edit the settings and click **Save**.<br/>The new settings are saved and when it is restarted, it will run with the new settings.
 
-#### <a name="stop_and_start_services"></a>Stop and Start Services
+<a name="stop_and_start_services"></a>
+
+#### Stop and Start Services
 
 You can stop a service and then restart the service when required.
 
@@ -127,7 +132,9 @@ To stop or start the services, do the following:
 1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**. The Services page is displayed.
 2. Select a service from the services list and click the **Stop** button. The service is stopped.<br/>To restart this service, click the **Start** button.
 
-#### <a name="clone_service"></a>Clone Service
+<a name="clone_service"></a>
+
+#### Clone Service
 
 You can clone, edit, and save the service configurations as a new service. There are two methods to clone a service configuration.
 
@@ -146,7 +153,9 @@ Method 2:
 4. Change the service name and service configurations
 5. Click the **Create** button to create the new service.
 
-####<a name="delete_services"></a>Delete Services
+<a name="delete_services"></a>
+
+#### Delete Services
 
 Services can be deleted for an application from the Services management page.
 
@@ -156,7 +165,7 @@ To stop or start the services, do the following:
 2. Select a service from the services list and click the **Delete** button.
 3. The delete service confirmation modal is shown.  Click the **Delete** button to confirm that you want to delete the service.
 
-## Installation
+# Installation
 
 Some applications require services which are run in the Docker containers. For such services, you must install Docker (Version 1.9.1 or greater) on your system. Services can run in Docker installed on a remote system if Docker isn't installed on the system where the Gateway is running.
 
@@ -175,7 +184,7 @@ To specify optional remote Docker, do the following:
 
 5. Click **Continue** and complete the Installation wizard.
 
-## Development
+# Development
 
 When you are developing an application based on your business requirements, you can specify the services that are associated with that application and which services are required to run when an application is launched.  This can be defined in a **service.json** file which is a service descriptor. The  **\*.apa** contains the service definitions (**services.json**) file. Each of these services can be further configured with settings for your requirements.
 
@@ -195,6 +204,7 @@ In a **services.json** file, you can use parameters which are metadata variables
 | Global configuration values | These are not in the context of a service but global or gateway scope. These are:<ul><li>**${GATEWAY\_CONNECT\_ADDRESSS}** - this is the GATEWAY\_CONNECT\_ADDRESS value used in many places (typically the IP address/hostname used to connect to the gateway)</li><li>**${GATEWAY\_ADMIN\_USER}** - this is the value of current unix user who launched the gateway (value of `DTGateway.SUPER_USER_CONTEXT.getUserPrincipal().getName()`)</li></ul> |
 
 <a name="services_property"></a>
+
 #### Services Property
 
 Services definition in **services.json** is a JSON array under the **services** property and each element in the array is a JSON object that has fields and values which can be configured. 
@@ -210,6 +220,7 @@ Services definition in **services.json** is a JSON array under the **services** 
 | proxy | Specify the proxy to configure on Gateway when this service is running. Enter the following details:<ul><li>**address** - `host:port` to which the proxy path forwards.</li></ul>In case of a docker based service, you may optionally provide the following:<ul><li>**requestHeaders** - Headers that must be added to the request when sent to the proxy destination. This is a JSON object with a key-value pair representing a header name and value pair.</li><li>**replaceStrings** - A JSON array of JSON Objects that represents text replacement processing to be performed on a returned response body.  Support is provided for Java regex processing as described in [https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) including capturing group and back references.<br/>The JSON object keys are as follows:<ul><li>**matchMime** - Process only for this mime-type. For example -  `text/html`</li><li>**matchUrl** - Process only when URL matches this regex pattern. For example, `acct*`</li><li>**matchText** - Text to be matched in the response body. For example, `href=\"/static/`</li><li>**replaceText** - Text that replaces the matched-text.</li></ul></li></ul>Example 1:<pre><code>{<br/>  "matchMime": "text/html",<br/>  "matchUrl": "acct\*",<br/>  "matchText":  "href=\"/static/",<br/>  "replaceText": "href=\"/proxy/services/superset-fraud-app/static/"<br/>}</code></pre>In the above example, when the proxy is processing the URL `http://gateway:9090/proxy/services/superset/acct-admins/welcome.html`, if the response mime type is text/html and contains the following text: `href="/static/welcome-stylesheet.css"`, then that text is replaced with `href="/proxy/services/superset-fraud-app/static/welcome-stylesheet.css"`<br/>Example 2:<pre><code>{<br/>  "matchMime": "text/html",<br/>  "matchUrl": ".\*",<br/>  "matchText":  "num=/([0-9]*\\)",<br/>  "replaceText": "NUM=\1"<br/>}</code></pre> |
 
 <a name="applications_property"></a>
+
 #### Applications Property
 
 Applications depending on services are defined in the `applications` properties.  
