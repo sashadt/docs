@@ -22,8 +22,7 @@ DAGs and widgets
 When monitoring an application, the logical view is selected by default, with
 the following panels, also called widgets:  _Application
 Overview_, _Stram Events_, _Logical DAG_, _Logical Operators_, _Streams_, _Associated Services_, and _Metrics Chart_.
-These panels can be resized, moved around, confi _Application
-Overview_ gured (using the gear wheel
+These panels can be resized, moved around, configured (using the gear wheel
 icon in the top-right corner), or removed (using the delete button in the
 top-right corner).
 
