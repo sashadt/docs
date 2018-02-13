@@ -9,6 +9,7 @@ pages:
 - Sandbox: sandbox.md
 - Cloud Integration:
     - AWS: aws_emr_manual.md
+    - Azure: azure_deployment.md
 - Development:
     - Creating Applications: create.md
     - "Beginner's Guide": beginner.md
