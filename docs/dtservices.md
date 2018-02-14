@@ -28,10 +28,10 @@ The following services are required by the premium applications in DT RTS:
 
 # Management
 
-You can manage the services using the Services page. To view and manage the services, do the following:
+You can view and manage services using the **Services** page. To navigate to the **Services** page, follow the steps below:
 
 1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
-2. Select **Services**. The **Services** page is displayed with the list of installed services. You can perform the following actions:
+2. Select the **Services** menu item from the dropdown menu.  The **Services** page is displayed with the list of installed services. The following actions can be performed on this page:
 
     * [Create new service](#create_new_service)
     * [Import packaged services](#import_packaged_service)
@@ -42,11 +42,11 @@ You can manage the services using the Services page. To view and manage the serv
     * [Clone service](#clone_service)
     * [Delete services](#delete_services)
 
-<a name="crate_new_service"></a>
+<a name="create_new_service"></a>
 
 #### Create New Service
 
-To create a new service, do the following:
+To create a new service, follow the steps below:
 
 1. Navigate to the **Services** page.
 2. Click the **create new** button. The **Create Service** dialog is shown.
@@ -54,20 +54,21 @@ To create a new service, do the following:
 
     | Item | Description |
     | ----- | ----------- |
-    | Name | Specify the name of the service. This should be a unique name. For example, **druid**, **superset** etc. |
+    | Name | Enter the name of the service. This should be a unique name. |
     | Description | Enter a description about the service. |
-    | Type | Specify one of the following type of the service:<ul><li>**docker** - Docker container as a service.</li><li>**apex** - Apex application as a service.</li></ul>|
-    | Source URL | Specify the location of the apex application image or the docker image that was used for `docker pull`. |
-    | Docker Run | Specify the optional arguments provided for the `docker run` during container setup. For example `-d -p 80:80` |
-    | Docker Exec | Execute the shell command inside the docker container after it is launched with `docker exec`. |
-    | Apex App Name | Specify the application name in the Apex image which must be launched. |
-    | Apex Launch Properties | Specify Apex launch properties. Click **Add** to add these properties. Enter the name and the corresponding value. |
-    | Gateway Proxy Configuration | Gateway Proxy allows multiple service endpoints to be grouped inside a common resource path (**/proxy/services/&lt;name&gt;**) and exposed from the Gateway listen address. |
-    | Proxy Address | Port or host:port to which the proxy path forwards. |
-    | Proxy Request Headers | Specify headers to be added to the request when sending to the proxy destination. This is a JSON object with a key-value pair representing a header name and value pair. Click **Add** to add more headers. |
-    | Proxy Response Replacements | Specify the response replacements which represents the processing that must be performed on a returned response body.<ul><li>**URL** – Matching URL to apply the text replacement logic. For example, `example.com`</li><li>**Mime** – Matching mime to apply the text replacement logic. For example, `text/html`</li><li>**String** – Specify a string to find and replace, which may contain regular expressions with match groups.</li><li>**Replace** – Specify replacement string which may contain match group variables.</li></ul>Click **Add** to add more proxy response replacements. |
+    | Type | Select a service type.<br/>`docker` - Docker container as a service.<br/>`apex` - Apex application as a service. |
+    | Source URL | Specify the location of the Docker image or the Apex application image. |
+    | Docker Run<br/>_(Optional)_ | Enter the Docker command arguments to be used when the Docker service container starts.<br/>**Note**: This entry will only be shown if the service type is `docker`. |
+    | Docker Exec<br/>_(Optional)_ | Execute the shell command inside the docker container after it is launched.<br/>**Note**: This entry will only be shown if the service type is `docker`. |
+    | Apex App Name | Enter the application name that exists in the Apex APA image which will be launched when the service starts.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
+    | Apex Launch Properties<br/>_(Optional)_ | Enter Apex launch properties. Click the **Add** button to add additional properties. Enter the names and corresponding values.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
+    | Proxy Address<br/>_(Optional)_ | Port or host:port to which the Gateway proxy path forwards requests. |
+    | Proxy Request Headers<br/>_(Optional)_ | Enter headers to be added to the request made by the Gateway to the proxy destination. Click the **Add** button to add additional headers. |
+    | Proxy Response Replacements<br/>_(Optional)_ | Enter the response replacement definitions which represents the text replacement processing to be performed on the response body by the Gateway proxy. Click the **Add** button to add additional replacement definitions.|
 
-4. Click **Create** button. The new service is installed. 
+4. Click the **Create** button to create the new service and install it.
+
+For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
 
 Sample Docker create service dialog.
 
@@ -81,11 +82,14 @@ Sample Apex create service dialog.
 
 #### Import Packaged Service
 
+Packaged services are pre-defined services included in application packages that are uploaded in the cluster.  These services can be installed as-is or with different settings.
+
+To install a packaged service, follow the steps below:
+
 1. Navigate to the **Services** page.
-2. Click the **Import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in application packages.
-3. Click the **Import** button of a service to be imported.
-4. An **Import Packaged Service** dialog is shown.
-5. Edit the applicable entries and click the **Import** button to install the service.
+2. Click the **import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in application packages.
+3. Click the **import** button of a service to be imported. An **Import Packaged Service** dialog is shown.
+4. Edit the applicable entries and click the **Import** button to install the service.
 
 <a name="view_service_instance"></a>
 
@@ -93,7 +97,7 @@ Sample Apex create service dialog.
 
 1. Navigate to the **Services** page.
 2. Click the service name to navigate to the service instance page.
-3. The following service details are displayed on the **Service Instance** page:
+3. The following service details can be found on the **Service Instance** page:
 
     | Item | Description |
     | ---- | ----------- |
@@ -104,13 +108,15 @@ Sample Apex create service dialog.
 
 #### Edit Service
 
-The services are automatically launched when an associated application is launched. However, you can change the settings of the services based on your requirements and restart the services.<br/>**Note**: Only **STOPPED** services can be edited.
+Services are automatically installed when an associated application is launched. However, you can change the settings of the services based on your requirements and restart the services.
 
-To edit a service, do the following:
+**Note**: Only **STOPPED** services can be edited.
+
+To edit a service, follow the steps below:
 
 1. Navigate to the **Services** page.
-2. Select a service from the service list and click the **Edit** button. The **Edit Service** dialog is shown.
-3. Edit the settings and click **Save**.<br/>The new settings are saved and will be applied when the service is restarted.
+2. Select a service from the services list and click the **Edit** button. The **Edit Service** dialog is shown.
+3. Edit the settings and click the **Save** button. The new settings are saved and will be applied when the service is restarted.
 
 **Note**: You can also edit a service on the service instance page.
 
@@ -118,7 +124,7 @@ To edit a service, do the following:
 
 #### Start Services
 
-To start a service, do the following:
+To start a service, follow the steps below:
 
 1. Navigate to the **Services** page.
 2. Select a service from the services list and click the **Start** button.
@@ -129,11 +135,11 @@ To start a service, do the following:
 
 #### Stop Services
 
-To stop a service, do the following:
+To stop a service, follow the steps below:
 
 1. Navigate to the **Services** page.
-2. Select a service from the services list and click the **Stop** button.
-3. A **Stop Service** modal is shown.  Click the **Stop** button to stop the service.
+2. Select a service from the services list and click the **Stop** button. A **Stop Service** modal is shown.
+3. Click the **Stop** button to stop the service.
 
 **Note**: You can also stop a service on the service instance page.
 
@@ -141,22 +147,16 @@ To stop a service, do the following:
 
 #### Clone Service
 
-You can clone, edit, and save the service configurations as a new service. There are two methods to clone a service configuration.
+You can clone, edit, and save a service configuration as a new service.
 
-Method 1:
+To clone a service, follow the steps below:
 
-1. On the **Services** page, select a service to clone. 
-2. Click the **Copy** button.
-3. Change the service name and service configurations.<br/>Service name must be different from the original service name because it must be unique.
-4. Click the **Create** button.<br/>If the original service is enabled, then the new service will be installed and started.<br/>If the original service isn't enabled, then the new service will be installed, but not started.
+1. Navigate to the **Services** page.
+2. Select a service to clone and click the **copy** button.  The **Create Service** dialog is shown with the selected service configurations pre-filled.
+3. Change the service name and applicable settings.<br/>Service name must be different from the original service name because it must be unique.
+4. Click the **Create** button to create the new service.<br/>If the original service is enabled, then the new service will be installed and started.<br/>If the original service isn't enabled, then the new service will be installed, but not started.
 
-Method 2:
-
-1. On the Services page, select a service to clone.
-2. Click the **View** button.
-3. On the service instance page, click the **Copy** button.
-4. Change the service name and service configurations
-5. Click the **Create** button to create the new service.
+**Note**: You can also clone a service on the service instance page.
 
 <a name="delete_services"></a>
 
@@ -164,11 +164,13 @@ Method 2:
 
 Services can be deleted for an application from the Services management page.
 
-To stop or start the services, do the following:
+To stop or start the services, follow the steps below:
 
-1. On the DT RTS console, click the settings icon located on upper most right section of the page and select **Services**. The Services page is displayed.
-2. Select a service from the services list and click the **Delete** button.
-3. The delete service confirmation modal is shown.  Click the **Delete** button to confirm that you want to delete the service.
+1. Navigate to the **Services** page.
+2. Select a service from the services list and click the **delete** button.  The delete service confirmation modal is shown.
+3. Click the **Delete** button to confirm that you want to delete the service.
+
+**Note**: You can also delete a service on the service instance page.
 
 # Installation
 
