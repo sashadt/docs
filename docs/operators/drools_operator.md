@@ -26,9 +26,7 @@ The drools operator is tested with the following components:
 
 ## Workflow of the Operator
 
-##
-
-
+![droolsworkflow](images/operators/drools_Workflow.png)
 
 - Write and save the rules in the drools format.
 - Configure the location of this rule&#39;s file in the drools operator.
@@ -111,25 +109,23 @@ end`
 
 The following code illustrates how Drools Operator can be used within an application. The application reads JSON data from Kafka, parses it to Java object, and sends it to Drools Operator for evaluation of rules. The result of rule evaluation is then sent to another Kafka topic, which can be consumed by other applications.
 
-`public class Application implements StreamingApplication`
-`{
+`public class Application implements StreamingApplication
+{
   @Override
   public void populateDAG(DAG, Configuration configuration)
   {
     KafkaSinglePortInputOperator kafkaInputOperator = dag.addOperator("Input", new KafkaSinglePortInputOperator());
-    JsonParser parser = dag.addOperator("TransactionParser", JsonParser.class);`
+    JsonParser parser = dag.addOperator("TransactionParser", JsonParser.class);
     
     dag.setInputPortAttribute(parser.in, Context.PortContext.PARTITION_PARALLEL, true);
     DroolsOperator ruleExecutor = dag.addOperator("RuleExecutor", new DroolsOperator());
-    KafkaSinglePortOutputOperator output = dag.addOperator("Output", new KafkaSinglePortOutputOperator());`
+    KafkaSinglePortOutputOperator output = dag.addOperator("Output", new KafkaSinglePortOutputOperator());
 
     dag.addStream("input", kafkaInputOperator.outputPort, parser.in);
     dag.addStream("data", parser.out, ruleExecutor.factsInput);
     dag.addStream("processed", ruleExecutor.factsOutput, output.inputPort);
-  }`
+  }
 }`
-`
-
 
 ## Performance Benchmarking
 
@@ -141,7 +137,8 @@ As the Drools operator is configured in streaming mode, it keeps the data in mem
 
 Drools operator was tested with 1KB tuple size and various expiration rate, input rate, and memory configuration.
 
-The result is shown as a graph where **Y-axis** is the **expiration interval** and **X-axis** is the **input rate**. ![]
+The result is shown as a graph where **Y-axis** is the **expiration interval** and **X-axis** is the **input rate**.
+![droolsworkflow](images/operators/drools_benchmarking.png)
 
 If you want to process data at a specific input rate and expiration interval, you can choose a point on the plot with configured input rate and expiration interval and choose that line of memory configuration which is above that point.
 
