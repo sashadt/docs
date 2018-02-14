@@ -132,6 +132,10 @@ To install a packaged service, follow the steps below:
 1. Navigate to the **Services** page.
 2. Click the service name to navigate to the service instance page.
 
+Sample service instance page:
+
+![](/images/dtservices/service-instance-view.png)
+
 The following sections can be found on the **Service Instance** page:
 
 **Service Status and Actions**
@@ -140,7 +144,7 @@ This section shows the **service name**, **type**, **status**, **uptime** and **
 
 **Service Details**
 
-This table shows the configuration of the service.  It also contains the Apex application ID if the service type is `apex` and the service is running.
+This table shows the configuration of the service.  It may also contain the Apex application ID if the service type is `apex` and the service is running and some metadata keys/values if the service provides such data.  The sample service instance above shows `QueryIP` and `QueryPort` with values of `192.168.2.135` and `46620`, respectively.  These metadata keys/values are provided by the service at run time.  This section will also show explicit metadata variables defined in the service descriptor.
 
 **Proxy URL**
 
@@ -410,7 +414,9 @@ The above example tells the Gateway to process requests where the response heade
 
 **Note**: The matchUrl in this case will match any URL so it could have been omitted.
 
-In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+In addition to the explicit metadata variables defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+
+**Note**: These variables are only applicable to the following properties: _srcUrl, proxy.address, docker.run, docker.exec and apex.launchArgs values (not names)_
 
 **Implicit Variables**
 
