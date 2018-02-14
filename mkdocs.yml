@@ -34,6 +34,7 @@ pages:
     - Operators: 
         - Operators List: library_operators.md
         - Drools Operator: operators/drools_operator.md
+        - TCP Input Operator: tcpinputoperator.md
         - Block Reader: operators/block_reader.md
         - Deduper: operators/deduper.md
         - Dimension Computation: operators/dimensions_computation.md
