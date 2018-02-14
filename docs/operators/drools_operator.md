@@ -41,9 +41,9 @@ The following ports are available on the Drools operator:
 | --- | --- | --- |
 | Input Port | factsInput Port | Receives incoming tuples from upstream operators. |
 | Output Port | factsOutput Port | Emits processed data with fields changed by applied rules. |
-| ruleCountOutput Port | Emits details of rule name and the number of times that the rule is applied. |
-| firedRuleAndTransactionOutput Port | Emits rules along with processed data matching a specific rule. |
-| factAndFiredRulesOutput | Emits processed data along with associated rules. |
+| ruleCountOutput Port | |Emits details of rule name and the number of times that the rule is applied. |
+| firedRuleAndTransactionOutput Port | |Emits rules along with processed data matching a specific rule. |
+| factAndFiredRulesOutput | |Emits processed data along with associated rules. |
 
 ## Partitioning
 
@@ -56,7 +56,7 @@ For partitioning, you must add the following property in the **properties.xml** 
 ```
 <property>
      <name>dt.operator.RuleExecutor.attr.PARTITIONER</name>
-     <value>com.datatorrent.common.partitioner.StatelessPartitioner:4</name>
+     <value>com.datatorrent.common.partitioner.StatelessPartitioner:4</value>
 </property>
 ```
 
