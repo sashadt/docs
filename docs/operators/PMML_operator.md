@@ -10,7 +10,7 @@ The only input that the operator takes is the PMML file. The operator identifies
 
 For example, the following image depicts how the PMML operator process the scoring data to predict about an admission to a graduate school.
 
-![](images/PMML_workflow.png)
+![](images/PMML_Process.png)
 
 The PMML operator is available under _DT Premium_ license.
 
@@ -76,6 +76,35 @@ For running the PMML operator, the following properties must be set in the **pro
 
 Following is a sample code to use the PMML operator:
 ```
-| package com.datatorrent.Classification;import org.apache.apex.malhar.lib.fs.GenericFileOutputOperator;import org.apache.hadoop.conf.Configuration;import com.datatorrent.api.annotation.ApplicationAnnotation;import com.datatorrent.api.StreamingApplication;import com.datatorrent.api.DAG;import com.datatorrent.api.DAG.Locality;import com.datatorrent.lib.io.ConsoleOutputOperator;import com.datatorrent.lib.io.fs.AbstractFileOutputOperator;import com.datatorrent.pmml.operator.ClassificationScoringOperator;import com.datatorrent.pmml.scorer.ClassificationScorer;@ApplicationAnnotation(name = &quot;PMML-Classification-Scoring-App&quot;)public class Application implements StreamingApplication{  @Override  public void populateDAG(DAG dag, Configuration conf)  {        ClassificationInput inputOp = dag.addOperator(&quot;inputOp&quot;, ClassificationInput.class);        inputOp.setEmitBatchSize(1);        ClassificationScoringOperator scoring = dag.addOperator(&quot;classificationOperator&quot;, ClassificationScoringOperator.class);        ScoringOutputOperator logger = dag.addOperator(&quot;Logger&quot;, ScoringOutputOperator.class);        dag.addStream(&quot;data to scoring&quot;, inputOp.scoringOut, scoring.input);        dag.addStream(&quot;scoring to output&quot;, scoring.output, logger.input);  }} |
-| --- |
+package com.datatorrent.Classification;
+import org.apache.apex.malhar.lib.fs.GenericFileOutputOperator;
+import org.apache.hadoop.conf.Configuration;
+
+import com.datatorrent.api.annotation.ApplicationAnnotation;
+import com.datatorrent.api.StreamingApplication;
+import com.datatorrent.api.DAG;
+import com.datatorrent.api.DAG.Locality;
+import com.datatorrent.lib.io.ConsoleOutputOperator;
+import com.datatorrent.lib.io.fs.AbstractFileOutputOperator;
+import com.datatorrent.pmml.operator.ClassificationScoringOperator;
+import com.datatorrent.pmml.scorer.ClassificationScorer;
+
+@ApplicationAnnotation(name = "PMML-Classification-Scoring-App")
+public class Application implements StreamingApplication
+{
+
+  @Override
+  public void populateDAG(DAG dag, Configuration conf)
+  {
+
+	ClassificationInput inputOp = dag.addOperator("inputOp", ClassificationInput.class);
+	inputOp.setEmitBatchSize(1);
+	ClassificationScoringOperator scoring = dag.addOperator("classificationOperator", ClassificationScoringOperator.class);
+	ScoringOutputOperator logger = dag.addOperator("Logger", ScoringOutputOperator.class);
+
+	dag.addStream("data to scoring", inputOp.scoringOut, scoring.input);
+	dag.addStream("scoring to output", scoring.output, logger.input);
+  }
+}
+
 ```
