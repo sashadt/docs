@@ -233,14 +233,12 @@ To specify optional remote Docker, do the following:
 
 # Development
 
-When you are developing an application based on your business requirements, you can specify the services that are associated with that application and which services are required to run when an application is launched.  This can be defined in a **service.json** file which is a service descriptor. The  **\*.apa** contains the service definitions (**services.json**) file. Each of these services can be further configured with settings for your requirements.
+Services and dependent applications can be defined and included in the application package.  This service descriptor is defined in the **services.json** file.  This file is located in the **/src/main/resources/resources** directory of your Apex project.  When the project is built and packaged as an APA file, the **services.json** file is placed in the **/resources** directory inside the APA file.
 
-In the **services.json** file, you must define the following top level properties:
+The **services.json** file contains two root level properties:
 
 * [Services Property](#services_property)
 * [Applications Property](#applications_property)
-
-The **services.json** file is located in the **application.apa** within the **resources** folder: **resources/resources/services.json**
 
 In a **services.json** file, you can use parameters which are metadata variables, implicit variables, and global configuration values.
 
@@ -287,6 +285,7 @@ Service descriptors are defined in the `services` property.  The services proper
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
 | address<br/>_(Optional)_ | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088` |
+| followRedirect<br/>_(Optional, default: true)_ | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy. |
 | requestHeaders<br/>_(Optional)_ | json | Headers to be added to the request made by the Gateway to the proxy destination. |
 | replaceStrings<br/>_(Optional)_ | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references. |
 
