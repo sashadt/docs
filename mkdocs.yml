@@ -31,7 +31,8 @@ pages:
     - Application Packages: application_packages.md
     - Configuration Packages: configuration_packages.md
     - Operator Development: operator_development.md
-    - Operators: library_operators.md
+    - Operators: 
+        - Operators List: library_operators.md
         - Drools Operator: drools_operator.md
         - Block Reader: operators/block_reader.md
         - Deduper: operators/deduper.md
