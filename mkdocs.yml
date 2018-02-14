@@ -33,7 +33,7 @@ pages:
     - Operator Development: operator_development.md
     - Operators: 
         - Operators List: library_operators.md
-        - Drools Operator: drools_operator.md
+        - Drools Operator: operators/drools_operator.md
         - Block Reader: operators/block_reader.md
         - Deduper: operators/deduper.md
         - Dimension Computation: operators/dimensions_computation.md
