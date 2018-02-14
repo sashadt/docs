@@ -28,19 +28,46 @@ The following services are required by the premium applications in DT RTS:
 
 # Management
 
-You can view and manage services using the **Services** page. To navigate to the **Services** page, follow the steps below:
+You can view and manage installed services using the **Services** page. To navigate to the **Services** page, follow the steps below:
 
 1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
-2. Select the **Services** menu item from the dropdown menu.  The **Services** page is displayed with the list of installed services. The following actions can be performed on this page:
+2. Select the **Services** menu item from the dropdown menu.  The **Services** page is displayed with the list of installed services.
 
-    * [Create new service](#create_new_service)
-    * [Import packaged services](#import_packaged_service)
-    * [View service instance](#view_service_instance)
-    * [Edit service](#edit_service)
-    * [Start services](#start_services)
-    * [Stop services](#stop_services)
-    * [Clone service](#clone_service)
-    * [Delete services](#delete_services)
+The following details can be found in the services table on the **Services** page:
+
+| Item | Description |
+| ---- | ----------- |
+| name | The service name, which can be clicked to navigate to the service instance page. |
+| enabled | The service status should be `RUNNING` if this field is `true` (checked).<br/>The status should be `STOPPED` if this field is `false`.<br/>The Gateway monitors all **enabled** services to make sure they are running.  |
+| status | The state of the service. |
+| started | The duration since the service was started. |
+| uptime | Number of hours the service has been running. |
+| type | The service type. Possible values are `docker` and `apex`. |
+| active apps | The active Apex applications that depend on the service. |
+| memory | Memory allocated by the service. |
+
+Below are possible service status:
+
+| Status | Description |
+| ------ | ----------- |
+| INSTALLING | The service is being installed.  This status is typically shown during service download or installation. |
+| STOPPED | The service is installed, but not running. |
+| STARTING | The service is installed and is starting up. |
+| RUNNING | The service is installed and running. |
+| STOPPING | The service is being stopped. |
+| REMOVING | The service is being deleted. Once deleted, it should disappear from the table on the **Services** page. |
+| FAILED | The service is installed but failed to start or ended unexpectedly. |
+
+The following actions can be performed on this page:
+
+* [Create new service](#create_new_service)
+* [Import packaged services](#import_packaged_service)
+* [View service instance](#view_service_instance)
+* [Edit service](#edit_service)
+* [Start services](#start_services)
+* [Stop services](#stop_services)
+* [Clone service](#clone_service)
+* [Delete services](#delete_services)
 
 <a name="create_new_service"></a>
 
