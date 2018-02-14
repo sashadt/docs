@@ -35,6 +35,7 @@ pages:
         - Operators List: library_operators.md
         - Drools Operator: operators/drools_operator.md
         - Python Operator: operators/python_operator.md
+        - PMML Operator: operators/PMML_operator.md
         - TCP Input Operator: operators/tcpinputoperator.md
         - Azure Blob Storage Operator: operators/azure_blob.md
         - Block Reader: operators/block_reader.md
