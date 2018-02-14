@@ -82,17 +82,17 @@ To create a new service, follow the steps below:
 
     | Item | Description |
     | ----- | ----------- |
-    | Name | Enter the name of the service. This should be a unique name. |
-    | Description | Enter a description about the service. |
+    | Name | Enter the name of the service. This must be a unique name. |
+    | Description | Enter a description about the service.<br/>_(Optional)_ |
     | Type | Select a service type.<br/>`docker` - Docker container as a service.<br/>`apex` - Apex application as a service. |
     | Source URL | Specify the location of the Docker image or the Apex application image. |
-    | Docker Run<br/>_(Optional)_ | Enter the Docker command arguments to be used when the Docker service container starts.<br/>**Note**: This entry will only be shown if the service type is `docker`. |
-    | Docker Exec<br/>_(Optional)_ | Execute the shell command inside the docker container after it is launched.<br/>**Note**: This entry will only be shown if the service type is `docker`. |
+    | Docker Run| Enter the Docker command arguments to be used when the Docker service container starts.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
+    | Docker Exec | Execute the shell command inside the docker container after it is launched.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
     | Apex App Name | Enter the application name that exists in the Apex APA image which will be launched when the service starts.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
-    | Apex Launch Properties<br/>_(Optional)_ | Enter Apex launch properties. Click the **Add** button to add additional properties. Enter the names and corresponding values.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
-    | Proxy Address<br/>_(Optional)_ | Port or host:port to which the Gateway proxy path forwards requests. |
-    | Proxy Request Headers<br/>_(Optional)_ | Enter headers to be added to the request made by the Gateway to the proxy destination. Click the **Add** button to add additional headers. |
-    | Proxy Response Replacements<br/>_(Optional)_ | Enter the response replacement definitions which represents the text replacement processing to be performed on the response body by the Gateway proxy. Click the **Add** button to add additional replacement definitions.|
+    | Apex Launch Properties | Enter Apex launch properties. Click the **Add** button to add additional properties. Enter the names and corresponding values.<br/>**Note**: This entry will only be shown if the service type is `apex`.<br/>_(Optional)_ |
+    | Proxy Address | Port or host:port to which the Gateway proxy path forwards requests.<br/>_(Optional)_ |
+    | Proxy Request Headers | Enter headers to be added to the request made by the Gateway to the proxy destination. Click the **Add** button to add additional headers.<br/>_(Optional)_ |
+    | Proxy Response Replacements | Enter the response replacement definitions which represents the text replacement processing to be performed on the response body by the Gateway proxy. Click the **Add** button to add additional replacement definitions.<br/>_(Optional)_ |
 
 4. Click the **Create** button to create the new service and install it.
 
@@ -212,7 +212,7 @@ To stop or start the services, follow the steps below:
 
 **Note**: You can also delete a service on the service instance page.
 
-# Installation
+# Docker Configuration
 
 Some applications require services which are run in the Docker containers. For such services, you must install Docker (Version 1.9.1 or greater) on your system. Services can run in Docker installed on a remote system if Docker isn't installed on the system where the Gateway is running.
 
@@ -229,11 +229,11 @@ To configure the remote Docker host, follow the steps below:
 
     | Field | Description |
     | ----- | ----------- |
-    | Docker host_(Optional)_ | Enter the remote Docker host URL.<br/>For example: `unix:///var/run/docker.sock` or `http://127.0.0.1:2376` |
+    | Docker host | Enter the remote Docker host URL.<br/>For example: `unix:///var/run/docker.sock` or `http://127.0.0.1:2376`<br/>_(Optional)_ |
 
 5. Click **Continue** and complete the Installation wizard.
 
-# Development
+# Packaging Services
 
 Services and dependent applications can be defined and included in the application package.  This service descriptor is defined in the **services.json** file.  This file is located in the **/src/main/resources/resources** directory of your Apex project.  When the project is built and packaged as an APA file, the **services.json** file is placed in the **/resources** directory inside the APA file.
 
@@ -253,13 +253,13 @@ Service descriptors are defined in the `services` property.  The services proper
 | Item | Type | Description |
 | ---- | ---- | ----------- |
 | name | string | Service name, which should be globally unique and only include characters that HDFS file name friendly.<br/>For example: `superset-fpa`, `druid_workbench`, etc. |
-| description<br/>_(Optional)_ | string | Short description about the service. |
+| description | string | Short description about the service.<br/>_(Optional)_ |
 | type | string | Services type must be one of the following values:<br/>`docker` - service is a Docker container.<br/>`apex` - service is an Apex application. |
 | srcURL | string | Specify the name of the Docker image if the service is Docker based or specify the path of the Apex application package if the service is Apex based.<br/><br/>An example of a Docker srcURL: `datatorrent/superset-fpa:1.4.0`<br/><br/>An example of an Apex srcURL:<br/>`${.dt.gateway.artifactHubLocation}/ws/v1/artifacts/com.datatorrent/`<br/>`dt-apoxi-oas/1.4.0-SNAPSHOT/download`<br/><br/>Another example of an Apex URL: `file:///path/to/apppackage.apa` |
-| docker<br/>_(Optional)_ | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`. |
-| apex<br/>_(Optional)_ | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`. |
-| proxy<br/>_(Optional)_ | json | Specify the proxy settings for the service. |
-| metadata<br/>_(Optional)_ | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre><br/>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`. |
+| docker | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`.<br/>_(Optional)_ |
+| apex | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`.<br/>_(Optional)_ |
+| proxy | json | Specify the proxy settings for the service.<br/>_(Optional)_ |
+| metadata | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
 
 **Docker Details**
 
@@ -273,25 +273,25 @@ Service descriptors are defined in the `services` property.  The services proper
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
 | appName | string | Specify the Apex application in the APA to launch.<br/>For example: `OA` |
-| launchArgs<br/>_(Optional)_ | json | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre> |
+| launchArgs | json | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
 
 **Proxy Settings**
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
-| address<br/>_(Optional)_ | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088` |
-| followRedirect<br/>_(Optional, default: true)_ | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy. |
-| requestHeaders<br/>_(Optional)_ | json | Headers to be added to the request made by the Gateway to the proxy destination. |
-| replaceStrings<br/>_(Optional)_ | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references. |
+| address | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088`<br/>_(Optional)_ |
+| followRedirect | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy.<br/>_(Optional, default: true)_ |
+| requestHeaders | json | Headers to be added to the request made by the Gateway to the proxy destination.<br/>_(Optional)_ |
+| replaceStrings | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<br/>_(Optional)_ |
 
 **Replace Strings Details**
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
-| matchMime<br/>_(Optional)_ | string | Process only for this mime-type.<br/>For example: `text/html` |
-| matchUrl<br/>_(Optional)_ | string | Process only when the URL matches this regular expression pattern.<br/>For example: `acct*` |
+| matchMime | string | Process only for this mime-type.<br/>For example: `text/html`<br/>_(Optional)_ |
+| matchUrl | string | Process only when the URL matches this regular expression pattern.<br/>For example: `acct*`<br/>_(Optional)_ |
 | matchText | string | Text to be matched in the response body.<br/>For example: `href=\"/static/` |
-| replaceText<br/>_(Optional, default: '')_ | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/` |
+| replaceText | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/`<br/>_(Optional, default: '')_ |
 
 In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
 
@@ -353,8 +353,8 @@ Applications depending on services are defined in the `applications` property.
 | Item | Type | Description |
 | ---- | ---- | ----------- |
 | name | string | The service name this application depends on. |
-| requiredBeforeLaunch<br/><br/>_(Optional, default: false)_ | boolean | If this property is set to true, then the application cannot be launched until this service is started. |
-| transient<br/><br/>_(Optional, default: false)_ | boolean | If this property is set to true, then it is deleted when the application is killed or shutdown. |
+| requiredBeforeLaunch | boolean | If this property is set to true, then the application cannot be launched until this service is started.<br/>_(Optional, default: false)_ |
+| transient | boolean | If this property is set to true, then it is deleted when the application is killed or shutdown.<br/>_(Optional, default: false)_ |
 
 #### Sample Services File
 
