@@ -30,12 +30,12 @@ The following services are required by the premium applications in DT RTS:
 
 You can view and manage installed services using the **Services** page. To navigate to the **Services** page, follow the steps below:
 
-1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
+1. Click the Settings ![](/images/services/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
 2. Select the **Services** menu item from the dropdown menu.  The **Services** page is displayed with the list of installed services.
 
 Sample services list:
 
-![](/images/dtservices/services-list.png)
+![](/images/services/services-list.png)
 
 Below are the descriptions of the services table columns:
 
@@ -86,11 +86,11 @@ To create a new service, follow the steps below:
 
 Sample Docker create service dialog.
 
-![](/images/dtservices/create-service-docker.png)
+![](/images/services/create-service-docker.png)
 
 Sample Apex create service dialog.
 
-![](/images/dtservices/create-service-apex.png)
+![](/images/services/create-service-apex.png)
 
 **Create Service Dialog Fields**
 
@@ -134,7 +134,7 @@ To install a packaged service, follow the steps below:
 
 Sample service instance page:
 
-![](/images/dtservices/service-instance-view.png)
+![](/images/services/service-instance-view.png)
 
 The following sections can be found on the **Service Instance** page:
 
