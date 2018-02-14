@@ -119,7 +119,7 @@ public class Application implements StreamingApplication
     KafkaSinglePortInputOperator kafkaInputOperator = dag.addOperator("Input", new KafkaSinglePortInputOperator());
     JsonParser parser = dag.addOperator("TransactionParser", JsonParser.class);`
     
- `   dag.setInputPortAttribute(parser.in, Context.PortContext.PARTITION_PARALLEL, true);
+    dag.setInputPortAttribute(parser.in, Context.PortContext.PARTITION_PARALLEL, true);
     DroolsOperator ruleExecutor = dag.addOperator("RuleExecutor", new DroolsOperator());
     KafkaSinglePortOutputOperator output = dag.addOperator("Output", new KafkaSinglePortOutputOperator());
 
