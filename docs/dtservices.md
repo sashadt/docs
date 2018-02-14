@@ -22,27 +22,9 @@ You can take administrative actions to start, stop, edit or remove these service
 
 The following services are required by the premium applications in DT RTS:
 
-* Online Analytics (Will be linked to the respective guide.)
-* Drools Workbench (Will be linked to the respective guide.)
-* [Superset](#superset)
-
-#### Online Analytics Service
-
-Online Analytics Service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by [Apache Superset](#superset).
-
-For more details refer to [&lt;Online Analytics Services&gt;]()
-
-#### Drools Workbench
-
-Drools Workbench is the web application and repository to manage Drools assets. The Drools Workbench provides you the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules on the application.
-
-For more details refer to [&lt;Drools Workbench documentation&gt;]()
-
-#### Superset
-
-Superset is a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using the Superset services, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
-
-For more details refer to [&lt;Superset dashboard documentation&gt;]()
+* [Online Analytics Service]() - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by [Apache Superset](#superset).
+* [Drools Workbench]() - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
+* [Superset](#superset) - This service provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using this service, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
 
 # Management
 
