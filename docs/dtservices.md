@@ -33,9 +33,13 @@ You can view and manage installed services using the **Services** page. To navig
 1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
 2. Select the **Services** menu item from the dropdown menu.  The **Services** page is displayed with the list of installed services.
 
-The following details can be found in the services table on the **Services** page:
+Sample services list:
 
-| Item | Description |
+![](/images/dtservices/services-list.png)
+
+Below are the descriptions of the services table columns:
+
+| Column | Description |
 | ---- | ----------- |
 | name | The service name, which can be clicked to navigate to the service instance page. |
 | enabled | The service status should be `RUNNING` if this field is `true` (checked).<br/>The status should be `STOPPED` if this field is `false`.<br/>The Gateway monitors all **enabled** services to make sure they are running.  |
