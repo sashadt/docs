@@ -4,7 +4,7 @@ Services represent global, shared, and automatically managed Docker or Apex proc
 
 Thus, when launching an application, the associated services that are configured also get launched automatically.
 
-For example:  When you launch [Omni Channel Fraud Prevention application](http://docs.datatorrent.com/omni_channel_fraud_app/) for the first time after the APA import, the following services are launched along with it:
+For example:  When you launch the [Omni Channel Fraud Prevention](http://docs.datatorrent.com/omni_channel_fraud_app/) application, the following services are installed along with it:
 
 * Online Analytics App
 * Drools Workbench
@@ -12,13 +12,13 @@ For example:  When you launch [Omni Channel Fraud Prevention application](http:/
 
 A Service is either an  Apex application or a Docker container. DT RTS automatically manages the services based on the application dependencies. It saves the services that were added to the system for management, and the settings required to install and launch the services.
 
-Services can come with an application package or a configuration package.
+Services can be predefined in an application or configuration packages.  Users can also manually create services using the Services Management or Application Configuration Launch pages.
 
 DT Gateway launches the services based on service descriptors.  A service descriptor is a JSON based description of the service that comes with an application package or a configuration package.  All the services are monitored by DT Gateway at regular intervals.
 
-As individual services get started, Gateway creates proxy connections, where the web interface of these services can be accessed from a global Gateway address. Proxy names and ports can be defined in the service descriptor.
+As individual services get started, the Gateway creates proxy connections, where the web interface of these services can be accessed using the global Gateway address. Proxy ports can be defined in the service descriptor.
 
-You can take administrative actions to stop or remove these services.
+You can take administrative actions to start, stop, edit or remove these services.
 
 The following services are required by the premium applications in DT RTS:
 
@@ -46,30 +46,31 @@ For more details refer to [&lt;Superset dashboard documentation&gt;]()
 
 # Management
 
-You can manage the services from the Services page. To access and manage the services, do the following:
+You can manage the services using the Services page. To view and manage the services, do the following:
 
-1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the page.
+1. Click the Settings ![](images/dtservices/cog-wheel.png) icon located on the upper most right section of the DT RTS console.
 2. Select **Services**. The **Services** page is displayed with the list of installed services. You can perform the following actions:
 
     * [Create new service](#create_new_service)
     * [Import packaged services](#import_packaged_service)
     * [View service instance](#view_service_instance)
     * [Edit service](#edit_service)
-    * [Stop and start services](#stop_and_start_services)
+    * [Start services](#start_services)
+    * [Stop services](#stop_services)
     * [Clone service](#clone_service)
     * [Delete services](#delete_services)
 
-<a name=""></a>
+<a name="crate_new_service"></a>
+
 #### Create New Service
 
 To create a new service, do the following:
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**.
-2. In the **Services** page, click **Create New** button.
-The **Create Service** page is displayed.
+1. Navigate to the **Services** page.
+2. Click the **create new** button. The **Create Service** dialog is shown.
 3. Enter the following details:
 
-    | Items | Description |
+    | Item | Description |
     | ----- | ----------- |
     | Name | Specify the name of the service. This should be a unique name. For example, **druid**, **superset** etc. |
     | Description | Enter a description about the service. |
@@ -86,51 +87,73 @@ The **Create Service** page is displayed.
 
 4. Click **Create** button. The new service is installed. 
 
+Sample Docker create service dialog.
+
+![](/images/dtservices/create-service-docker.png)
+
+Sample Apex create service dialog.
+
+![](/images/dtservices/create-service-apex.png)
+
 <a name="import_packaged_service"></a>
 
 #### Import Packaged Service
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**.
-2. On the **Services** page, click **Import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in the application.
+1. Navigate to the **Services** page.
+2. Click the **Import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in application packages.
 3. Click the **Import** button of a service to be imported.
-4. An **Import Packaged Service** dialogue is shown.
+4. An **Import Packaged Service** dialog is shown.
 5. Edit the applicable entries and click the **Import** button to install the service.
 
 <a name="view_service_instance"></a>
 
 #### View Service Instance
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**.
-2. On the **Services** page, click the service name to navigate to the service instance page.
+1. Navigate to the **Services** page.
+2. Click the service name to navigate to the service instance page.
 3. The following service details are displayed on the **Service Instance** page:
 
     | Item | Description |
     | ---- | ----------- |
     | Name | The service name |
-    | list all most common items in this table | ... |
+    | TODO: List all items in this table |
 
 <a name="edit_service"></a>
 
 #### Edit Service
 
-The services are automatically launched when the application is launched. However, you can change the settings of the service based on your requirements and re-launch the service.  Only stopped services can be edited.
+The services are automatically launched when an associated application is launched. However, you can change the settings of the services based on your requirements and restart the services.<br/>**Note**: Only **STOPPED** services can be edited.
 
-To edit the services, do the following:
+To edit a service, do the following:
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select Services. The Services page is displayed. 
-2. Select a **Service** from the service list and then click the **Edit** button. The **Edit Service** dialogue is shown. 
-3. Edit the settings and click **Save**.<br/>The new settings are saved and when it is restarted, it will run with the new settings.
+1. Navigate to the **Services** page.
+2. Select a service from the service list and click the **Edit** button. The **Edit Service** dialog is shown.
+3. Edit the settings and click **Save**.<br/>The new settings are saved and will be applied when the service is restarted.
 
-<a name="stop_and_start_services"></a>
+**Note**: You can also edit a service on the service instance page.
 
-#### Stop and Start Services
+<a name="start_services"></a>
 
-You can stop a service and then restart the service when required.
+#### Start Services
 
-To stop or start the services, do the following:
+To start a service, do the following:
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**. The Services page is displayed.
-2. Select a service from the services list and click the **Stop** button. The service is stopped.<br/>To restart this service, click the **Start** button.
+1. Navigate to the **Services** page.
+2. Select a service from the services list and click the **Start** button.
+
+**Note**: You can also start a service on the service instance page.
+
+<a name="stop_services"></a>
+
+#### Stop Services
+
+To stop a service, do the following:
+
+1. Navigate to the **Services** page.
+2. Select a service from the services list and click the **Stop** button.
+3. A **Stop Service** modal is shown.  Click the **Stop** button to stop the service.
+
+**Note**: You can also stop a service on the service instance page.
 
 <a name="clone_service"></a>
 
@@ -161,7 +184,7 @@ Services can be deleted for an application from the Services management page.
 
 To stop or start the services, do the following:
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on upper most right section of the page and select **Services**. The Services page is displayed.
+1. On the DT RTS console, click the settings icon located on upper most right section of the page and select **Services**. The Services page is displayed.
 2. Select a service from the services list and click the **Delete** button.
 3. The delete service confirmation modal is shown.  Click the **Delete** button to confirm that you want to delete the service.
 
@@ -173,7 +196,7 @@ During the DT RTS installation, the Docker version is automatically detected. Th
 
 To specify optional remote Docker, do the following:
 
-1. On the DT RTS console, click the settings **&lt;&lt;&lt;cog wheel image&gt;&gt;&gt;** icon located on the upper most right section of the page and select **System Configuration**. The **System Configuration** page is displayed.
+1. On the DT RTS console, click the settings icon located on the upper most right section of the page and select **System Configuration**. The **System Configuration** page is displayed.
 2. Click **Installation Wizard**.
 3. In the **Welcome** page, click **Continue**
 4. On the **Configuration** page, go to the **Docker** section and set the following:
