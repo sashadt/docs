@@ -46,6 +46,7 @@ The following details can be found in the services table on the **Services** pag
 | active apps | The active Apex applications that depend on the service. |
 | memory | Memory allocated by the service. |
 
+<a name="all_service_status"></a>
 Below are possible service status:
 
 | Status | Description |
@@ -124,12 +125,24 @@ To install a packaged service, follow the steps below:
 
 1. Navigate to the **Services** page.
 2. Click the service name to navigate to the service instance page.
-3. The following service details can be found on the **Service Instance** page:
 
-    | Item | Description |
-    | ---- | ----------- |
-    | Name | The service name |
-    | TODO: List all items in this table |
+The following sections can be found on the **Service Instance** page:
+
+**Service Status and Actions**
+
+This section shows the **service name**, **type**, **status**, **uptime** and **currently allocated memory** if the service is running.  It also contains the applicable actionable buttons such as **view app**, **start**, **stop**, **edit**, **copy** and **delete**.  Note that the **view app** button is only visible if the service type is `apex` and the service is running.
+
+**Service Details**
+
+This table shows the configuration of the service.  It also contains the Apex application ID if the service type is `apex` and the service is running.
+
+**Proxy URL**
+
+This section shows the proxy URL that users can use to access data provided by the service through the Gateway proxy.  The Gateway applies proxy request headers and proxy replace string settings when processing this URL requests.
+
+**Dependent Active Apps**
+
+This section shows the Apex applications that depend on this service.  The table will show the application ID application name, application status and the application running username.  Users can click on the application ID or name to navigate to the running Apex application instance page.
 
 <a name="edit_service"></a>
 
