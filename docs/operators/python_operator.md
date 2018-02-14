@@ -35,7 +35,8 @@ The following must be pre-installed before running the operator:
 
 # Workflow of the Operator
 
-The following image depicts the workflow of the operator
+The following image depicts the workflow of the operator:
+![pythonworkflow](images/python_workflow.png)
  
 - Compile Python Operator Project
 - Add dependency on actual application project.
@@ -43,6 +44,7 @@ The following image depicts the workflow of the operator
 - Compile Project.
 
 The following image depicts the steps in the operator execution:
+![operatorexecution](images/Python_operator_execution.png)
 
 # Supplementary Classes
 
@@ -161,7 +163,7 @@ To compile DT application with Python, you must first add dt-operators-python as
  <version>1.4.0-SNAPSHOT</version>
 </dependency>
 ```
-Later, you must add the following plugin to pom.xml for packaging the python code and required dependencies in \*.apa.
+Later, you must add the following plugin to **pom.xml** for packaging the python code and required dependencies in \*.apa.
 
 ```
 <plugin>
