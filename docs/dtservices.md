@@ -293,22 +293,6 @@ Service descriptors are defined in the `services` property.  The services proper
 | matchText | string | Text to be matched in the response body.<br/>For example: `href=\"/static/` |
 | replaceText | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/`<br/>_(Optional, default: '')_ |
 
-In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
-
-**Implicit Variables**
-
-| Item |  Description |
-| ---- |  ----------- | 
-| _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
-| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
-
-**Global Variables**
-
-| Item |  Description |
-| ---- |  ----------- | 
-| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
-| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
-
 Example 1:
 
 <pre><code>{
@@ -332,6 +316,22 @@ Example 2:
 The above example tells the Gateway to process requests where the response header mime-type equals `text/html`.  Once the mime-type is a match, then the response body is transformed by replacing every occurrence of `num=one or more digits` with `NUM="same digits"`.  For example: `num=25` becomes `NUM="25"`, `num=100` becomes `NUM="100"`, etc.
 
 **Note**: The matchUrl in this case will match any URL so it could have been omitted.
+
+In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+
+**Implicit Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
+| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
+
+**Global Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
+| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
 
 <a name="applications_property"></a>
 
