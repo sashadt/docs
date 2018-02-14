@@ -53,12 +53,12 @@ Drools operator can be dynamically partitioned when rules are stateless. For sta
 
 For partitioning, you must add the following property in the **properties.xml** file. For example, if you add Drools operator with the name _RuleExecutor_ in the DAG, then this property creates four partitions of the operator when the application starts.
 
-``
+```
 <property>
      <name>dt.operator.RuleExecutor.attr.PARTITIONER</name>
      <value>com.datatorrent.common.partitioner.StatelessPartitioner:4</name>
 </property>
-``
+```
 
 ## Configuring Drools Operator
 
@@ -99,10 +99,12 @@ Every item that is added to the Drools operator is kept in the memory. Hence, yo
 
 For example, if you want to evaluate the rules on _UserEventType_ objects, you must add the following code on top of the rules file **(.drl file)**:
 
-`declare UserEventType
+```
+declare UserEventType
   @role(event)
   @expires(60m)
-end`
+end
+```
 
 **Note:** For more details refer to the [Drools documentation](http://docs.jboss.org/drools/release/6.5.0.Final/drools-docs/html/).
 
@@ -110,7 +112,7 @@ end`
 
 The following code illustrates how Drools Operator can be used within an application. The application reads JSON data from Kafka, parses it to Java object, and sends it to Drools Operator for evaluation of rules. The result of rule evaluation is then sent to another Kafka topic, which can be consumed by other applications.
 
-`
+```
 public class Application implements StreamingApplication
 {
   @Override
@@ -129,7 +131,7 @@ public class Application implements StreamingApplication
   }
   
 }
-`
+```
 ## Performance Benchmarking
 
 As the Drools operator is configured in streaming mode, it keeps the data in memory till the configured expiration in the rule file. Memory required by operator depends on the following parameters:
