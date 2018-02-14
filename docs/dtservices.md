@@ -351,10 +351,10 @@ Service descriptors are defined in the `services` property.  The services proper
 | description | string | Short description about the service.<br/>_(Optional)_ |
 | type | string | Services type must be one of the following values:<br/>`docker` - service is a Docker container.<br/>`apex` - service is an Apex application. |
 | srcURL | string | Specify the name of the Docker image if the service is Docker based or specify the path of the Apex application package if the service is Apex based.<br/><br/>An example of a Docker srcURL: `datatorrent/superset-fpa:1.4.0`<br/><br/>An example of an Apex srcURL:<br/>`${.dt.gateway.artifactHubLocation}/ws/v1/artifacts/com.datatorrent/`<br/>`dt-apoxi-oas/1.4.0-SNAPSHOT/download`<br/><br/>Another example of an Apex URL: `file:///path/to/apppackage.apa` |
-| docker | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`.<br/>_(Optional)_ |
-| apex | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`.<br/>_(Optional)_ |
-| proxy | json | Specify the proxy settings for the service.<br/>_(Optional)_ |
-| metadata | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
+| docker | json object | Specify the Docker details for he service.<br/>For example:<pre><code>{<br/>  "run": "-d -p 18080:8080",<br/>  "exec": "nginx -t -c ~/mynginx.conf"<br/>}</code></pre>**Note**: This property is required if the service type is `docker`.<br/>_(Optional)_ |
+| apex | json object | Specify the Apex details for the service.<br/>For example:<pre><code>{<br/>  "appName": "OAS",<br/>  "launchArgs": {<br/>    ...<br/>  }<br/>}</code></pre>**Note**: This property is required if the service type is `apex`.<br/>_(Optional)_ |
+| proxy | json object | Specify the proxy settings for the service.<br/>For example:<pre><code>{<br/>  "address": "localhost",<br/>  "followRedirect": false,<br/>  "requestHeaders": {<br/>   ...<br/>  },<br/>  "replaceString": [<br/>    ...<br/>  ]<br/>}</code></pre>_(Optional)_ |
+| metadata | json object | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
 
 **Docker Details**
 
@@ -368,7 +368,7 @@ Service descriptors are defined in the `services` property.  The services proper
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
 | appName | string | Specify the Apex application in the APA to launch.<br/>For example: `OA` |
-| launchArgs | json | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
+| launchArgs | json object | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
 
 **Proxy Settings**
 
@@ -376,8 +376,8 @@ Service descriptors are defined in the `services` property.  The services proper
 | ---- | ---- | ----------- | 
 | address | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088`<br/>_(Optional)_ |
 | followRedirect | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy.<br/>_(Optional, default: true)_ |
-| requestHeaders | json | Headers to be added to the request made by the Gateway to the proxy destination.<br/>_(Optional)_ |
-| replaceStrings | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<br/>_(Optional)_ |
+| requestHeaders | json object | Headers to be added to the request made by the Gateway to the proxy destination.<br/>For example:<pre><code>{<br/>  "X\_PROXY\_REMOTE\_USER": "dtadmin"<br/>}</code></pre>_(Optional)_ |
+| replaceStrings | array of json object | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<pre><code>[<br/>  {<br/>    "matchMime": "text/html",<br/>    "matchUrl": ".*.html",<br/>    "matchText": "\"/static/",<br/>    "replaceText": "\"/proxy/services/superset/static/"<br/>  }</br>  ...</br>]</code></pre>_(Optional)_ |
 
 **Replace Strings Details**
 
@@ -443,7 +443,7 @@ Applications depending on services are defined in the `applications` property.
 | Item | Type | Description |
 | ---- | ---- | ----------- |
 | name | string | Apex application name, which exists in the current APA package. |
-| requiredServices | array of json object | List of services in which this application depends on.  If one of the services depends on other services, transitive service dependencies do not need to be specified explicitly. |
+| requiredServices | array of json object | List of services in which this application depends on.  If one of the services depends on other services, transitive service dependencies do not need to be specified explicitly.<br/>For example:<pre><code>[<br/>  {<br/>    "name": "superset-fpa",<br/>    "requiredBeforeLaunch": true,<br/>    "transient": true<br/>  }<br/>  ...<br/>]</code></pre> |
 
 `requiredServices` is an array of JSON objects where each object defines a service the application depends on.
 
