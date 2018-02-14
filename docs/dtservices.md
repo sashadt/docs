@@ -237,128 +237,9 @@ To configure the remote Docker host, follow the steps below:
 
 Services and dependent applications can be defined and included in the application package.  This service descriptor is defined in the **services.json** file.  This file is located in the **/src/main/resources/resources** directory of your Apex project.  When the project is built and packaged as an APA file, the **services.json** file is placed in the **/resources** directory inside the APA file.
 
-The **services.json** file contains two root level properties:
-
-* [Services Property](#services_property)
-* [Applications Property](#applications_property)
-
-<a name="services_property"></a>
-
-#### Services Property
-
-Service descriptors are defined in the `services` property.  The services property is an array of JSON objects where each object defines a service.
-
-**Service Descriptor Parameters**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- |
-| name | string | Service name, which should be globally unique and only include characters that HDFS file name friendly.<br/>For example: `superset-fpa`, `druid_workbench`, etc. |
-| description | string | Short description about the service.<br/>_(Optional)_ |
-| type | string | Services type must be one of the following values:<br/>`docker` - service is a Docker container.<br/>`apex` - service is an Apex application. |
-| srcURL | string | Specify the name of the Docker image if the service is Docker based or specify the path of the Apex application package if the service is Apex based.<br/><br/>An example of a Docker srcURL: `datatorrent/superset-fpa:1.4.0`<br/><br/>An example of an Apex srcURL:<br/>`${.dt.gateway.artifactHubLocation}/ws/v1/artifacts/com.datatorrent/`<br/>`dt-apoxi-oas/1.4.0-SNAPSHOT/download`<br/><br/>Another example of an Apex URL: `file:///path/to/apppackage.apa` |
-| docker | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`.<br/>_(Optional)_ |
-| apex | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`.<br/>_(Optional)_ |
-| proxy | json | Specify the proxy settings for the service.<br/>_(Optional)_ |
-| metadata | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
-
-**Docker Details**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- | 
-| run | string | Specify the Docker run command details.<br/>For example: `--add-host druid_cluster:<GATEWAY_IP> -e OAS=fpa-online-analytics-service -e PORT=9090 -p 28088:8088` |
-| exec | string | Specify the Docker shell command to execute after the Docker service is started.<br/>For example: `nginx -t -c ~/mynginx.conf` |
-
-**Apex Details**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- | 
-| appName | string | Specify the Apex application in the APA to launch.<br/>For example: `OA` |
-| launchArgs | json | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
-
-**Proxy Settings**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- | 
-| address | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088`<br/>_(Optional)_ |
-| followRedirect | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy.<br/>_(Optional, default: true)_ |
-| requestHeaders | json | Headers to be added to the request made by the Gateway to the proxy destination.<br/>_(Optional)_ |
-| replaceStrings | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<br/>_(Optional)_ |
-
-**Replace Strings Details**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- | 
-| matchMime | string | Process only for this mime-type.<br/>For example: `text/html`<br/>_(Optional)_ |
-| matchUrl | string | Process only when the URL matches this regular expression pattern.<br/>For example: `acct*`<br/>_(Optional)_ |
-| matchText | string | Text to be matched in the response body.<br/>For example: `href=\"/static/` |
-| replaceText | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/`<br/>_(Optional, default: '')_ |
-
-Example 1:
-
-<pre><code>{
-  "matchMime": "text/html",
-  "matchUrl": ".*\.html",
-  "matchText": "href=\"/static/",
-  "replaceText": "href=\"/proxy/services/superset-fraud-app/static/"
-}</code></pre>
-
-The above example tells the Gateway proxy to process request URLs ending with `.html` and the response header mime-type equals `text/html`.  Once the URL and mime-type are a match, then the response body is transformed by replacing every occurrence of `href="/static/` with `href="/proxy/services/superset-fraud-app/static/`.
-
-Example 2:
-
-<pre><code>{
-  "matchMime": "text/html",
-  "matchUrl": ".*",
-  "matchText": "num=([0-9]*)",
-  "replaceText": "NUM=\"$1\""
-}</code></pre>
-
-The above example tells the Gateway to process requests where the response header mime-type equals `text/html`.  Once the mime-type is a match, then the response body is transformed by replacing every occurrence of `num=one or more digits` with `NUM="same digits"`.  For example: `num=25` becomes `NUM="25"`, `num=100` becomes `NUM="100"`, etc.
-
-**Note**: The matchUrl in this case will match any URL so it could have been omitted.
-
-In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
-
-**Implicit Variables**
-
-| Item |  Description |
-| ---- |  ----------- | 
-| _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
-| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
-
-**Global Variables**
-
-| Item |  Description |
-| ---- |  ----------- | 
-| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
-| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
-
-<a name="applications_property"></a>
-
-#### Applications Property
-
-Applications depending on services are defined in the `applications` property.  
-
-**Applications Parameters**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- |
-| name | string | Apex application name, which exists in the current APA package. |
-| requiredServices | [json] | List of services in which this application depends on.  If one of the services depends on other services, transitive service dependencies do not need to be specified explicitly. |
-
-`requiredServices` is an array of JSON objects where each object defines a service the application depends on.
-
-**Required Services Parameters**
-
-| Item | Type | Description |
-| ---- | ---- | ----------- |
-| name | string | The service name this application depends on. |
-| requiredBeforeLaunch | boolean | If this property is set to true, then the application cannot be launched until this service is started.<br/>_(Optional, default: false)_ |
-| transient | boolean | If this property is set to true, then it is deleted when the application is killed or shutdown.<br/>_(Optional, default: false)_ |
-
 #### Sample Services File
 
-Following is an example of the **services.json** file.
+The following is a sample **services.json** file:
 
 <pre><code>{
   "services": [
@@ -440,3 +321,125 @@ Following is an example of the **services.json** file.
     }
   ]
 }</code></pre>
+
+The **services.json** file contains two root level properties:
+
+* [Services Property](#services_property)
+* [Applications Property](#applications_property)
+
+<a name="services_property"></a>
+
+#### Services Property
+
+Service descriptors are defined in the `services` property.  The services property is an array of JSON objects where each object defines a service.
+
+**Service Descriptor Parameters**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- |
+| name | string | Service name, which should be globally unique and only include characters that HDFS file name friendly.<br/>For example: `superset-fpa`, `druid_workbench`, etc. |
+| description | string | Short description about the service.<br/>_(Optional)_ |
+| type | string | Services type must be one of the following values:<br/>`docker` - service is a Docker container.<br/>`apex` - service is an Apex application. |
+| srcURL | string | Specify the name of the Docker image if the service is Docker based or specify the path of the Apex application package if the service is Apex based.<br/><br/>An example of a Docker srcURL: `datatorrent/superset-fpa:1.4.0`<br/><br/>An example of an Apex srcURL:<br/>`${.dt.gateway.artifactHubLocation}/ws/v1/artifacts/com.datatorrent/`<br/>`dt-apoxi-oas/1.4.0-SNAPSHOT/download`<br/><br/>Another example of an Apex URL: `file:///path/to/apppackage.apa` |
+| docker | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`.<br/>_(Optional)_ |
+| apex | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`.<br/>_(Optional)_ |
+| proxy | json | Specify the proxy settings for the service.<br/>_(Optional)_ |
+| metadata | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
+
+**Docker Details**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- | 
+| run | string | Specify the Docker run command details.<br/>For example: `--add-host druid_cluster:<GATEWAY_IP> -e OAS=fpa-online-analytics-service -e PORT=9090 -p 28088:8088` |
+| exec | string | Specify the Docker shell command to execute after the Docker service is started.<br/>For example: `nginx -t -c ~/mynginx.conf` |
+
+**Apex Details**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- | 
+| appName | string | Specify the Apex application in the APA to launch.<br/>For example: `OA` |
+| launchArgs | json | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
+
+**Proxy Settings**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- | 
+| address | string | Host:port to which the proxy path forwards to.<br/>For example: `localhost:28088`<br/>_(Optional)_ |
+| followRedirect | boolean | If this property is true, then the Gateway proxy will perform redirect when it sees the HTTP status code 302 in the HTTP response header from the service.  Therefore, the browser surfing the service proxy URL will never encounter the hTTP status code 302.<br/>**Warning**: Omitting this property or setting it to true may cause a maximum redirect error in the Gateway proxy.<br/>_(Optional, default: true)_ |
+| requestHeaders | json | Headers to be added to the request made by the Gateway to the proxy destination.<br/>_(Optional)_ |
+| replaceStrings | [json] | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<br/>_(Optional)_ |
+
+**Replace Strings Details**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- | 
+| matchMime | string | Process only for this mime-type.<br/>For example: `text/html`<br/>_(Optional)_ |
+| matchUrl | string | Process only when the URL matches this regular expression pattern.<br/>For example: `acct*`<br/>_(Optional)_ |
+| matchText | string | Text to be matched in the response body.<br/>For example: `href=\"/static/` |
+| replaceText | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/`<br/>_(Optional, default: '')_ |
+
+**Note**: Explicit metadata, implicit and global variables such as `${superset-fpa.ipaddr}`, `${superset-fpa._state}`, `${.GATEWAY_CONNECT_ADDRESS}`, etc. are not currently supported in the replace strings definitions.
+
+Example 1:
+
+<pre><code>{
+  "matchMime": "text/html",
+  "matchUrl": ".*\.html",
+  "matchText": "href=\"/static/",
+  "replaceText": "href=\"/proxy/services/superset-fraud-app/static/"
+}</code></pre>
+
+The above example tells the Gateway proxy to process request URLs ending with `.html` and the response header mime-type equals `text/html`.  Once the URL and mime-type are a match, then the response body is transformed by replacing every occurrence of `href="/static/` with `href="/proxy/services/superset-fraud-app/static/`.
+
+Example 2:
+
+<pre><code>{
+  "matchMime": "text/html",
+  "matchUrl": ".*",
+  "matchText": "num=([0-9]*)",
+  "replaceText": "NUM=\"$1\""
+}</code></pre>
+
+The above example tells the Gateway to process requests where the response header mime-type equals `text/html`.  Once the mime-type is a match, then the response body is transformed by replacing every occurrence of `num=one or more digits` with `NUM="same digits"`.  For example: `num=25` becomes `NUM="25"`, `num=100` becomes `NUM="100"`, etc.
+
+**Note**: The matchUrl in this case will match any URL so it could have been omitted.
+
+In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+
+**Implicit Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
+| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
+
+**Global Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
+| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
+
+<a name="applications_property"></a>
+
+#### Applications Property
+
+Applications depending on services are defined in the `applications` property.  
+
+**Applications Parameters**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- |
+| name | string | Apex application name, which exists in the current APA package. |
+| requiredServices | array of json object | List of services in which this application depends on.  If one of the services depends on other services, transitive service dependencies do not need to be specified explicitly. |
+
+`requiredServices` is an array of JSON objects where each object defines a service the application depends on.
+
+**Required Services Parameters**
+
+| Item | Type | Description |
+| ---- | ---- | ----------- |
+| name | string | The service name this application depends on. |
+| requiredBeforeLaunch | boolean | If this property is set to true, then the application cannot be launched until this service is started.<br/>_(Optional, default: false)_ |
+| transient | boolean | If this property is set to true, then it is deleted when the application is killed or shutdown.<br/>_(Optional, default: false)_ |
+
