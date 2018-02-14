@@ -216,18 +216,20 @@ To stop or start the services, follow the steps below:
 
 Some applications require services which are run in the Docker containers. For such services, you must install Docker (Version 1.9.1 or greater) on your system. Services can run in Docker installed on a remote system if Docker isn't installed on the system where the Gateway is running.
 
-During the DT RTS installation, the Docker version is automatically detected. The version and compatibility of that version with DT RTS is shown. You can optionally configure the services to run in Docker installed on a remote system.
+During the DT RTS installation, the Docker version is automatically detected. That Docker version is shown in the Docker section on the Configuration page. You can optionally configure the services to run in Docker installed on a remote system.
 
-To specify optional remote Docker, do the following:
+**Warning: If the system does not have a compatible version of Docker and the remote Docker host isn't configured, then Docker services will not work.**
+
+To configure the remote Docker host, follow the steps below:
 
 1. On the DT RTS console, click the settings icon located on the upper most right section of the page and select **System Configuration**. The **System Configuration** page is displayed.
-2. Click **Installation Wizard**.
-3. In the **Welcome** page, click **Continue**
+2. Click the **Installation Wizard** button.
+3. On the **Welcome** page, click the **Continue** button.
 4. On the **Configuration** page, go to the **Docker** section and set the following:
 
     | Field | Description |
     | ----- | ----------- |
-    | Docker Host | Specify the Docker host. For example,<br/>*unix:///var/run/docker.sock or http://127.0.0.1:2376* |
+    | Docker host_(Optional)_ | Enter the remote Docker host URL.<br/>For example: `unix:///var/run/docker.sock` or `http://127.0.0.1:2376` |
 
 5. Click **Continue** and complete the Installation wizard.
 
@@ -239,14 +241,6 @@ The **services.json** file contains two root level properties:
 
 * [Services Property](#services_property)
 * [Applications Property](#applications_property)
-
-In a **services.json** file, you can use parameters which are metadata variables, implicit variables, and global configuration values.
-
-| Fields | Description |
-| ------ | ----------- |
-| Metadata variables | These are variables explicitly defined in the metadata section of a service and dynamically updated via APIs. For example:<pre><code>{<br/>  "name": "druid",<br/>  ...<br/>  "metadata": {<br/>    "ipaddr" : "",<br/>    "port" : 2345<br/>  }<br/>  ...<br/>}</code></pre>In this example the metadata variables can be referenced as `${druid.ipaddr}` and `${druid.port}` in parameterizable sections of a service definition. |
-| Implicit variables | These are service specific variables which should not be defined in the metadata section but are implicitly resolved by the resolver. These are as follows:<ul><li>**type** - the service type, e.g. `${druid._type}`, which will resolve to "apex" because of the type property of that service definition.</li><li>**\_state** - the current state of the service, e.g. `${druid._state}` will resolve to "STOPPED" assuming that is the current state of the druid service.</li></ul> |
-| Global configuration values | These are not in the context of a service but global or gateway scope. These are:<ul><li>**${GATEWAY\_CONNECT\_ADDRESSS}** - this is the GATEWAY\_CONNECT\_ADDRESS value used in many places (typically the IP address/hostname used to connect to the gateway)</li><li>**${GATEWAY\_ADMIN\_USER}** - this is the value of current unix user who launched the gateway (value of `DTGateway.SUPER_USER_CONTEXT.getUserPrincipal().getName()`)</li></ul> |
 
 <a name="services_property"></a>
 
@@ -265,6 +259,7 @@ Service descriptors are defined in the `services` property.  The services proper
 | docker<br/>_(Optional)_ | json | Specify the Docker details for he service.<br/>**Note**: This property is required if the service type is `docker`. |
 | apex<br/>_(Optional)_ | json | Specify the Apex details for the service.<br/>**Note**: This property is required if the service type is `apex`. |
 | proxy<br/>_(Optional)_ | json | Specify the proxy settings for the service. |
+| metadata<br/>_(Optional)_ | json | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre><br/>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`. |
 
 **Docker Details**
 
@@ -297,6 +292,22 @@ Service descriptors are defined in the `services` property.  The services proper
 | matchUrl<br/>_(Optional)_ | string | Process only when the URL matches this regular expression pattern.<br/>For example: `acct*` |
 | matchText | string | Text to be matched in the response body.<br/>For example: `href=\"/static/` |
 | replaceText<br/>_(Optional, default: '')_ | string | Text that replaces the matched-text.<br/>For example: `href=\"/proxy/services/superset-fraud-app/static/` |
+
+In addition to the explicit metadata defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+
+**Implicit Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
+| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
+
+**Global Variables**
+
+| Item |  Description |
+| ---- |  ----------- | 
+| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
+| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
 
 Example 1:
 
