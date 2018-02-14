@@ -78,25 +78,7 @@ To create a new service, follow the steps below:
 
 1. Navigate to the **Services** page.
 2. Click the **create new** button. The **Create Service** dialog is shown.
-3. Enter the following details:
-
-    | Item | Description |
-    | ----- | ----------- |
-    | Name | Enter the name of the service. This must be a unique name. |
-    | Description | Enter a description about the service.<br/>_(Optional)_ |
-    | Type | Select a service type.<br/>`docker` - Docker container as a service.<br/>`apex` - Apex application as a service. |
-    | Source URL | Specify the location of the Docker image or the Apex application image. |
-    | Docker Run| Enter the Docker command arguments to be used when the Docker service container starts.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
-    | Docker Exec | Execute the shell command inside the docker container after it is launched.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
-    | Apex App Name | Enter the application name that exists in the Apex APA image which will be launched when the service starts.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
-    | Apex Launch Properties | Enter Apex launch properties. Click the **Add** button to add additional properties. Enter the names and corresponding values.<br/>**Note**: This entry will only be shown if the service type is `apex`.<br/>_(Optional)_ |
-    | Proxy Address | Port or host:port to which the Gateway proxy path forwards requests.<br/>_(Optional)_ |
-    | Proxy Request Headers | Enter headers to be added to the request made by the Gateway to the proxy destination. Click the **Add** button to add additional headers.<br/>_(Optional)_ |
-    | Proxy Response Replacements | Enter the response replacement definitions which represents the text replacement processing to be performed on the response body by the Gateway proxy. Click the **Add** button to add additional replacement definitions.<br/>_(Optional)_ |
-
-4. Click the **Create** button to create the new service and install it.
-
-For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
+3. Enter data in the applicable entries.  See sample screen captures below for reference.
 
 Sample Docker create service dialog.
 
@@ -105,6 +87,26 @@ Sample Docker create service dialog.
 Sample Apex create service dialog.
 
 ![](/images/dtservices/create-service-apex.png)
+
+**Create Service Dialog Fields**
+
+| Item | Description |
+| ----- | ----------- |
+| Name | Enter the name of the service. This must be a unique name. |
+| Description | Enter a description about the service.<br/>_(Optional)_ |
+| Type | Select a service type.<br/>`docker` - Docker container as a service.<br/>`apex` - Apex application as a service. |
+| Source URL | Specify the location of the Docker image or the Apex application image. |
+| Docker Run| Enter the Docker command arguments to be used when the Docker service container starts.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
+| Docker Exec | Execute the shell command inside the docker container after it is launched.<br/>**Note**: This entry will only be shown if the service type is `docker`.<br/>_(Optional)_ |
+| Apex App Name | Enter the application name that exists in the Apex APA image which will be launched when the service starts.<br/>**Note**: This entry will only be shown if the service type is `apex`. |
+| Apex Launch Properties | Enter Apex launch properties. Click the **Add** button to add additional properties. Enter the names and corresponding values.<br/>**Note**: This entry will only be shown if the service type is `apex`.<br/>_(Optional)_ |
+| Proxy Address | Port or host:port to which the Gateway proxy path forwards requests.<br/>_(Optional)_ |
+| Proxy Request Headers | Enter headers to be added to the request made by the Gateway to the proxy destination. Click the **Add** button to add additional headers.<br/>_(Optional)_ |
+| Proxy Response Replacements | Enter the response replacement definitions which represents the text replacement processing to be performed on the response body by the Gateway proxy. Click the **Add** button to add additional replacement definitions.<br/>_(Optional)_ |
+
+4. Click the **Create** button to create the new service and install it.
+
+For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
 
 <a name="import_packaged_service"></a>
 
