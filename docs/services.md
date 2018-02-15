@@ -20,7 +20,7 @@ Below are three services that are packaged with DT premium applications:
 * [Drools Workbench](/drools) - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
 * [Superset](/superset) - This service provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using this service, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
 
-# Management
+# Managing Services
 
 You can view and manage installed services using the **Services** page. To navigate to the **Services** page, follow the steps below:
 
@@ -59,16 +59,15 @@ Below are possible service status:
 
 The following actions can be performed on this page:
 
-* [Create new service](#create-new-service)
-* [Import packaged services](#import-packaged-service)
-* [View service instance](#view-service-instance)
-* [Edit service](#edit-service)
-* [Start services](#start-services)
-* [Stop services](#stop-services)
-* [Clone service](#clone-service)
-* [Delete services](#delete-services)
+* [Create new service](#creating-new-service)
+* [Import packaged services](#importing-packaged-service)
+* [View service instance](#viewing-service-instance)
+* [Start services](#starting-services)
+* [Stop services](#stopping-services)
+* [Clone service](#cloning-a-service)
+* [Delete services](#deleting-services)
 
-#### Create New Service
+## Creating New Service
 
 To create a new service, follow the steps below:
 
@@ -104,7 +103,7 @@ Sample Apex create service dialog.
 
 For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
 
-#### Import Packaged Service
+## Importing Packaged Service
 
 Packaged services are pre-defined services included in application packages that are uploaded in the cluster.  These services can be installed as-is or with different settings.
 
@@ -115,7 +114,7 @@ To install a packaged service, follow the steps below:
 3. Click the **import** button of a service to be imported. An **Import Packaged Service** dialog is shown.
 4. Edit the applicable entries and click the **Import** button to install the service.
 
-#### View Service Instance
+## Viewing Service Instance
 
 1. Navigate to the **Services** page.
 2. Click the service name to navigate to the service instance page.
@@ -156,7 +155,7 @@ To edit a service, follow the steps below:
 
 **Note**: You can also edit a service on the service instance page.
 
-#### Start Services
+## Starting Services
 
 To start a service, follow the steps below:
 
@@ -165,7 +164,7 @@ To start a service, follow the steps below:
 
 **Note**: You can also start a service on the service instance page.
 
-#### Stop Services
+## Stopping Services
 
 To stop a service, follow the steps below:
 
@@ -175,7 +174,7 @@ To stop a service, follow the steps below:
 
 **Note**: You can also stop a service on the service instance page.
 
-#### Clone Service
+## Cloning a Service
 
 You can clone, edit, and save a service configuration as a new service.
 
@@ -188,7 +187,7 @@ To clone a service, follow the steps below:
 
 **Note**: You can also clone a service on the service instance page.
 
-#### Delete Services
+## Deleting Services
 
 Services can be deleted for an application from the Services management page.
 
@@ -200,7 +199,7 @@ To stop or start the services, follow the steps below:
 
 **Note**: You can also delete a service on the service instance page.
 
-# Docker Configuration
+# Configuring Docker
 
 Some applications require services which are run in the Docker containers. For such services, you must install Docker (Version 1.9.1 or greater) on your system. Services can run in Docker installed on a remote system if Docker isn't installed on the system where the Gateway is running.
 
@@ -315,11 +314,11 @@ The **services.json** file contains two root level properties:
 * [Services Property](#services-property)
 * [Applications Property](#applications-property)
 
-#### Services Property
+## Services Property
 
 Service descriptors are defined in the `services` property.  The services property is an array of JSON objects where each object defines a service.
 
-**Service Descriptor Parameters**
+### Service Descriptor Parameters
 
 | Item | Type | Description |
 | ---- | ---- | ----------- |
@@ -332,21 +331,21 @@ Service descriptors are defined in the `services` property.  The services proper
 | proxy | json object | Specify the proxy settings for the service.<br/>For example:<pre><code>{<br/>  "address": "localhost",<br/>  "followRedirect": false,<br/>  "requestHeaders": {<br/>   ...<br/>  },<br/>  "replaceString": [<br/>    ...<br/>  ]<br/>}</code></pre>_(Optional)_ |
 | metadata | json object | Specify explicit metadata to use in the service.<br/>For example: <pre><code>{<br/>  "ipaddr" : "localhost",<br/>  "port" : 8080<br/>}</code></pre>With this metadata defined in the service, we can reference them in the service configuration as `${superset-fpa.ipaddr}` and `${superset-fpa.port}`, assuming the service name is `superset-fpa`.<br/>_(Optional)_ |
 
-**Docker Details**
+### Docker Details
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
 | run | string | Specify the Docker run command details.<br/>For example: `--add-host druid_cluster:<GATEWAY_IP> -e OAS=fpa-online-analytics-service -e PORT=9090 -p 28088:8088` |
 | exec | string | Specify the Docker shell command to execute after the Docker service is started.<br/>For example: `nginx -t -c ~/mynginx.conf` |
 
-**Apex Details**
+### Apex Details
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
 | appName | string | Specify the Apex application in the APA to launch.<br/>For example: `OA` |
 | launchArgs | json object | Arguments to use during the launching of the Apex service.<br/>For example:<pre><code>{</br>  "kafkaBrokers": "localhost:9092",</br>  "kafkaTopic": "analytics"<br/>}</code></pre>_(Optional)_ |
 
-**Proxy Settings**
+### Proxy Settings
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
@@ -355,7 +354,7 @@ Service descriptors are defined in the `services` property.  The services proper
 | requestHeaders | json object | Headers to be added to the request made by the Gateway to the proxy destination.<br/>For example:<pre><code>{<br/>  "X\_PROXY\_REMOTE\_USER": "dtadmin"<br/>}</code></pre>_(Optional)_ |
 | replaceStrings | array of json object | Definitions that represents text replacement processing to be performed on the response body by the Gateway proxy.  Regular expression is supported as described in the [Java Regex Pattern Class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html), which includes capturing group and back references.<pre><code>[<br/>  {<br/>    "matchMime": "text/html",<br/>    "matchUrl": ".*.html",<br/>    "matchText": "\"/static/",<br/>    "replaceText": "\"/proxy/services/superset/static/"<br/>  }</br>  ...</br>]</code></pre>_(Optional)_ |
 
-**Replace Strings Details**
+### Replace Strings Details
 
 | Item | Type | Description |
 | ---- | ---- | ----------- | 
@@ -390,7 +389,7 @@ The above example tells the Gateway to process requests where the response heade
 
 **Note**: The matchUrl in this case will match any URL so it could have been omitted.
 
-In addition to the explicit metadata variables defined in the services, there are implicit and global variables that can be use in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
+In addition to the explicit metadata variables defined in the services, there are implicit and global variables that can be used in the service configuration also.  Implicit variables are specific to the service while global variables are specific to the Gateway.
 
 **Note**: These variables are only applicable to the following properties: _srcUrl, proxy.address, docker.run, docker.exec and apex.launchArgs values (not names)_
 
@@ -408,11 +407,11 @@ In addition to the explicit metadata variables defined in the services, there ar
 | GATEWAY\_CONNECT\_ADDRESS | This is the Gateway connection address.  The syntax to reference this variable is `${.GATEWAY_CONNECT_ADDRESS}`. |
 | GATEWAY\_ADMIN\_USER | This is the Unix user that the Gateway runs as. The syntax to reference this variable is `${.GATEWAY_ADMIN_USER}`. |
 
-#### Applications Property
+## Applications Property
 
 Applications depending on services are defined in the `applications` property.  
 
-**Applications Parameters**
+### Applications Parameters
 
 | Item | Type | Description |
 | ---- | ---- | ----------- |
@@ -421,7 +420,7 @@ Applications depending on services are defined in the `applications` property.
 
 `requiredServices` is an array of JSON objects where each object defines a service the application depends on.
 
-**Required Services Parameters**
+### Required Services Parameters
 
 | Item | Type | Description |
 | ---- | ---- | ----------- |
