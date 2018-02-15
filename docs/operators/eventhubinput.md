@@ -27,8 +27,7 @@ Java 1.8 and above
 
 # Workflow of the Operator
 
-![workflow](images/
-eventhubinput_workflow)
+![](images/eventhubinput_workflow.png)
  
 # Supported Data Types
 
