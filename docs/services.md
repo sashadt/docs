@@ -1,8 +1,6 @@
 # Overview
 
-Services represent global, shared, and automatically managed Docker or Apex processes. When an application is dependent on these services, these services can be configured in RTS to be launched automatically along with the application.
-
-Thus, when launching an application, the associated services that are configured also get launched automatically.
+Services represent global, shared, and automatically managed Docker or Apex processes. When an application is dependent on these services, these services can be configured in RTS to be launched automatically along with the application. Thus, when launching an application, the associated services that are configured also get installed and started automatically.
 
 For example:  When you launch the [Omni Channel Fraud Prevention](http://docs.datatorrent.com/omni_channel_fraud_app/) application, the following services are installed along with it:
 
@@ -22,9 +20,9 @@ You can take administrative actions to start, stop, edit or remove these service
 
 The following services are required by the premium applications in DT RTS:
 
-* [Online Analytics Service]() - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by [Apache Superset](#superset).
-* [Drools Workbench]() - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
-* [Superset](#superset) - This service provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using this service, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
+* [Online Analytics Service](/oas) - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by Apache Superset.
+* [Drools Workbench](/drools) - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
+* [Superset](/superset) - This service provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using this service, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
 
 # Management
 
@@ -50,7 +48,7 @@ Below are the descriptions of the services table columns:
 | active apps | The active Apex applications that depend on the service. |
 | memory | Memory allocated by the service. |
 
-<a name="all_service_status"></a>
+<a name="all-service-status"></a>
 Below are possible service status:
 
 | Status | Description |
@@ -65,16 +63,14 @@ Below are possible service status:
 
 The following actions can be performed on this page:
 
-* [Create new service](#create_new_service)
-* [Import packaged services](#import_packaged_service)
-* [View service instance](#view_service_instance)
-* [Edit service](#edit_service)
-* [Start services](#start_services)
-* [Stop services](#stop_services)
-* [Clone service](#clone_service)
-* [Delete services](#delete_services)
-
-<a name="create_new_service"></a>
+* [Create new service](#create-new-service)
+* [Import packaged services](#import-packaged-service)
+* [View service instance](#view-service-instance)
+* [Edit service](#edit-service)
+* [Start services](#start-services)
+* [Stop services](#stop-services)
+* [Clone service](#clone-service)
+* [Delete services](#delete-services)
 
 #### Create New Service
 
@@ -112,8 +108,6 @@ Sample Apex create service dialog.
 
 For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
 
-<a name="import_packaged_service"></a>
-
 #### Import Packaged Service
 
 Packaged services are pre-defined services included in application packages that are uploaded in the cluster.  These services can be installed as-is or with different settings.
@@ -124,8 +118,6 @@ To install a packaged service, follow the steps below:
 2. Click the **import** button. The **Import from Packaged Services** page is displayed with the list of available packaged services in application packages.
 3. Click the **import** button of a service to be imported. An **Import Packaged Service** dialog is shown.
 4. Edit the applicable entries and click the **Import** button to install the service.
-
-<a name="view_service_instance"></a>
 
 #### View Service Instance
 
@@ -154,8 +146,6 @@ This section shows the proxy URL that users can use to access data provided by t
 
 This section shows the Apex applications that depend on this service.  The table will show the application ID application name, application status and the application running username.  Users can click on the application ID or name to navigate to the running Apex application instance page.
 
-<a name="edit_service"></a>
-
 #### Edit Service
 
 Services are automatically installed when an associated application is launched. However, you can change the settings of the services based on your requirements and restart the services.
@@ -170,8 +160,6 @@ To edit a service, follow the steps below:
 
 **Note**: You can also edit a service on the service instance page.
 
-<a name="start_services"></a>
-
 #### Start Services
 
 To start a service, follow the steps below:
@@ -180,8 +168,6 @@ To start a service, follow the steps below:
 2. Select a service from the services list and click the **Start** button.
 
 **Note**: You can also start a service on the service instance page.
-
-<a name="stop_services"></a>
 
 #### Stop Services
 
@@ -192,8 +178,6 @@ To stop a service, follow the steps below:
 3. Click the **Stop** button to stop the service.
 
 **Note**: You can also stop a service on the service instance page.
-
-<a name="clone_service"></a>
 
 #### Clone Service
 
@@ -207,8 +191,6 @@ To clone a service, follow the steps below:
 4. Click the **Create** button to create the new service.<br/>If the original service is enabled, then the new service will be installed and started.<br/>If the original service isn't enabled, then the new service will be installed, but not started.
 
 **Note**: You can also clone a service on the service instance page.
-
-<a name="delete_services"></a>
 
 #### Delete Services
 
@@ -334,10 +316,8 @@ The following is a sample **services.json** file:
 
 The **services.json** file contains two root level properties:
 
-* [Services Property](#services_property)
-* [Applications Property](#applications_property)
-
-<a name="services_property"></a>
+* [Services Property](#services-property)
+* [Applications Property](#applications-property)
 
 #### Services Property
 
@@ -423,16 +403,14 @@ In addition to the explicit metadata variables defined in the services, there ar
 | Item |  Description |
 | ---- |  ----------- | 
 | _type | This variable should resolve to the service type such as `docker` or `apex`.  The syntax to reference this variable is `${superset-fpa._type}`, assuming the service name is `superset-fpa`. |
-| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all_service_status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
+| _state | This variable should resolve to the service status.  For a complete list of service status, see the [service status table](#all-service-status) in the Manage section. The syntax to reference this variable is `${superset-fpa._state}`, assuming the service name is `superset-fpa`. |
 
 **Global Variables**
 
 | Item |  Description |
 | ---- |  ----------- | 
-| GATEWAY\_CONNECT\_ADDRESSS | This is the Gateway connection address.  The syntax to reference this variable is `${GATEWAY_CONNECT_ADDRESSS}`. |
-| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The synxtax to reference this variable is `${GATEWAY_ADMIN_USER}`. |
-
-<a name="applications_property"></a>
+| GATEWAY\_CONNECT\_ADDRESS | This is the Gateway connection address.  The syntax to reference this variable is `${.GATEWAY_CONNECT_ADDRESS}`. |
+| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The syntax to reference this variable is `${.GATEWAY_ADMIN_USER}`. |
 
 #### Applications Property
 
