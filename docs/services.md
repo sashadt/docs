@@ -8,17 +8,13 @@ For example:  When you launch the [Omni Channel Fraud Prevention](http://docs.da
 * Drools Workbench
 * Superset Dashboards
 
-A Service is either an  Apex application or a Docker container. DT RTS automatically manages the services based on the application dependencies. It saves the services that were added to the system for management, and the settings required to install and launch the services.
-
 Services can be predefined in an application or configuration packages.  Users can also manually create services using the Services Management or Application Configuration Launch pages.
 
 DT Gateway launches the services based on service descriptors.  A service descriptor is a JSON based description of the service that comes with an application package or a configuration package.  All the services are monitored by DT Gateway at regular intervals.
 
-As individual services get started, the Gateway creates proxy connections, where the web interface of these services can be accessed using the global Gateway address. Proxy ports can be defined in the service descriptor.
+When a service is started, the Gateway creates proxy connection for the service if the proxy address property is configured in the service descriptor.  This proxy connection can be used to access the actual service API/web interface using the Gateway connection address.  There might be cases where users do not have access to the actual service web interface, so using the Gateway proxy address allows users to access such services.
 
-You can take administrative actions to start, stop, edit or remove these services.
-
-The following services are required by the premium applications in DT RTS:
+Below are three services that are packaged with DT premium applications:
 
 * [Online Analytics Service](/oas) - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by Apache Superset.
 * [Drools Workbench](/drools) - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
