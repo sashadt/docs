@@ -4,7 +4,7 @@
 ### Handling High Ingestion Rate in OAS 
 
 Usually, OAS consumes the Kafka topic data as soon as it is available from upstream. However, if it cannot cope with the incoming rate, there can be failures in the **Input** operator. 
-To avoid such issues following approaches are suggested:
+To avoid such issues, the following approaches are suggested:
 
  - **OlapParser Operator partitioning**
  
