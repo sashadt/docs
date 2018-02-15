@@ -19,58 +19,58 @@ DataTorrent dtGateway API v2 Specification
 Function: View the data that is sent back to DataTorrent customer support. 
 
 Return:
-
-```json
+```
 {
-    "licenseId": "dt-20170918160904-tyej3my1",
-    "numNodesInCluster": "9",
-    "license": {
-        "currentTime": "1510696736831",
-        "startDate": "1505692800000",
-        "expireTime": "1512000000000",
-        "memoryMBAllowed": "1024000",
-        "memoryMBUsed": "379904",
-        "issuedBy": "DataTorrent, Inc.",
-        "issuerWebsite": "https://www.datatorrent.com",
-        "supportedBy": "DataTorrent, Inc.",
-        "supportURL": "https://www.datatorrent.com/support",
-        "category": "DT Premium",
-        "exceedGracePeriod": "1800000",
-        "valid": true,
-        "expirationTimeNotificationLevel": "INFO",
-        "id": "dt-20170918160904-tyej3my1",
-        "licenseType": "Non_production"
+    "licenseId": "{licenseId}",
+    "numNodesInCluster": "{numberOfNodesInCluster}",
+    "license":
+    {
+        "currentTime": "{currentTimeMills}",
+        "startDate": "{startTimeMills}",
+        "expireTime": "{expireTimeMills}",
+        "memoryMBAllowed": "{memoryMBAllowed}",
+        "memoryMBUsed": "{memoryMBUsed}",
+        "issuedTo": "{issuedTo}",
+        "issuedBy": "{issuedBy}",
+        "issuerWebsite": "{issuerWebsite}",
+        "supportedBy": "{supportedBy}",
+        "supportURL": "{supportURL}",
+        "category": "{DT Premium/DT PLUS}",
+        "exceedGracePeriod": "{exceedGracePeriod}",
+        "valid": {true/false},
+        "id": "{licenseId}",
+        "licenseType": "{licenseType}"
     },
-    "rts.version": "3.10.0-SNAPSHOT from rev: 4be2df8 branch: SPOI-12775 by Shunxin Lu on 14.11.2017 @ 13:22:09 PST",
-    "apex.version": "3.7.0-SNAPSHOT from rev: 95c4b10 branch: SPOI-12829 by Shunxin Lu on 14.11.2017 @ 09:55:37 PST",
-    "java.vendor": "Oracle Corporation",
-    "java.version": "1.7.0_67",
-    "os.arch": "amd64",
-    "os.name": "Linux",
-    "os.version": "2.6.32-220.el6.x86_64",
-    "hadoop.version": "2.6.0-cdh5.8.2 from 9abce7e9ea82d98c14606e7ccc7fa3aa448f6e90 by jenkins source checksum f381cdf3a496d5679c23d113e5a35cd8",
-    "metrics": {
-        "tuplesProcessedPSMA": "332146",
-        "tuplesEmittedPSMA": "327566",
-        "cpuPercentage": "476.5691399952991",
-        "gatewayUpTimeMills": "1438599",
-        "currentMemoryAllocatedMB": "379904",
-        "period": "total",
-        "startTime": "1510695298232",
-        "appsRunningMax": "18",
-        "ageOfAppsAvg": "772629658",
-        "appsRunningAvg": "18",
-        "memMBMax": "379904",
-        "memMBMin": "360960",
-        "numAppsFinished": "0",
-        "numOfContainersAvg": "66",
-        "endTime": "1510696736831",
-        "appsRunningMin": "18",
-        "numOfOperatorsAvg": "104"
+    "rts.version": "{rtsVersion}",
+    "apex.version": "{apexVersion}",
+    "java.vendor": "{javaVendor}",
+    "java.version": "{javaVersion}",
+    "os.arch": "{operatingSystemArchitecture}",
+    "os.name": "{operatingSystemName}",
+    "os.version": "{operatingSystemVersion}",
+    "hadoop.version": "{hadoopVersion}",
+    "metrics":
+    {
+        "tuplesProcessedPSMA": "{tuplesProcessedPSMA}",
+        "tuplesEmittedPSMA": "{tuplesEmittedPSMA}",
+        "cpuPercentage": "{cpuPercentage}",
+        "gatewayUpTimeMills": "{gatewayUpTimeMills}",
+        "currentMemoryAllocatedMB": "{currentMemoryAllocatedMB}",
+        "period": "{total/previous/current}",
+        "startTime": "{startTimeOfThePeriod}",
+        "appsRunningMax": "{appsRunningMaxInThePeriod}",
+        "ageOfAppsAvg": "{ageOfAppsAvgInThePeriod}",
+        "appsRunningAvg": "{appsRunningAvgInThePeriod}",
+        "memMBMax": "{memMBMaxInThePeriod}",
+        "memMBMin": "{memMBMinInThePeriod}",
+        "numAppsFinished": "{numAppsFinishedInThePeriod}",
+        "numOfContainersAvg": "{numOfContainersAvgInThePeriod}",
+        "endTime": "{endTimeOfThePeriod}",
+        "appsRunningMin": "{appsRunningMinInThePeriod}",
+        "numOfOperatorsAvg": "{numOfOperatorsAvgInThePeriod}"
     }
 }
 ```
-
 ### GET /ws/v2/about
 
 Function:
