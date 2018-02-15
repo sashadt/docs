@@ -410,7 +410,7 @@ In addition to the explicit metadata variables defined in the services, there ar
 | Item |  Description |
 | ---- |  ----------- | 
 | GATEWAY\_CONNECT\_ADDRESS | This is the Gateway connection address.  The syntax to reference this variable is `${.GATEWAY_CONNECT_ADDRESS}`. |
-| GATEWAY\_ADMIN\_USER | This is the Unit user that the Gateway runs with. The syntax to reference this variable is `${.GATEWAY_ADMIN_USER}`. |
+| GATEWAY\_ADMIN\_USER | This is the Unix user that the Gateway runs as. The syntax to reference this variable is `${.GATEWAY_ADMIN_USER}`. |
 
 #### Applications Property
 
