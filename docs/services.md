@@ -140,7 +140,7 @@ This section shows the proxy URL that users can use to access data provided by t
 
 **Dependent Active Apps**
 
-This section shows the Apex applications that depend on this service.  The table will show the application ID application name, application status and the application running username.  Users can click on the application ID or name to navigate to the running Apex application instance page.
+This section shows the Apex applications that depend on this service.  The table will show the application ID, application name, application status and the application running username.  Users can click on the application ID or name to navigate to the running Apex application instance page.
 
 #### Edit Service
 
