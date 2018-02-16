@@ -563,7 +563,7 @@ Manage users (create/delete users, change password)
 
 #### UPLOAD_APP_PACKAGES
 
-Upload App Packages and use the app builder
+Upload App Packages
 
 #### VIEW_GLOBAL_CONFIG
 
