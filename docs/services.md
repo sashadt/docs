@@ -204,7 +204,7 @@ To stop or start the services, follow the steps below:
 
 Some applications require services which are run in the Docker containers. For such services, you must install Docker (Version 1.9.1 or greater) on your system. Services can run in Docker installed on a remote system if Docker isn't installed on the system where the Gateway is running.
 
-During the DT RTS installation, the Docker version is automatically detected. That Docker version is shown in the Docker section on the Configuration page. You can optionally configure the services to run in Docker installed on a remote system.
+The Docker version is automatically detected during the DT RTS installation process. That Docker version is shown in the Docker section of the Installation Wizard - Configuration. You can optionally configure the services to run in Docker installed on a remote system.
 
 **Warning: If the system does not have a compatible version of Docker and the remote Docker host isn't configured, then Docker services will not work.**
 
