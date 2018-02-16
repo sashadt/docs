@@ -59,13 +59,13 @@ Below are possible service status:
 
 The following actions can be performed on this page:
 
-* [Create new service](#creating-new-service)
-* [Import packaged services](#importing-packaged-service)
-* [View service instance](#viewing-service-instance)
-* [Start services](#starting-services)
-* [Stop services](#stopping-services)
-* [Clone service](#cloning-a-service)
-* [Delete services](#deleting-services)
+* [Creating new service](#creating-new-service)
+* [Importing packaged services](#importing-packaged-service)
+* [Viewing service instance](#viewing-service-instance)
+* [Starting services](#starting-services)
+* [Stopping services](#stopping-services)
+* [Cloning a service](#cloning-a-service)
+* [Deleting services](#deleting-services)
 
 ## Creating New Service
 
@@ -101,7 +101,7 @@ Sample Apex create service dialog.
 
 4. Click the **Create** button to create the new service and install it.
 
-For more details and examples regarding the items in the table above, see the [Services Property](#services_property) section below.
+For more details and examples regarding the items in the table above, see the [Services Property](#services-property) section below.
 
 ## Importing Packaged Service
 
