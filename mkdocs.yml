@@ -40,6 +40,7 @@ pages:
         - Event Hub Output Operator: operators/eventhuboutput.md
         - Abstracthttpserver Operator: abstracthttpserver.md
         - Azure Blob Storage Operator: operators/azure_blob.md
+        - Analytics Output Operator: operators/aoooperator.md
         - Elasticsearch Output Operator: operators/elasticsearch.md
         - Block Reader: operators/block_reader.md
         - Deduper: operators/deduper.md
