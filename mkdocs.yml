@@ -38,6 +38,7 @@ pages:
         - TCP Input Operator: operators/tcpinputoperator.md
         - Event Hub Input Operator: operators/eventhubinput.md
         - Event Hub Output Operator: operators/eventhuboutput.md
+        - Abstracthttpserver Operator: abstracthttpserver.md
         - Azure Blob Storage Operator: operators/azure_blob.md
         - Elasticsearch Output Operator: operators/elasticsearch.md
         - Block Reader: operators/block_reader.md
