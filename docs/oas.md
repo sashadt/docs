@@ -14,6 +14,8 @@ OAS is available only with _DT Premium_ license.
 
 The following image depicts the workflow of OAS.
 
+![](images/Workflow.png)
+
 - OAS is enabled to stream-in data from Apache Kafka. Any datasource can send the applicable data for analysis into Kafka.
 - The Online Analytics Service takes this real-time feed of data from Apache Kafka, computes, and makes it ready for querying.
 - OAS Dashboard service can query on OAS in real time through DT gateway.
