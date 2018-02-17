@@ -1,24 +1,20 @@
 # Overview
 
-Services represent global, shared, and automatically managed Docker or Apex processes. When an application is dependent on these services, these services can be configured in RTS to be launched automatically along with the application. Thus, when launching an application, the associated services that are configured also get installed and started automatically.
+Services represent global, shared, and automatically managed processes.  These processes are automatically installed, managed, and monitored by the Gateway, and can be an instance of an Apex application or a Docker container.  Applications can rely on any number of services as their dependencies, and all the required services will be automatically installed and launched as needed when the application starts.
 
-For example:  When you launch the [Omni Channel Fraud Prevention](http://docs.datatorrent.com/omni_channel_fraud_app/) application, the following services are installed along with it:
+For example when you launch the [Omni Channel Fraud Prevention](http://docs.datatorrent.com/omni_channel_fraud_app/) application for the first time, the following services are automatically installed and launched along with it:
 
-* Online Analytics App
+* Online Analytics Service
 * Drools Workbench
-* Superset Dashboards
+* OAS Dashboards
 
-Services can be predefined in an application or configuration packages.  Users can also manually create services using the Services Management or Application Configuration Launch pages.
-
-DT Gateway launches the services based on service descriptors.  A service descriptor is a JSON based description of the service that comes with an application package or a configuration package.  All the services are monitored by DT Gateway at regular intervals.
-
-When a service is started, the Gateway creates proxy connection for the service if the proxy address property is configured in the service descriptor.  This proxy connection can be used to access the actual service API/web interface using the Gateway connection address.  There might be cases where users do not have access to the actual service web interface, so using the Gateway proxy address allows users to access such services.
+Services required by the applications can be defined via JSON service descriptors placed in an application package during the application development.  Users can also add new services and manage existing services via the UI Console using the Services Management or Application Configuration pages.  
 
 Below are three services that are packaged with DT premium applications:
 
-* [Online Analytics Service](/oas) - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application, which provides the backend query service. The visualization for this query service is provided by Apache Superset.
-* [Drools Workbench](/drools) - This service is a web application and repository which is used to manage Drools assets. It provides the capability to change the application functionality by using Drools-based rules. You can create, edit, or version the rules and apply these rules in the application.
-* [Superset](/superset) - This service provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data. Using this service, you can create and share dashboards as well as control the data sources that must be displayed on the dashboards.
+* [Online Analytics Service](oas.md) - This service provides analytic processing of event streams from various source applications in real-time. This is an Apex application backed by a custom Druid implementation which provides fast in-memory OLAP query support.
+* [CEP Workbench](cep_workbench.md) - This service is a web application and repository which is used to manage Drools assets. It provides the capability to quickly create, edit, and version Drools rules via a web UI, which can in turn be deployed to applications which implement CEP Engine, such as [Omni Channel Fraud Prevention](http://docs.datatorrent.com/omni_channel_fraud_app/) application.
+* [OAS Dashboards](oas_dashboards.md) - This service, based on Apache Supersert, provides a rich set of data visualizations with an easy-to-use interface for exploring and visualizing data available via [OAS](oas.md) or other data sources.
 
 # Managing Services
 
