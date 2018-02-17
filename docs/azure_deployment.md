@@ -43,7 +43,7 @@ To deploy DT RTS from Azure Website, do the following:
 1. From the DT Website for [downloads](https://www.datatorrent.com/download/), Access the Azure login page.
 **Note:** You can proceed only if you have the DT RTS license. In case you do not have the license, you are directed to the **Details** page for obtaining the license for DT RTS.
 2. On the Azure login page, enter the Azure user credentials. The **Template** page is displayed.
-![](images/azurepage)
+![](images/azurepage.png)
 3. Under **Basics** &gt; **Resource**** group **, either select** Create new **to create a new resource group or select** Use existing** and choose an existing resource group.
 4. Select the location.
 5. Under **Settings** , enter the following details based on your requirements:
@@ -113,8 +113,11 @@ This ZIP file contains the JSON file template which can be edited to configure t
 az login
 ```
 The URL and the authentication code is provided.
+
 2. In a web browser, enter this URL and the authentication code and then click **Continue**.
+
 3. On the Microsoft Azure Login page, enter your Microsoft Azure account credentials and login.
+
 4. Go to Azure CLI and enter the following command:
 
 ```
