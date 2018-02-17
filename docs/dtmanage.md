@@ -49,7 +49,7 @@ To launch an app in an App Package, click on the launch button to the far right 
 
 ![Launch app modal](images/dtmanage/console-launch-app.png)
 
-> **Note:** For more information about config files and custom properties, see the [Application Packages Guide](https://www.datatorrent.com/docs/guides/ApplicationDeveloperGuide.html)
+> **Note:** For more information about config files and custom properties, see the [Application Packages](application_packages.md)
 
 
 ## Visualize
