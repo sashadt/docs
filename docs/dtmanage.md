@@ -23,33 +23,48 @@ The AppFactory hosts a collection of applications and templates grouped by vario
 
 ## Launch
 
-The Launch screen lists all of the imported and uploaded packages and their applications. Applications can be launched and active instances viewed.
+The Launch page lists all of the **Applications** and [**Configurations**](/application_configurations) available for launching, as well as offering convenient management features.
 
 ![Launch](images/dtmanage/console-launch.png)
 
-#### Launching Apps
+Two alternative views are accessible through the **Applications** and **Configurations** buttons on the top right of the page. The **Applications** view lists all the applications across all the application packages. The **Configurations** view lists all the available application configurations.
 
-To launch an app in an App Package, click on the launch button to the far right of the list. A dialog box will appear with several options: 
+The *instances* column lists all the running instances of each application or configuration. Clicking on an instance takes you to the application instance page.
 
-- **Specify a name for the running app**
-  The console will pre-populate this field with an appropriate name, but you can specify your own name. Make sure it is unique among all the applications running in the Hadoop cluster of your DataTorrent installation.
-- **Specify launch properties**
-  In addition to choosing a config file, you may also directly specify properties in the launch pop-up by selecting this option. Any required properties will automatically show up in this section and require input. Note that there are several helpful functions when specifying custom properties:
-  - *add* - App Packages can have custom properties applied at launch time to override existing properties.
-    - *add default properties* - App Packages can also have default properties. This function will add the default properties to the list, making it easy for you to override the defaults. This button can be found clicking on the *add* button's submenu.
-  If any properties were added, the option to save the properties as a Configuration Package is activated.
-- **Use configuration file**
-  App Package config files are xml files that contain `<properties>` that get interpreted and used for launching an application. To choose one, enable the check box and choose the config file you want to use for launch.
-- **Use configuration package**
-  App Packages with a separate associated Configuration Package can be selected here. The Configuration Package will launch with its own custom properties.
-- **Specify the [scheduler queue](https://hadoop.apache.org/docs/r2.4.1/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html)**
-  This input allows you to specify which queue you want the application to be launched under. The default behavior depends on your Hadoop installation, but typically will be `root.[USER_NAME]`.
-- **Enable [Garbage Collection logging](http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/index.html)**
-  Checking this box enables GC logging by including the `-Xloggc:<LOG_DIR>/gc.log -verbose:gc -XX:+PrintGCDateStamps` JVM options for all the containers of the application. This GC logging in turn enables garbage collection widgets described later.
 
-![Launch app modal](images/dtmanage/console-launch-app.png)
+### Uploading Packages and Configurations
 
-> **Note:** For more information about config files and custom properties, see the [Application Packages](application_packages.md)
+To upload an application package (.apa), use the **upload package** button in the **Applications** view. To upload an application configuration (.apc), use the **upload configuration** button in the **Configurations** view.
+
+
+### Launching Applications and Configurations
+
+Applications and configurations can be launched using the **launch** button in the *actions* column. This opens a launch modal where you can confirm whether to **Launch** or **Configure** the application.
+
+*Note*: Some applications and configurations must be configured before launching because they have incomplete required properties.
+
+When using the **Configure** button in the *Launch Application* modal, a temporary configuration is used. Temporary configurations are useful for launching and testing quickly without creating extra configurations. Read more about [temporary configurations](/application_configurations#launching-quickly-with-temporary-configurations) on the main Application Configurations page.
+
+
+#### Launch Dropdown
+
+The dropdown menu to the right of the **launch** button contains some convenient management actions and alternative launch options.
+
+![Launch Dropdown](images/dtmanage/console-launch-dropdown.png)
+
+When working with **Applications**, the dropdown provides quick access to related configurations, ability to launch with configuration xml files, and some package management actions.
+
+When working with **Configurations**, the dropdown provides configuration management actions, links to related configurations, and source management actions.
+
+
+#### Retargeting Multiple Configurations
+
+Multiple configurations can have their source applications retargeted at the same time. This is useful when working with a new application version and you want to migrate a set of existing configurations.
+
+To start, select all of the configurations you want to retarget using the selection checkboxes, then click the **retarget** button that shows up above the configurations list.
+
+In the modal, select a new target source application, confirm your changes, and click **Retarget**.
+
 
 
 ## Visualize
@@ -152,7 +167,7 @@ Shows various metrics of your application on a real-time line chart. Single-clic
 
 #### Garbage Collection (GC) Chart by Heap
 
-This chart shows a container's heap memory in use in KB (kilo-bytes) against time. The chart is constructed by plotting and extrapolating in-use heap memory obtained from events in the GC log file of a container which requires GC logging to be enabled as described in [Launching apps](#launching-apps). The chart shown is for a single container that is selectable from the radio buttons shown at the top right corner of the widget. Each container in the radio buttons and the chart is color-coded with the same color. The containers included depend on the context of the widget:
+This chart shows a container's heap memory in use in KB (kilo-bytes) against time. The chart is constructed by plotting and extrapolating in-use heap memory obtained from events in the GC log file of a container which requires GC logging to be enabled as described in [Application Configurations](/application_configurations#optional-properties). The chart shown is for a single container that is selectable from the radio buttons shown at the top right corner of the widget. Each container in the radio buttons and the chart is color-coded with the same color. The containers included depend on the context of the widget:
 
 - all application containers in the application view
 - all the containers containing the physical partitions of a logical operator in the logical operator view
@@ -163,7 +178,7 @@ This chart shows a container's heap memory in use in KB (kilo-bytes) against tim
 
 #### Garbage Collection (GC) Log Table
 
-This table shows the garbage collection (GC) events for a group of containers. This table too requires GC logging to be enabled as described in [Launching apps](#launching-apps). The containers included in the group depend on the context of the widget:
+This table shows the garbage collection (GC) events for a group of containers. This table too requires GC logging to be enabled as described in [Application Configurations](/application_configurations#optional-properties). The containers included in the group depend on the context of the widget:
 
 - all application containers in the application view
 - all the containers containing the physical partitions of a logical operator in the logical operator view
@@ -174,7 +189,7 @@ This table shows the garbage collection (GC) events for a group of containers. T
 
 #### Garbage Collection (GC) Chart by Duration
 
-This discrete bar chart shows GC event duration in seconds against time for a group of containers. Each bar is of fixed-width but the height denotes the duration of the corresponding GC event. This chart too requires GC logging to be enabled as described in [Launching apps](#launching-apps). One or more containers are selectable from the radio buttons shown at the top right corner of the widget. Each container in the radio buttons and the chart is color-coded with the same color. The containers included depend on the context of the widget:
+This discrete bar chart shows GC event duration in seconds against time for a group of containers. Each bar is of fixed-width but the height denotes the duration of the corresponding GC event. This chart too requires GC logging to be enabled as described in [Application Configurations](/application_configurations#optional-properties). One or more containers are selectable from the radio buttons shown at the top right corner of the widget. Each container in the radio buttons and the chart is color-coded with the same color. The containers included depend on the context of the widget:
 
 - all application containers in the application view
 - all the containers containing the physical partitions of a logical operator in the logical operator view
