@@ -92,6 +92,7 @@ pages:
     - Apache Apex: apex.md
     - Apache Apex-Malhar: apex_malhar.md
     - Application Backplane: appbackplane.md
+    - Store and Replay Feature: storeandreplay.md
 - Deployment and Operations:
     - Licensing: Licensing.md
     - Installation: installation.md
