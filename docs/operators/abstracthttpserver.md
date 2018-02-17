@@ -1,5 +1,3 @@
-
-
 ## About AbstractHttpServer Operator
 
 AbstractHttpServer operator helps developer to implement HTTP services and run them as part of operator.  It provides a way to host Jetty HTTP Servlet server as an . You can develop custom Servlets and plug-in those using these classes: ServletContextHolder and ServletHolder.
@@ -16,7 +14,7 @@ The following port is available for the AbstractHttpServerOperator operator:
 
 | **Port Type** | **Port Name** | **Details** |
 | --- | --- | --- |
-| Output Port | deployBroadcastOutport | Emits information about the current partition including, hostname, services started or not, partition mask, partitionId.If the partition has more than one partitionId assigned, then that many tuples are emitted.  All this information is emitted using POJO object of the type ServerDeploymentConfig. |
+| Output Port | deployBroadcastOutport | Emits information about the current partition including, hostname, services started or not, partition mask, partitionId.  If the partition has more than one partitionId assigned, then that many tuples are emitted.  All this information is emitted using POJO object of the type ServerDeploymentConfig. |
 
 ## Testing
 
@@ -42,14 +40,14 @@ The following classes are used by the **AbstrractHttpServer** operator:
 
 | Property Name | Type | Description |
 | --- | --- | --- |
-| hostName | String | This property can be used as the address URL and is specified in the following format by default: _protocol://[hostname]:[port]/._ |
+| hostName | String | This property can be used as the address URL and is specified in the following format by default: `protocol://[hostname]:[port]/.` |
 | started | boolean | Specifies if the server has started or shut down for the clients. |
 | mask | int | Specifies the partition mask of the partition of the operator |
 | partitionId | int | Specifies the partition ID for the current partition of the operator. |
 
 ## HandlerCollection
 
-You must implement the _getHandlers()_ method on this operator, which returns the **HandlerCollection** object (_`org.eclipse.jetty.server.handler.HandlerCollection` _). The following example depicts how you implement the *gethandlers* method:
+You must implement the _getHandlers()_ method on this operator, which returns the **HandlerCollection** object `org.eclipse.jetty.server.handler.HandlerCollection`. The following example depicts how you implement the *gethandlers* method:
 ```
 @Override
 public HandlerCollection getHandlers() throws Exception
@@ -70,7 +68,7 @@ public HandlerCollection getHandlers() throws Exception
 ```
 You can also use this operator to develop Websocket operators with some modifications. Two classes are implemented; one for handling data transfer for receiving and sending data over websocket connections and other for creating connections and configuring WebSocketServletFactory.
 
-The following example depicts implementation of _getHandlers()_ method for WebsocketOutput operator.
+The following example depicts implementation of `getHandlers()` method for WebsocketOutput operator.
 ```
 public HandlerCollection getHandlers() throws UnknownHostException
 {

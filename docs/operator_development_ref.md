@@ -1,142 +1,7 @@
-# Operator Development Guide Reference
+# Operator Development Reference
 
-* 1: Introduction
 
-* 2: Operators
-
- * API
-
-   * Interface - Component
-
-   * Interface Operator
-
-   * Class DefaultInputPort
-
-   * Class DefaultOutputPort
-
-   * Interface InputPort
-
-   * Interface OutputPort
-
-   * Interface ActivationListener
-
-   * Interface CheckpointListener
-
-   * Interface IdleTimeHandeler
-
- * Ports
-
-   * Examples
-
-     * Input Port
-
-     * Output Port
-
-     * Error Port
-
-   * Unifiers
-
-   * Port Declarations
-
- * Operator Properties
-
- * Operator Attributes
-
- * Templates
-
- * Validations
-
-   * Compile Time Validations
-
-   * Initialization/Instantiation Time
-
-   * Runtime Validations
-
- * Transient Fields
-
- * Stateless vs Stateful
-
- * Single vs Multiple Inputs
-
- * Hierarchical Operators
-
- * Macros
-
-* 3: Computation Model
-
- * Single Dedicated Thread Execution
-
- * Mutability of tuples
-
- * Passthrough vs End of Window tuples
-
- * Streaming Window vs Application Window
-
-* 4: Commonly Used Operators
-
- * Window Generator
-
- * Default Unifier
-
- * Sinks
-
- * InputOperator
-
- * Apache Apex Malhar Library Templates
-
- * Database/Window Synchronization Operator
-
-* 5: Fault Tolerance
-
- * Checkpointing
-
- * Recovery Mechanisms
-
-   * At-Least-Once
-
-   * At-Most-Once
-
-   * Exactly-Once
-
-* 6: Partitioning
-
- * Static vs Dynamic
-
- * Partitioner
-
- * Multiple Ports
-
- * StreamCodec
-
- * Unifier
-
-* 7: Library
-
- * Common Operator Functions
-
-   * Filtering-Selecting-Map
-
-   * Aggregations
-
-   * Joins
-
-   * Input Adapters
-
-   * Output Adapters
-
-   * Event Generators
-
-   * Stream Manipulation
-
-   * User Defined
-
- * Sample Code
-
- * Latency and Throughput
-
-
-1: Introduction
-===============
+## 1: Introduction
 
 A streaming application is a DAG that consists of computations (called
 operators) and data flow (called streams). In this document we will
@@ -144,8 +9,7 @@ discuss details on how an operator works and its internals. This
 document aims to enable the reader to write efficient operators and make
 informed design choices.
 
-2: Operators
-============
+## 2: Operators
 
 Operators are basic computation units of the application. They are
 interconnected via streams to form an application. Operators are classes
@@ -183,15 +47,15 @@ behavior of the operator. Within an application attributes can be
 assigned to an operator that impact the operability of the operator.
 Later sections of this chapter cover the internal details of operators.
 
-API
----
+### API
+
 
 To write your own operator you need to implement the Operator interface.
 This interface provides the basic API for an operator developer. It
 extends the Component interface; important parts of both interfaces are
 discussed below.
 
-### Interface - Component
+#### Interface - Component
 
 -   ``` setup (OperatorContext context) ``` This is part of  Component. This is
     invoked as part of initialization of the operator. This is part of
@@ -215,7 +79,7 @@ discussed below.
     outside connections (for example sockets, database sessions, etc.)
     should be done in this method
 
-### Interface Operator
+#### Interface Operator
 
 -   ``` beginWindow(long windowId) ``` Invoked at the start of a window. The
     windowId parameter identifies the window. All tuples received and
@@ -229,7 +93,7 @@ discussed below.
     beginWindow). The window computation ends with the last line in
     endWindow().
 
-### Class DefaultInputPort
+#### Class DefaultInputPort
 
 -   ```process(T tuple)``` Invoked within an input port for every tuple
     received from the port of an upstream operator. This method is part
@@ -237,20 +101,20 @@ discussed below.
     schema of the input port. This callback is an abstract call that
     must be implemented by the operator developer.
 
-### Class DefaultOutputPort
+#### Class DefaultOutputPort
 
 -   ```emit(T tuple)``` To be called by the operator developer when a tuple
     has to be emitted on the output port. Tuples can be emitted in
     beginWindow, endWindow, or process callbacks. The schema of the
     tuple is the same as the schema of the output port.
 
-### Interface InputPort
+#### Interface InputPort
 
 -   ```StreamCodec < T > getStreamCodec()``` A stream codec serializes or
     deserializes the data that can be received on the port. If null,
     STRAM uses the generic codec.
 
-### Interface OutputPort
+#### Interface OutputPort
 
 -   ```Unifier < T > getUnifier()``` When operators are partitioned via round
     robin partitioning they may need to merge the outputs of the
@@ -267,7 +131,7 @@ discussed below.
     just passes the tuples from each partition to the downstream
     operators.
 
-### Interface ActivationListener
+#### Interface ActivationListener
 
 An operator may be subjected to activate/deactivate cycle multiple times
 during its lifetime which is bounded by setup/teardown method pair. So
@@ -290,7 +154,7 @@ activate instead of setup.
     Opposite of the operations done in activate() must be done in
     deactivate().
 
-### Interface CheckpointListener
+#### Interface CheckpointListener
 
 Operators which need to be notified as soon as they are checkpointed or
 committed, must implement this interface.
@@ -303,7 +167,7 @@ committed, must implement this interface.
     successfully checkpointed a particular window id. This window id is
     passed as a parameter to the call back.
 
-### Interface IdleTimeHandeler
+#### Interface IdleTimeHandeler
 
 An operator must implement this interface if it is interested in being
 notified when it's idling. An operator can be said to be idling when
@@ -355,8 +219,8 @@ specific interfaces please refer to their API classes.
 
 ![](images/operator_development/image00.png)
 
-Ports
------
+### Ports
+
 
 Ports are connection points of an operator and are transient objects
 declared in the Operator class. Tuples flow in and out through these
@@ -551,8 +415,8 @@ IDEs. The port schema also enables the STRAM to do schema validation
 before run time addition of an operator. The added sub-query can do a
 check (instanceof) before accepting a tuple.
 
-Operator Properties
--------------------
+### Operator Properties
+
 
 Operator can have properties which are used to customize the
 functionality of the operator. Operator properties should be accessed
@@ -578,8 +442,8 @@ checkpoint is loaded, so runtime changes are remembered irrespective of
 whether the checkpoint happened between property set and operator
 outage.
 
-Operator Attributes
--------------------
+### Operator Attributes
+
 
 Operators can have attributes. Attributes are provided by the platform
 and do not belong to user code. Attributes do not change the basic
@@ -596,8 +460,8 @@ operator the values of these attributes could be used to provide better
 operability for the operator. Details of attributes are covered in
 Operation and Installation Guide.
 
-Templates
----------
+### Templates
+
 
 Since operators are java classes they can be templatized (generic types)
 for reuse. The streaming platform leverages all features in Java for
@@ -614,8 +478,8 @@ In general an operator should set the schema of the tuple to the minimum
 required for its functionality. Apache Apex Malhar Library package
 sample code has examples of a lot of such operators.
 
-Validations
------------
+### Validations
+
 
 The platform provides various ways of validating application
 specifications and data input. Validation of an application is done in
@@ -816,8 +680,8 @@ be done via usage of the instanceof() function. In later versions,
 stronger support would be provided by the platform for run time check
 for dynamic insertion of objects.
 
-Transient Fields
-----------------
+### Transient Fields
+
 
 During the application lifecycle, operators are serialized as part of
 checkpointing in the distributed environment. The platform uses Kryo for
@@ -878,8 +742,8 @@ Application window is equal to streaming window. This can be done either
 during the setup call, or you can set the checkpointing window count to
 application window count.
 
-Stateless vs Stateful
----------------------------------------------
+### Stateless vs Stateful
+
 
 The platform intends to discern stateless vs. stateful without direct
 specification from the developer. This depends on declaring objects as
@@ -955,8 +819,8 @@ asking for checkpointing within an application window, clearing
 container objects in endWindow is more efficient as the object in most
 cases does not become part of the checkpoint state.
 
-Single vs Multiple Inputs
--------------------------------------------------
+### Single vs Multiple Inputs
+
 
 A single-input operator by definition has a single upstream operator,
 since there can only be one writing port for a stream.  If an operator
@@ -982,8 +846,8 @@ catches up. The STRAM monitors and guarantees these conditions. These
 may occur dynamically due to changes in throughputs on various streams,
 caused by internal or external events.
 
-Hierarchical Operators
-----------------------------------------------
+### Hierarchical Operators
+
 
 Hierarchical operators are those whose functional logic it itself a DAG.
 The difference between an application and a hierarchical operator is
@@ -992,8 +856,8 @@ Hierarchical operators are very useful for reuse, and enforcing common
 design practices. The development for hierarchical operator is underway
 and will be available in a future version.
 
-Macros
-------------------------------
+### Macros
+
 
 Macros are sets of instructions that run via the CLI to insert a
 sub-query (sub-DAG) into the application. They have a similar result as
@@ -1003,16 +867,16 @@ during application creation time. Macros would still differ from a
 hierarchical operators as the operator would have a scope that the macro
 may not.
 
-3: Computation Model
-====================
+## 3: Computation Model
+
 
 In this section we discuss details of the computation model of an
 operator. It is very important for an operator developer to understand
 the nuances of the operator computational model to be able to leverage
 all the rich features provided by the platform.
 
-Single Dedicated Thread Execution
----------------------------------
+### Single Dedicated Thread Execution
+
 
 All code of an operator always executes in a single dedicated thread
 within a Hadoop container. This is a design principle of the platform,
@@ -1040,8 +904,8 @@ in-flowing tuples is handled by the platform to allow the operator code
 to run in a single thread execution, and frees the developer to focus
 solely on the business logic.
 
-Mutability of tuples
---------------------
+### Mutability of tuples
+
 
 Tuples emitted and received from ports are POJO (plain old java
 objects). Operator developers should be careful about the ownership
@@ -1068,8 +932,8 @@ t.clear();
 
 ```
 
-Passthrough vs End of Window tuples
------------------------------------
+### Passthrough vs End of Window tuples
+
 
 Tuples can be emitted during beginWindow(), process(), or endWindow().
 All these tuples would have the windowId associated with the window
@@ -1118,8 +982,8 @@ possibility of adding annotations on the operator to signal the STRAM
 about their behavior in the future. In the future, the platform would
 leverage this data.
 
-Streaming Window vs Application Window
---------------------------------------------------------------
+### Streaming Window vs Application Window
+
 
 The platform supports two windowing concepts. The first one is the
 streaming window, i.e. the smallest atomic micro-batch. All bookkeeping
@@ -1162,14 +1026,14 @@ that allows operator developers to easily code a sliding window
 operator. For details refer to Real-Time Streaming Platform
 Guide.
 
-4: Commonly Used Operators
-==========================
+## 4: Commonly Used Operators
+
 
 There are operators in the platform that support commonly needed
 functions. In this chapter we review them.
 
-Window Generator
-----------------
+### Window Generator
+
 
 A Window Generator is inserted for every input adapter. This operator is
 tasked with creating windows. The windows from two different window
@@ -1185,8 +1049,8 @@ public and therefore should not be relied upon. An application that uses
 window generators directly also risks complications and compatibility
 issues with future releases of the platform.
 
-Default Unifier
----------------
+### Default Unifier
+
 
 A default unifier is provided for merging partitions. The default
 unifier is a passthrough, i.e. it forwards all the tuples from
@@ -1196,8 +1060,8 @@ unifiers works the same in Nx1 partitions as well as NxM partitions; the
 only difference is that a NxM partition would have M unifiers - one for
 each downstream operator partition.
 
-Sinks
------
+### Sinks
+
 
 Sinks are objects that implement the Sink interface. The sink is the
 basic interface that has the process(tuple) API. The platform
@@ -1219,8 +1083,8 @@ guaranteed.
 -   HashTestSink
 -   CountTestSink
 
-InputOperator
--------------
+### InputOperator
+
 
 The InputOperator interface should be used to develop input adapters.
 This is the interface that all input adapters implement. Operators that
@@ -1232,15 +1096,15 @@ This method is called continuously between the beginWindow() and
 endWindow() calls and is supposed to fetch data from an external system
 and write it out to the output port(s).
 
-Apache Apex Malhar Library Templates
-------------------------------------
+### Apache Apex Malhar Library Templates
+
 
 The Util and Common libraries have a collection of operators that can be
 extended to create custom operators. These include operators for key/val
 pairs, matching, filters, unifiers, and others.
 
-Database/Window Synchronization Operator
------------------------------------------------------------------
+### Database/Window Synchronization Operator
+
 
 Database adapters (input or output) need to be able to instrument the
 at-most-once mechanism. This is needed as that is the final output
@@ -1250,8 +1114,8 @@ is provided for precisely such a behavior. These operators rely on last
 completely processed window being written to these outside system for
 ouputAdapters, and retaining the last read event for inputAdapters.
 
-5: Fault Tolerance
-==================
+## 5: Fault Tolerance
+
 
 Fault tolerance in the platform is defined as the ability to recognize
 an outage in any part of the application, provision replacement
@@ -1286,8 +1150,8 @@ data-loss intolerant, an at-least-once mechanism works. For computations
 that write to an outside state and cannot handle re-computations, an
 exactly-once model is needed.
 
-Checkpointing
--------------
+### Checkpointing
+
 
 The STRAM provides checkpointing parameters to StreamingContainer during
 intialization. A checkpoint period is given to StreamingContainer of the
@@ -1358,8 +1222,8 @@ bookkeeping cost very low, and still allowing rapid catch up of
 processing. In the next section we would see how this simple abstraction
 allows applications to recover under different requirements.
 
-Recovery Mechanisms
--------------------
+### Recovery Mechanisms
+
 
 Recovery mechanisms are ways to recover from a container (or an
 operator) outage. In this section we explain a single container outage.
@@ -1397,7 +1261,7 @@ context.attrValue(OperatorContext.PROCESSING\_MODE,      
 ProcessingMode.AT\_LEAST\_ONCE);
 ```
 
-### At-Least-Once
+#### At-Least-Once
 
 At-least-once recovery is the default recovery mechanism, i.e it is used
 if no mechanism is specified. In this method, the lost operator is
@@ -1440,7 +1304,7 @@ at-least-once without the support from sources outside Hadoop. For an
 output adapter, care needs to be taken if external systems cannot handle
 re-writing the same data.
 
-### At-Most-Once
+#### At-Most-Once
 
 Applications that can tolerate data loss get the quickest recovery in
 return. The engine brings the operators to the most recent checkpointed
@@ -1481,7 +1345,7 @@ SW        Streaming window period (default value is 0.5 seconds)
 HC       Time it takes to get a new Hadoop Container, or make do with the current ones, and initialize the operator(s)
 ```
 
-### Exactly-Once
+#### Exactly-Once
 
 This recovery mechanism is for applications that need no data-loss as
 well as no recomputation. Since a window is an atomic compute unit,
@@ -1499,8 +1363,8 @@ an operator in this recovery mode may not be as costly. In the current
 set, up exactly-once can be achieved by setting checkpointing window to
 1 on an operator.
 
-6: Partitioning
-===============
+## 6: Partitioning
+
 
 Partitioning is the fundamental building block for scaling a streaming
 application. Any of the logical units in an application may face a
@@ -1511,8 +1375,8 @@ partitioning schemes to help scale an application. The platform is
 designed to scale at a Hadoop level and has several functionalities
 built in that support scalability.
 
-Static vs Dynamic
------------------
+### Static vs Dynamic
+
 
 In general, partitioning can be done statically (during launch time) or
 dynamically (during run time). There is no other difference between
@@ -1542,8 +1406,8 @@ any, stay idle and are wasted. A choice between (possibly) wasting
 resources, or impacting application performance is a decision for the
 user to make. With commodity hardware this decision is a close one.
 
-Partitioner
------------
+### Partitioner
+
 
 How does the platform know what data an operator partition needs to
 receive in order to implement its logic? It depends on the functionality
@@ -1565,8 +1429,8 @@ case, the operator would provide a mapping that declares:
 While this may look complicated at first glance, it is necessary for
 more complex scenarios.
 
-Multiple Ports
---------------
+### Multiple Ports
+
 
 Operators may have multiple input ports. The partitioning of incoming
 streams on each of the ports depends entirely on the logic or the
@@ -1587,8 +1451,8 @@ custom, there is no way for the platform to check if two ports are
 listening to streams that are partitioned the same way (or in a
 particular manner).
 
-StreamCodec
------------
+### StreamCodec
+
 
 The StreamCodec is responsible for serialization of data tuples into
 bytes (object to byte array) and deserialization (byte array to object)
@@ -1615,8 +1479,8 @@ for all port types of library operators. To customize how objects are
 serialized or the partition key is computed, the operator developer can
 supply a custom stream codec by overriding InputPort.getStreamCodec().
 
-Unifier
--------
+### Unifier
+
 
 When an operator is partitioned into N physical operator instances, the
 downstream operator needs to get streams from all the partitions. All
@@ -1700,8 +1564,8 @@ be partitioned, and no partition should read/write the full stream.
 
 ![](images/operator_development/image01.png)
 
-7: Library
-==========
+## 7: Library
+
 
 The platform includes a set of operator templates, which are available
 under Apache 2.0 license. These are open source operator library under
@@ -1712,8 +1576,8 @@ the development time, they also help reduce maintenance cost. The
 library operators can be benchmarked, tested, and have data that the
 STRAM can leverage for running applications optimally.
 
-Common Operator Functions
--------------------------
+### Common Operator Functions
+
 
 There are several common operator functions that can be utilized. We
 describe a few categories below. You can find many more operators in the
@@ -1722,7 +1586,7 @@ quickly create an application. They are not meant to replace or
 substitute custom operators. Developers should judiciously decide on
 which operators to use.
 
-### Filtering-Selecting-Map
+#### Filtering-Selecting-Map
 
 Filtering is a very common operation. Filters can be employed in the
 following ways:
@@ -1745,7 +1609,7 @@ cases the throughput will decrease. These operators are also most likely
 stateless. The resource requirements are usually not directly impacted
 by the micro-batch size.
 
-### Aggregations
+#### Aggregations
 
 Aggregate computations are those that need the entire window (atomic
 micro-batch) to be computed for the results to be known. A lot of
@@ -1764,7 +1628,7 @@ the micro-batch and this size is usually decided between what the
 application needs (application window) and how much micro-batch
 processing makes sense from an operability point of view
 
-### Joins
+#### Joins
 
 Joins are very common operations done on streams. These computations are
 mostly done over the application window. The concept of the atomic micro
@@ -1773,7 +1637,7 @@ arrive at unpredictable times within the window and thus at the end of
 the window, the computation can guarantee that join operation is done
 over all the tuples in that window.
 
-### Input Adapters
+#### Input Adapters
 
 Input adapters enable the application to get data from outside sources.
 Data read is done by the Input Adapter either by pulling from the source
@@ -1794,7 +1658,7 @@ sources. Examples of outside sources include HDFS, HBase, HTTP, Messages
 busses like ZeroMQ, RabbitMQ, ActiveMQ, Kafka, Rendezvous, Databases
 like MongoDB, MySql, Oracle.
 
-### Output Adapters
+#### Output Adapters
 
 Output adapters write out results of the application to outside sources.
 Data is written to a message bus, a database, to files (HDFS), or sent
@@ -1808,7 +1672,7 @@ Since the platform is atomic on a streaming window, output adapters
 should use end of window as a commit. This way, during a recomputation
 due to operator outage, data integrity can be ensured.
 
-### Event Generators
+#### Event Generators
 
 Event generators are operators that generate events without an input
 port. They are needed for testing other operators, for functionality or
@@ -1816,7 +1680,7 @@ load. These are different from input adapters as event generators do not
 connect to any source. Various event adapters are available in the
 testbench  library.
 
-### Stream Manipulation
+#### Stream Manipulation
 
 Stream manipulation operators are those that do not change the content
 of the tuples, but may either change schema, or just merge or split the
@@ -1827,7 +1691,7 @@ example, you would use a split operator if you want one stream to be
 CONTAINER\_LOCAL, while another to be across containers. Merge is also
 used to merge in streams from upstream partition nodes.
 
-### User Defined
+#### User Defined
 
 Operator developers can easily develop their own operators, allowing for
 quick turnaround in application development. Functionality-wise, any
@@ -1836,16 +1700,16 @@ Standard operators do get tested with each build, are benchmarked, and
 are supported. An operator developer should take on these
 responsibilities for user defined operators.
 
-Sample Code
------------
+#### Sample Code
+
 
 Code samples are included in the samples project. We will continually
 add examples of various operator templates to this package. This package
 is part of the open source Malhar project, and users are encouraged to
 add their examples to enable community reuse and verification. Here is the github link to the project: https://github.com/apache/incubator-apex-malhar/tree/master/samples.
 
-Latency and Throughput
-----------------------
+#### Latency and Throughput
+
 
 The latency of an atomic window compute operation of an operator is
 defined as the time between the first begin window received on any input
@@ -1864,4 +1728,5 @@ time on each output port. Per-port data is found in the “stream view” of
 the application, while the incoming and outgoing totals are found on the
 operator view of the application.
 
-© 2012-2015 DataTorrent Inc.  Patent pending        
+
+© 2012-2018 DataTorrent Inc.  Patent pending        

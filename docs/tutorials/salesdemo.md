@@ -1,5 +1,5 @@
-Building the Sales Dimension application in JAVA
-===
+# Sales Dimension Application
+
 The Sales Dimensions application demonstrates multiple
 features of the DataTorrent RTS platform including the ability to:
 - transform data
@@ -8,8 +8,8 @@ features of the DataTorrent RTS platform including the ability to:
 - support scalable applications for high-volume, multi-dimensional computations
   with very low latency using existing library operators.
 
-Example scenario
----
+### Example Scenario
+
 A large national retailer with physical stores and online sales
 channels is trying to gain better insights to improve decision making
 for their business. By utilizing real-time sales data, they would like
@@ -43,12 +43,16 @@ The application setup for this retailer requires:
     for selected combinations, perform analysis, and take actions on
     computed data in real time.
 
-Step I: Build the Sales Dimension application
----
+
+## Application Development
+
 To save time we will use some source and data files that are available online.
 We will create a new maven project using the maven archetype, add the source
 and data files to the project, modify them suitable and finally build and
 deploy application.
+
+
+### Step 1: Build the Sales Dimension application
 
 To build an application
 
@@ -196,8 +200,8 @@ Assuming the build is successful, you should see the package file named
 shows you how to use the **dtManage** GUI to upload the package and launch the
 application from there.
 
-Step II: Upload the Sales Dimension application package
----
+### Step 2: Upload the Sales Dimension application package
+
 To upload the Sales Dimension application package
 
 1.  Log on to the DataTorrent Console (the default username and password are
@@ -208,8 +212,8 @@ To upload the Sales Dimension application package
 4.  Navigate to the location of `salesApp-1.0-SNAPSHOT.apa` and select it.
 5.  Wait till the package is successfully uploaded.
 
-Step III: Launch the Sales Dimension application
----
+### Step 3: Launch the Sales Dimension application
+
 _Note_: If you are launching the application on the sandbox, make sure that
 an IDE is not running on it at the same time; otherwise, the sandbox might
 hang due to resource exhaustion.
@@ -223,8 +227,8 @@ hang due to resource exhaustion.
 
 If the launch is successful, a notification will appear on the top-right corner with the application ID and a hyperlink to monitor the running application.
 
-Operator base classes and interfaces
----
+### Operator base classes and interfaces
+
 This section briefly discusses operators (and ports) and the relevant interfaces;
 the next section discusses the specific operators used in the application.
 
@@ -369,8 +373,8 @@ console (we have simplified the code in that function somewhat for the
 purposes of this discussion; the actual code also allows the message
 to be logged and also allows some control over the output format).
 
-Operators in the Sales Dimensions application
----
+### Operators in the Sales Dimensions application
+
 
 The application simulates an incoming stream of sales events by
 generating a synthetic stream of such events; these events are then
@@ -591,8 +595,8 @@ necessary). As usual, the key method in the input port is `process`
 which converts the incoming event to a JSON message and sends it
 across the connection.
 
-Connecting the operators
----
+### Connecting the operators
+
 
 Now that we've seen the operator details, we will look at how they are
 connected in the application. An application must implement the
@@ -645,8 +649,8 @@ are often easier.
 _Note_: You can also find these instructions in the UI console. Click _Learn_ in the menu
 bar, and then click the first link in the left panel: _Transform, Analyze, Alert_.
 
-Step 1: Open the Application Builder interface
----
+### Step 1: Open the Application Builder interface
+
 
 1.  On the DataTorrent RTS console, navigate to _App Packages_.
 2.  Make sure that the DataTorrent Dimensions Demos package is imported (if
@@ -656,8 +660,8 @@ Step 1: Open the Application Builder interface
     ![Canvas](images/sales_dimensions/image23.png "Canvas")
 
 
-Step 2: Add and connect operators
----
+### Step 2: Add and connect operators
+
 
 1.  Under _Operator Library_ in the left panel, select the following
     operators and drag them to the Application Canvas. Rename them to
@@ -687,8 +691,8 @@ Step 2: Add and connect operators
     in the diagram below:
     ![streams](images/sales_dimensions/image01.png "streams")
 
-Step 3: Customize application and operator settings
----
+### Step 3: Customize application and operator settings
+
 
 Customize the operators and streams as described in each item below; to do that,
 click the individual operator or stream and use the _Operator Inspector_ panel
@@ -740,8 +744,8 @@ get deployed to, and can lead to significant performance improvements
 for an application. Once set, the connection will be represented by a
 dashed line to indicate the new locality setting.
 
-Step 4: Launch the application
----
+### Step 4: Launch the application
+
 Once the application is constructed, and validation checks are
 satisfied, a launch button will become available at the top left of the
 _Application Canvas_ window. Clicking this button to open the application
@@ -781,8 +785,11 @@ _Note_: This is one of the many performance improvement techniques
 available with the DataTorrent platform; in this case eliminating data
 serialization and networking stack overhead between groups of adjacent
 operators.
-Visualizing data from the Sales Dimension application using dtDashboard
-===
+
+
+## Visualizing Application Data
+
+
 DataTorrent includes powerful data visualization tools, which
 allow you to visualize streaming data from multiple sources in real
 time. For additional details see the tutorial entitled _dtDashboard
@@ -792,8 +799,8 @@ After the application is started, a visualize button, available in
 the Application Overview section, can be used to quickly generate a new
 dashboard for the Sales Dimensions application.
 
-Generate dashboards
----
+### Generate dashboards
+
 ![dashboard](images/sales_dimensions/image22.png "dashboard")
 
 If you created dashboards already, the dashboards appear in the
@@ -806,8 +813,8 @@ example:
 
 ![widgets](images/sales_dimensions/image25.png "widgets")
 
-Adding widgets
----
+### Adding widgets
+
 To derive more value out of application dashboards, you can add
 widgets to the dashboards. Widgets are charts in addition to the default
 charts that you can see on the dashboard. DataTorrent RTS supports five
@@ -826,8 +833,8 @@ To add a widget
 
 The widget is added to your dashboard.
 
-Edit a widget
----
+### Edit a widget
+
 
 After you add a widget to your dashboard, you can update it at any
 time. Each widget has a title that appears in gray. If you hover over
@@ -849,16 +856,16 @@ To edit a widget
     ![WidgetOptions.png](images/sales_dimensions/image26.png)
 
 3.  To remove a widget, in the top-right corner, click the _delete_ button.
-Monitoring the Sales Dimension application using dtManage
-===
+
+## Monitoring the Application
 
 Recall that after the application is built and validated, it can be
 launched from the _App Packages_ page as described in an earlier chapter. 
 This section describes how you can monitor the running Sales Dimension application
 using **dtManage**.
 
-The Monitor menu option
----
+### The Monitor menu option
+
 
 You can monitor the Sales Dimension application by clicking
 Monitor on the menu bar. After you click _Monitor_, you can choose between
@@ -954,8 +961,8 @@ interconnections:
 
 The metric-view tab displays only the _Metrics Chart_ widget.
 
-Monitor Sales Dimension using the Monitor menu
----
+### Monitor Sales Dimension using the Monitor menu
+
 To monitor the application
 
 1.  Click _Monitor_ on the menu bar to open the logical view of the DAG.
@@ -974,8 +981,8 @@ To monitor the application
     improvement technique, which eliminates data serialization and
     networking stack overhead between a group of adjacent operators.
 
-Create additional tabs
----
+### Create additional tabs
+
 
 You can create custom tabs in addition to logical, physical,
 physical-dag-view, and metric-view. Under each tab, you can add

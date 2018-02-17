@@ -27,7 +27,7 @@ Explore Apache Apex application development with one of the tutorial application
 
 * [Sales Dimensions](tutorials/salesdemo.md) is an introduction to assembling and visualizing sales analytics application.
 
-    [![Sales Dimensions Preview](tutorials/images/sales_dimensions/preview.png)](tutorials/salesdimensions.md)
+    [![Sales Dimensions Preview](tutorials/images/sales_dimensions/preview.png)](tutorials/salesdemo.md)
 
 
 
