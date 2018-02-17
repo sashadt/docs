@@ -26,6 +26,6 @@ OAS can be specified as a service for an application and managed from the Servic
 
 Refer to [Packaging Services](services) for more details.
 
-# Managing OAS for an Application
+# Managing OAS Service
 
 Refer to [Managing Services](services) for more details.
