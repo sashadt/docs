@@ -794,7 +794,6 @@ Example:
         "expireTime": "{expireTimeMills}",
         "memoryMBAllowed": "{memoryMBAllowed}",
         "memoryMBUsed": "{memoryMBUsed}",
-        "issuedTo": "{issuedTo}",
         "issuedBy": "{issuedBy}",
         "issuerWebsite": "{issuerWebsite}",
         "supportedBy": "{supportedBy}",
@@ -802,6 +801,7 @@ Example:
         "category": "{DT Premium/DT PLUS}",
         "exceedGracePeriod": "{exceedGracePeriod}",
         "valid": {true/false},
+        "expirationTimeNotificationLevel": "{INFO/WARN/ERROR}",
         "id": "{licenseId}",
         "licenseType": "{licenseType}"
     },
