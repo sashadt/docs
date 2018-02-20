@@ -369,3 +369,17 @@ that dashboard will serve as the starting point of your presentation. To start t
 just enter Presentation Mode from the home dashboard.
 
 ![presentationBuilder.gif](images/dtdashboard/image21.gif)
+
+## IFrame Widget
+
+The IFrame widget allows user to embed content from another source. The OAS dashboards are embedded inside DataTorrent RTS dashboards using this widget.
+
+ ![IFrame widget](images/dtdashboard/iframe-widget.png)
+
+IFrame widget supports the following functionalities:
+
+- Custom JavaScript execution after iframe has been loaded, provided the iframe src is from the same domain.
+- Iframe content can also be opened in a full-view mode in a new tab.
+- IFrame content from a different domain can also be embedded as long the src domain is CORS enabled.
+
+![IFrame widget settings](images/dtdashboard/iframe-settings.png)
