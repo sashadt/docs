@@ -1,14 +1,10 @@
 # Online Analytics Service (OAS)
 
-Online Analytics Service (OAS) is an Apex application which is delivered as a service in some of the DT RTS applications, for example, Omni Channel Fraud Prevention Application.  It is a Druid based system that can query in real-time on data streams from various source applications.
+Online Analytics Service (OAS) is an Apex application that is delivered as a service in some of the DataTorrent RTS applications. An example of one such application is [Omni Channel Fraud Prevention Application](omni_channel_fraud_app.md).  OAS is a [Druid](http://druid.io/) based application that supports querying in real-time on data streams that are populated by a source application such as [Omni Channel Fraud Prevention Application](omni_channel_fraud_app.md).
 
-OAS is integrated with OAS Dashboards service which is a DataTorrent RTS Service that has been built using Apache Superset. See [OAS Dashboards Service](oas_dashboards)
+OAS is integrated with the [OAS Dashboards Service](oas_dashboards.md) which is a DataTorrent RTS Service that has been built using [Apache Superset](https://superset.incubator.apache.org/). The OAS provides the powerful query engine in the backend for the [OAS Dashboards Service](oas_dashboards.md) which enables impressive visualization on the front-end for any application on the DataTorrent RTS platform. Both OAS and [OAS Dashboards](oas_dashboard.md) are components of a complete end-to-end Data Analytics solution for actionable insights into real-time data flowing through a DataTorrent RTS application pipeline.
 
-OAS Dashboards performs visualization on the frontend, whereas Online Analytics Service (OAS) provides a backend for OAS Dashboards to query the expected visualization.
-
-Both OAS and OAS Dashboards are interdependent services that provides a complete end-to-end Data Analytics solution for actionable insights into the data.
-
-OAS is available only with _DT Premium_ license.
+OAS is available only with the [_DT Premium_ license](Licensing.md).
 
 # Workflow of OAS
 
@@ -16,11 +12,11 @@ The following image depicts the workflow of OAS.
 
 ![](images/Workflow.png)
 
-- OAS is enabled to stream-in data from Apache Kafka. Any datasource can send the applicable data for analysis into Kafka.
-- The Online Analytics Service takes this real-time feed of data from Apache Kafka, computes, and makes it ready for querying.
-- OAS Dashboards service can query on OAS in real time through DT gateway.
+- OAS is enabled to stream-in data from Apache Kafka. Any datasource can send the applicable data for analysis into a Kafka topic.
+- The Online Analytics Service takes this real-time data-feed from Apache Kafka, computes and aggregates to generate derived data, and makes it ready for querying.
+- OAS Dashboards service performs queries on OAS in real time using REST APIs via the DT gateway.
 
-OAS can be specified as a service for an application and managed from the Services page. For more details, refer to [Services](services.md)
+OAS can be specified as a required service for an application and managed from the [Services](services.md) page.
 
 # Packaging OAS
 
