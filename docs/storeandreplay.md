@@ -23,6 +23,7 @@ To store incoming data, do the following:
     | dt.operator.TransactionReceiver.prop.enableReplay | false |
 
     **Note** : In the above example, _dt.operator.TransactionReceiver_ is the name of the Kafka input operator. Change this name to the Kafka input operator that your application uses.
+    
 3. Click **Save** and then click **Launch**.
 
 # Creating Rules
@@ -54,9 +55,10 @@ To enable replay, do the following:
     | dt.operator.TransactionReceiver.prop.replayStartTime | yyyy-MM-ddTHH:mm:ssFor example: 2017-11-20T08:11:00 |
     | dt.operator.TransactionReceiver.prop.replayEndTime | yyyy-MM-ddTHH:mm:ss2017-11-20T18:11:00 |
 
-    **Note** : In the above example,_ **dt.operator.TransactionReceiver** _is the name of the Kafka input operator. Change this name to the Kafka input operator that your application uses.
+    **Note** : In the above example, **dt.operator.TransactionReceiver** is the name of the Kafka input operator. Change this name to the Kafka input operator that your application uses.
+    
 3. Click **Save** and then click **Launch**. You can view the outcome from the **Visualize** tab by importing a dashboard for the application instance.
 
 # Visualizing Replay of Data
 
-To visualize the replay of data after applying various rules, you can either configure the dashboards for the same application in the application configuration or import dashboards for that application where you have enabled the replay. [
+To visualize the replay of data after applying various rules, you can either configure the dashboards for the same application in the application configuration or import dashboards for that application where you have enabled the replay. Refer [dtDashboard](dtdashboard.md)
