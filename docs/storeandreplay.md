@@ -31,8 +31,8 @@ To replay data, you must create an application configuration, add the applicable
 - **Enable replay**: The store function is set to false and the replay is set to true.
 - **SrcArchiveAppName**: Kafka time-offset mapping is read from DB related to SrcArchiveAppName. SrcArchiveAppName is the name of the separate instance of the application that stores the Kafka topic offset in HDFS.
 
-**Note** : Instance name and application name are different usually a different configured name of the same application.
-Path is under user path **kafka-offset/{src-app-name}/{topic}**.
+  **Note**: Instance name and application name are different usually a different configured name of the same application.
+
 - **Start time/endtime**
 Specify the start time and end time to begin and stop the replay.
 
@@ -45,9 +45,9 @@ To enable replay, do the following:
     | --- | --- |
     | dt.operator.TransactionReceiver.prop.enableArchive | false |
     | dt.operator.TransactionReceiver.prop.enableReplay | true |
-    | dt.operator.TransactionReceiver.prop.srcArchiveAppName | SrcArchiveAppName |
-    | dt.operator.TransactionReceiver.prop.replayStartTime | yyyy-MM-ddTHH:mm:ss . (For example: 2017-11-20T08:11:00) |
-    | dt.operator.TransactionReceiver.prop.replayEndTime | yyyy-MM-ddTHH:mm:ss . (For example: 2017-11-20T18:11:00) |
+    | dt.operator.TransactionReceiver.prop.srcArchiveAppName | DetectionApp."DetectionApp" is the example name of another app with enableArchive turned on, which has been launched or is running.  |
+    | dt.operator.TransactionReceiver.prop.replayStartTime | yyyy-MM-ddTHH:mm:ss.  (For example: 2017-11-20T08:11:00) |
+    | dt.operator.TransactionReceiver.prop.replayEndTime | yyyy-MM-ddTHH:mm:ss. (For example: 2017-11-20T18:11:00) |
 
     **Note** : In the above example, **dt.operator.TransactionReceiver** is the name of the Kafka input operator. Change this name to the Kafka input operator that your application uses.
     
