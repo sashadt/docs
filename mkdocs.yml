@@ -80,6 +80,7 @@ pages:
 - Services:
     - CEP Workbench: cep_workbench.md
     - OAS Dashboards: oas_dashboards.md
+    - OAS Online Analytics Service: oas.md
 - Platform:
     - RTS: rts.md
     - Application Configurations: application_configurations.md
