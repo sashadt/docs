@@ -76,6 +76,7 @@ pages:
     - S3 to HDFS Sync App: app-templates/s3-to-hdfs-sync.md
 - Applications:
     - Omni Channel Fraud Prevention Application: omni_channel_fraud_app.md
+    - Account Takeover Prevention Application: Accounttakeover.md
     - Quick Start Guide - Omni-Channel Fraud Prevention Application: quickstartlaunchfpa.md
     - Quick Start Guide - Account Takeover Prevention Application: quickstartlaunchato.md
 - Services:
