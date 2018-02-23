@@ -60,9 +60,9 @@ var argv = yargs
   .alias('h', 'help')
   .argv;
 
-var tempDir = './site';
-var customDir = tempDir + '/.custom';
-var versionDir = tempDir + '/v/' + argv.docsVersion;
+var buildDir = './site';
+var customDir = buildDir + '/.custom';
+var versionDir = buildDir + '/v/' + argv.docsVersion;
 var latestVersion;
 
 function log() {
@@ -75,8 +75,8 @@ function log() {
 /*
  * Create temp directory where builds are copied to
  */
-function initTempDirectory() {
-  var statement = 'mkdir -p ' + tempDir;
+function initBuildDir() {
+  var statement = 'mkdir -p ' + buildDir;
   log('initializing temp directory, statement:', statement);
   execSync(statement);
 }
@@ -85,8 +85,8 @@ function initTempDirectory() {
  * Copy custom files to temp directory so we can use to inject into tag/branch/hash
  * where files in this custom directory may not exist
  */
-function copyCustomDirectoryToTempDir() {
-  var statement = 'mkdir -p ' + customDir + ' ; cp -r docs/custom/* ' + customDir;
+function copyCustomDirectoryToBuildDir() {
+  var statement = 'rm -rf ' + customDir + ' && cp -rp docs/custom ' + customDir;
   log('copying custom directory, statement:', statement);
   execSync(statement);
 }
@@ -103,10 +103,10 @@ function checkoutGhPageBranch() {
 /*
  * Copy existing contents from gh-pages branch to temp directory
  */
-function copyGhPagesContentsToTempDir() {
+function copyGhPagesContentsToBuildDir() {
   // we want to create new build into existing gh-page contents,
-  // let's clean the tempDir before we copy files to it.
-  var statement = 'rm -rf ' + tempDir + '/*';
+  // let's clean the buildDir before we copy files to it.
+  var statement = 'rm -rf ' + buildDir + '/*';
   log('Removing files from temp directory, statement:', statement);
   execSync(statement);
 
@@ -114,14 +114,14 @@ function copyGhPagesContentsToTempDir() {
   checkoutGhPageBranch();
 
   // copy files to temp directory
-  statement = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + tempDir;
+  statement = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + buildDir;
   log('copying contents to temp dir, statement:', statement);
   execSync(statement);
 
   checkoutPrevBranch();
 
   // create "v" directory if not exist
-  statement = 'mkdir -p ' + tempDir + '/v';
+  statement = 'mkdir -p ' + buildDir + '/v';
   log('create "v" directory, statement:', statement);
   execSync(statement);
 }
@@ -199,7 +199,7 @@ function runMkdocsBuildCommand() {
 function updateVersionsJson(mode, version) {
   version = version || argv.docsVersion;
 
-  var file = tempDir + '/versions.json';
+  var file = buildDir + '/versions.json';
   log('Updating version file:', file);
 
 
@@ -300,7 +300,7 @@ function updateVersionsJson(mode, version) {
  */
 function copyLatestVersionToRoot() {
   if (latestVersion) {
-    var statement = 'cp -r ' + tempDir + '/v/' + latestVersion + '/* ' + tempDir;
+    var statement = 'cp -r ' + buildDir + '/v/' + latestVersion + '/* ' + buildDir;
     log('copying latest version to root, statement:', statement);
     execSync(statement);
   }
@@ -311,7 +311,7 @@ function copyLatestVersionToRoot() {
  * This way, the root custom directory always has the latest custom codes
  */
 function copyCustomDirectoryToRoot() {
-  var statement = 'cp ' + tempDir + '/.custom/* ' + tempDir + '/custom';
+  var statement = 'cp ' + buildDir + '/.custom/* ' + buildDir + '/custom';
   log('copying latest custom codes to root custom directory, statement:', statement);
   execSync(statement);  
 }
@@ -343,7 +343,7 @@ function commitGhPageBranch() {
  */
 function deployContentsToGhPages() {
   // write script file to clean current gh-pages directory
-  var file = tempDir + '/.cleaner';
+  var file = buildDir + '/.cleaner';
   var content = 'shopt -s extglob\nrm -rf ./!(node_modules|site)';
   log('creating cleaner, file:', file);
   log('content:', content);
@@ -358,7 +358,7 @@ function deployContentsToGhPages() {
   execSync(statement);
 
   // copy files from temp directory to branch
-  statement = 'cp -R ' + tempDir + '/* .';
+  statement = 'cp -R ' + buildDir + '/* .';
   log('copying files from temp directory, statement:', statement);
   execSync(statement);
 
@@ -396,7 +396,7 @@ function checkoutPrevBranch() {
  * Create symbolic link from new version to orig version
  */
 function createSymbolicLink() {
-  var statement = 'cd ' + tempDir + '/v ; unlink ' + argv.docsVersion + ' ; ln -sf ' + argv.targetVersion + ' ' + argv.docsVersion + ' ; cd -';
+  var statement = 'cd ' + buildDir + '/v ; unlink ' + argv.docsVersion + ' ; ln -sf ' + argv.targetVersion + ' ' + argv.docsVersion + ' ; cd -';
   log('creating symbolic link, statement:', statement);
   // execSync(statement);
 }
@@ -407,7 +407,7 @@ function createSymbolicLink() {
  * and there are linked versions but --delete-links aren't set to true.
  */
 function getLinkedVersion() {
-  var file = tempDir + '/versions.json';
+  var file = buildDir + '/versions.json';
   log('reading version file:', file);
   var content = fs.readFileSync(file, 'utf-8');
   log('content:', content);
@@ -453,7 +453,7 @@ function getLinkedVersion() {
  * Remove version directory from "v" directory inside the temp directory
  */
 function removeVersionDirectory(version) {
-  var statement = 'rm -rf ' + tempDir + '/v/' + version;
+  var statement = 'rm -rf ' + buildDir + '/v/' + version;
   log('Removing existing version directory, statement:', statement);
   execSync(statement);
 }
@@ -462,11 +462,11 @@ function removeVersionDirectory(version) {
  * Build a version
  */
 function build() {
-  initTempDirectory();
-  copyCustomDirectoryToTempDir();
+  initBuildDir();
+  copyCustomDirectoryToBuildDir();
   
   if (argv.initFromGhPages) {
-    copyGhPagesContentsToTempDir();
+    copyGhPagesContentsToBuildDir();
   }
 
   checkoutGitTag()
@@ -489,11 +489,11 @@ function build() {
 
  */
 function deleteVersion() {
-  initTempDirectory();
-  copyCustomDirectoryToTempDir();
+  initBuildDir();
+  copyCustomDirectoryToBuildDir();
 
   if (argv.initFromGhPages) {
-    copyGhPagesContentsToTempDir();
+    copyGhPagesContentsToBuildDir();
   }
 
   var linkedVersions = getLinkedVersion();
@@ -517,11 +517,11 @@ function deleteVersion() {
  * creates a symbolic link from one version to another
  */
 function link() {
-  initTempDirectory();
-  copyCustomDirectoryToTempDir();
+  initBuildDir();
+  copyCustomDirectoryToBuildDir();
 
   if (argv.initFromGhPages) {
-    copyGhPagesContentsToTempDir();
+    copyGhPagesContentsToBuildDir();
   }
   createSymbolicLink();
   updateVersionsJson('link');
@@ -536,7 +536,7 @@ function link() {
 log('command:', argv._[0]);
 log('gitTag:', argv.gitTag);
 log('docs-version:', argv.docsVersion);
-log('tempDir:', tempDir);
+log('buildDir:', buildDir);
 log('customDir:', customDir);
 log('versionDir:', versionDir);
 
