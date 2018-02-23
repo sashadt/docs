@@ -10,7 +10,7 @@ var yargs = require('yargs');
 
 var argv = yargs
   .usage('Usage: $0 <command> [options]')
-  .example('$0 build --git-tag=3.10.0 --docs-version=3.10.0 --released=true', 'Builds the mkdocs project using the tag/hash and docs-version.')
+  .example('$0 build --git-tag=3.10.0 --docs-version=3.10.0', 'Builds the mkdocs project using the tag/hash and docs-version.')
   .example('$0 build --git-tag=7c6200265787f548eb2ba4db392833791b518310 --docs-version=3.8.1', 'Builds the mkdocs project using the tag/hash and docs-version.')
   .example('$0 delete --docs-version', 'Removes specified version.  Throw error if specified version is linked by other versions.')
   .example('$0 delete --docs-version --delete-links', 'Removes specified version.  Also removes all verions linked to specified version as well.')
@@ -19,7 +19,8 @@ var argv = yargs
   .command('build', 'Builds a documentation version using the specified git-tag and makes contents available for testing in site folder.')
   .command('delete', 'Removes a version.  Note: Delete does not handle linked versions correctly.')
   .command('link', 'Links one version to another by creating a symbolic link in the "v" directory.  Also adds version (docs-version) to the versions.json file.')
-  .option('tag', {
+  .command('deploy', 'Deploy contents of build directory to the deploy branch and push the changes to Github.')
+  .option('git-tag', {
     describe: 'The tag to checkout.  docs-version is not necessary if tag is provided.'
   })
   .option('docs-version', {
@@ -39,25 +40,27 @@ var argv = yargs
     type: 'boolean',
     default: false
   })
-  .option('init-from-gh-pages', {
-    describe: 'Set to true if you want to build specified version starting from gh-pages branch contents.  If false, new version is created into current site folder.',
+  .option('build-from-deploy-branch', {
+    describe: 'Set to true if you want to build specified version starting from deploy branch contents.  If false, new version is created into current site folder.',
     type: 'boolean',
     default: false
   })
-  .option('deploy', {
-    describe: 'Commit changes to gh-pages branch and push the gh-pages branch to Github.',
-    type: 'boolean',
-    default: false
+  .option('deploy-branch', {
+    describe: 'Git branch to use for content deployments.  Github has a set standard to use gh-pages branch for static conent hosting.',
+    type: 'string',
+    default: 'gh-pages'
   })
-  .option('git-remote', {
-    describe: 'Remote to use when pushing/pulling branches to/from Github.  Default value is "origin".',
+  .option('deploy-remote', {
+    describe: 'Git remote reference to when pushing/pulling branches to/from Github.',
     type: 'string',
     default: 'origin'
   })
+  .demandOption(['docs-version'])
   .count('v')
   .alias('v', 'verbose')
   .help('h')
   .alias('h', 'help')
+  .wrap(yargs.terminalWidth())
   .argv;
 
 var buildDir = './site';
@@ -73,76 +76,74 @@ function log() {
 }
 
 /*
- * Create temp directory where builds are copied to
+ * Create build directory where builds are copied to
  */
 function initBuildDir() {
-  var statement = 'mkdir -p ' + buildDir;
-  log('initializing temp directory, statement:', statement);
-  execSync(statement);
+  var cmd = 'mkdir -p ' + buildDir;
+  log('initializing build directory:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Copy custom files to temp directory so we can use to inject into tag/branch/hash
+ * Copy custom files to build directory so we can use to inject into tag/branch/hash
  * where files in this custom directory may not exist
  */
-function copyCustomDirectoryToBuildDir() {
-  var statement = 'rm -rf ' + customDir + ' && cp -rp docs/custom ' + customDir;
-  log('copying custom directory, statement:', statement);
-  execSync(statement);
+function copyCustomDirToBuildDir() {
+  var cmd = 'rm -rf ' + customDir + ' && cp -rp docs/custom ' + customDir;
+  log('copying custom directory:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Run git checkout gh-pages branch
+ * Run git checkout of branch used for deploys
  */
-function checkoutGhPageBranch() {
-  var statement = 'git checkout gh-pages';
-  log('checkout gh-pages, statement:', statement);
-  execSync(statement);
+function checkoutDeployBranch() {
+  var cmd = 'git checkout' + yargs.deployBranch;
+  log('checking out deploy branch:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Copy existing contents from gh-pages branch to temp directory
+ * Copy existing contents from deploy branch to build directory
  */
-function copyGhPagesContentsToBuildDir() {
+function copyDeployBranchToBuildDir() {
   // we want to create new build into existing gh-page contents,
   // let's clean the buildDir before we copy files to it.
-  var statement = 'rm -rf ' + buildDir + '/*';
-  log('Removing files from temp directory, statement:', statement);
-  execSync(statement);
+  var cmd = 'rm -rf ' + buildDir + '/ && mkdir -p ' + buildDir;
+  log('removing all contents from build directory:', cmd);
+  execSync(cmd);
 
-  // checkout gh-pages
-  checkoutGhPageBranch();
+  checkoutDeployBranch();
 
-  // copy files to temp directory
-  statement = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + buildDir;
-  log('copying contents to temp dir, statement:', statement);
-  execSync(statement);
+  // copy files to build directory
+  cmd = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + buildDir;
+  log('copying contents to build dir:', cmd);
+  execSync(cmd);
 
   checkoutPrevBranch();
 
-  // create "v" directory if not exist
-  statement = 'mkdir -p ' + buildDir + '/v';
-  log('create "v" directory, statement:', statement);
-  execSync(statement);
+  // create versions directory "v"
+  cmd = 'mkdir -p ' + buildDir + '/v';
+  log('create versions directory:', cmd);
+  execSync(cmd);
 }
 
 /*
  * Checkout hash or tag to be built
  */
 function checkoutGitTag() {
-  var statement = 'git checkout ' + argv.gitTag;
-  log('run git checkout, statement:', statement);
-  execSync(statement);
+  var cmd = 'git checkout ' + argv.gitTag;
+  log('run git checkout:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Copy custom directory from temp directory to the branch we 
- * are building
+ * Copy custom directory from build directory to the branch we are building
  */
 function injectCustomDirectory() {
-  var statement = 'mkdir -p docs/custom ; cp -r ' + customDir + '/* docs/custom';
-  log('injecting custom directory, statement:', statement);
-  execSync(statement);
+  var cmd = 'rm -rf docs/custom && cp -rp ' + customDir + ' docs/custom';
+  log('injecting custom directory:', cmd);
+  execSync(cmd);
 }
 
 /*
@@ -184,13 +185,13 @@ function injectCustomLoaderJs() {
  * Run the mkdocs build command, make sure we build the new contents into the version directory
  */
 function runMkdocsBuildCommand() {
-  var statement = 'mkdocs build -c -d ' + versionDir;
-  log('Executing mkdocs build, statement:', statement);
-  execSync(statement);
+  var cmd = 'mkdocs build -c -d ' + versionDir;
+  log('Executing mkdocs build:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Update versions.json in temp directory
+ * Update versions.json in build directory
  * mode can be 'add' or 'delete'
  * If mode is 'add', then we are adding a version to the file.
  * If mode is 'delete', then we are remove a version from the file.
@@ -296,30 +297,30 @@ function updateVersionsJson(mode, version) {
 }
 
 /*
- * Copy latest version content to the root directory of temp directory
+ * Copy latest version content to the root directory of build directory
  */
 function copyLatestVersionToRoot() {
   if (latestVersion) {
-    var statement = 'cp -r ' + buildDir + '/v/' + latestVersion + '/* ' + buildDir;
-    log('copying latest version to root, statement:', statement);
-    execSync(statement);
+    var cmd = 'cp -r ' + buildDir + '/v/' + latestVersion + '/* ' + buildDir;
+    log('copying latest version to root:', cmd);
+    execSync(cmd);
   }
 }
 
 /*
- * Copy custom directory to custom directory of temp directory
+ * Copy custom directory to custom directory of build directory
  * This way, the root custom directory always has the latest custom codes
  */
 function copyCustomDirectoryToRoot() {
-  var statement = 'cp ' + buildDir + '/.custom/* ' + buildDir + '/custom';
-  log('copying latest custom codes to root custom directory, statement:', statement);
-  execSync(statement);  
+  var cmd = 'cp ' + buildDir + '/.custom/* ' + buildDir + '/custom';
+  log('copying latest custom codes to root custom directory:', cmd);
+  execSync(cmd);  
 }
 
 /*
- * Add changes and commit to gh-pages branch
+ * Add changes and commit to deploy branch
  */
-function commitGhPageBranch() {
+function commitDeployBranch() {
   // need to create an .gitignore file to site some items
   var file = '.gitignore';
   var content = 'site/\nnode_modules/\n.idea\n*.iml\n.DS_Store';
@@ -328,21 +329,21 @@ function commitGhPageBranch() {
   fs.writeFileSync(file, content);
 
   // add files to branch
-  var statement = 'git add .';
-  log('run git add, statement:', statement);
-  execSync(statement);
+  var cmd = 'git add .';
+  log('run git add:', cmd);
+  execSync(cmd);
 
   // commit with message
-  statement = 'git commit -m "saving build v' + argv.docsVersion + '"';
-  log('run git commit, statement:', statement);
-  execSync(statement);
+  cmd = 'git commit -m "saving build v' + argv.docsVersion + '"';
+  log('run git commit:', cmd);
+  execSync(cmd);
 }
 
 /*
- * Copy contents from temp directory to gh-pages branch
+ * Copy contents from build directory to deploy branch
  */
-function deployContentsToGhPages() {
-  // write script file to clean current gh-pages directory
+function deployBuildDir() {
+  // write script file to clean the root of the deploy branch
   var file = buildDir + '/.cleaner';
   var content = 'shopt -s extglob\nrm -rf ./!(node_modules|site)';
   log('creating cleaner, file:', file);
@@ -350,25 +351,25 @@ function deployContentsToGhPages() {
   fs.writeFileSync(file, content);
 
   // checkout branch
-  checkoutGhPageBranch();
+  checkoutDeployBranch();
 
   // remove all files
-  var statement = '/bin/bash ' + file;
-  log('executing cleaner script, statement:', statement);
-  execSync(statement);
+  var cmd = '/bin/bash ' + file;
+  log('executing cleaner script:', cmd);
+  execSync(cmd);
 
-  // copy files from temp directory to branch
-  statement = 'cp -R ' + buildDir + '/* .';
-  log('copying files from temp directory, statement:', statement);
-  execSync(statement);
+  // copy files from build directory to branch
+  cmd = 'cp -R ' + buildDir + '/* .';
+  log('copying files from build directory:', cmd);
+  execSync(cmd);
 
   // commit to branch
-  commitGhPageBranch();
+  commitDeployBranch();
 
   // push to Github
-  statement = 'git push ' + argv.gitRemote + ' gh-pages';
-  log('pushing gh-pages branch to Github, statement:', statement);
-  execSync(statement);
+  cmd = 'git push ' + argv.deployRemote + ' ' + yargs.deployBranch;
+  log('pushing deploy branch to Github:', cmd);
+  execSync(cmd);
 
 
   checkoutPrevBranch();
@@ -378,27 +379,27 @@ function deployContentsToGhPages() {
  * Clean changed and untracked files in current branch
  */
 function cleanGitBranch() {
-  var statement = 'git checkout . ; git clean -f -d -e node_modules -e site';
-  log('clean branch, statement:', statement);
-  execSync(statement);
+  var cmd = 'git checkout . ; git clean -f -d -e node_modules -e site';
+  log('clean branch:', cmd);
+  execSync(cmd);
 }
 
 /*
  * Checkout previous branch
  */
 function checkoutPrevBranch() {
-  var statement = 'git checkout -';
-  log('checkout previous branch, statement:', statement);
-  execSync(statement);
+  var cmd = 'git checkout -';
+  log('checkout previous branch:', cmd);
+  execSync(cmd);
 }
 
 /*
  * Create symbolic link from new version to orig version
  */
 function createSymbolicLink() {
-  var statement = 'cd ' + buildDir + '/v ; unlink ' + argv.docsVersion + ' ; ln -sf ' + argv.targetVersion + ' ' + argv.docsVersion + ' ; cd -';
-  log('creating symbolic link, statement:', statement);
-  // execSync(statement);
+  var cmd = 'cd ' + buildDir + '/v ; unlink ' + argv.docsVersion + ' ; ln -sf ' + argv.targetVersion + ' ' + argv.docsVersion + ' ; cd -';
+  log('creating symbolic link:', cmd);
+  // execSync(cmd);
 }
 
 /*
@@ -450,12 +451,12 @@ function getLinkedVersion() {
 }
 
 /*
- * Remove version directory from "v" directory inside the temp directory
+ * Remove version directory from "v" directory inside the build directory
  */
 function removeVersionDirectory(version) {
-  var statement = 'rm -rf ' + buildDir + '/v/' + version;
-  log('Removing existing version directory, statement:', statement);
-  execSync(statement);
+  var cmd = 'rm -rf ' + buildDir + '/v/' + version;
+  log('Removing existing version directory:', cmd);
+  execSync(cmd);
 }
 
 /*
@@ -463,10 +464,10 @@ function removeVersionDirectory(version) {
  */
 function build() {
   initBuildDir();
-  copyCustomDirectoryToBuildDir();
+  copyCustomDirToBuildDir();
   
-  if (argv.initFromGhPages) {
-    copyGhPagesContentsToBuildDir();
+  if (argv.buildFromDeployBranch) {
+    copyDeployBranchToBuildDir();
   }
 
   checkoutGitTag()
@@ -479,9 +480,6 @@ function build() {
   copyLatestVersionToRoot();
   copyCustomDirectoryToRoot();
 
-  if (argv.deploy) {
-    deployContentsToGhPages();
-  }
 }
 
 /*
@@ -490,10 +488,10 @@ function build() {
  */
 function deleteVersion() {
   initBuildDir();
-  copyCustomDirectoryToBuildDir();
+  copyCustomDirToBuildDir();
 
-  if (argv.initFromGhPages) {
-    copyGhPagesContentsToBuildDir();
+  if (argv.buildFromDeployBranch) {
+    copyDeployBranchToBuildDir();
   }
 
   var linkedVersions = getLinkedVersion();
@@ -508,9 +506,6 @@ function deleteVersion() {
   copyLatestVersionToRoot();
   copyCustomDirectoryToRoot();
 
-  if (argv.deploy) {
-    deployContentsToGhPages();
-  }
 }
 
 /*
@@ -518,19 +513,16 @@ function deleteVersion() {
  */
 function link() {
   initBuildDir();
-  copyCustomDirectoryToBuildDir();
+  copyCustomDirToBuildDir();
 
-  if (argv.initFromGhPages) {
-    copyGhPagesContentsToBuildDir();
+  if (argv.buildFromDeployBranch) {
+    copyDeployBranchToBuildDir();
   }
   createSymbolicLink();
   updateVersionsJson('link');
   copyLatestVersionToRoot();
   copyCustomDirectoryToRoot();
 
-  if (argv.deploy) {
-    deployContentsToGhPages();
-  }
 }
 
 log('command:', argv._[0]);
@@ -550,4 +542,8 @@ switch(argv._[0]) {
   case 'link':
     link();
     break;
+  case 'deploy':
+    deployBuildDir();
+    break;
+
 }
