@@ -109,7 +109,7 @@ function checkoutDeployBranch() {
 function copyDeployBranchToBuildDir() {
   // we want to create new build into existing gh-page contents,
   // let's clean the buildDir before we copy files to it.
-  var cmd = 'rm -rf ' + buildDir + '/ && mkdir -p ' + buildDir;
+  var cmd = 'rm -rf ' + buildDir + ' && mkdir -p ' + buildDir;
   log('removing all contents from build directory:', cmd);
   execSync(cmd);
 
@@ -397,9 +397,9 @@ function checkoutPrevBranch() {
  * Create symbolic link from new version to orig version
  */
 function createSymbolicLink() {
-  var cmd = 'cd ' + buildDir + '/v ; unlink ' + argv.docsVersion + ' ; ln -sf ' + argv.targetVersion + ' ' + argv.docsVersion + ' ; cd -';
+  var cmd = 'rm -rf ' + buildDir + '/v/' + argv.docsVersion + ' && ln -nsf ' + argv.targetVersion + ' ' + buildDir + '/v/' + argv.docsVersion;
   log('creating symbolic link:', cmd);
-  // execSync(cmd);
+  execSync(cmd);
 }
 
 /*
