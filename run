@@ -11,10 +11,10 @@ var yargs = require('yargs');
 var argv = yargs
   .usage('Usage: $0 <command> [options]')
   .example('$0 build --git-tag=v3.10.0 --docs-version=3.10.0', 'Builds the documents for version 3.10.0 using git tag v3.10.0.')
-  .example('$0 build --git-tag=7c6200265787f548eb2ba4db392833791b518310 --docs-version=3.8.1', 'Builds the mkdocs project using the tag/hash and docs-version.')
-  .example('$0 delete --docs-version', 'Removes specified version.  Throw error if specified version is linked by other versions.')
-  .example('$0 delete --docs-version --delete-links', 'Removes specified version.  Also removes all verions linked to specified version as well.')
-  .example('$0 link --docs-version --target-version', 'Creates symbolic link in the "v" directory and add a new version (docs-version) to the versions.json file.')
+  .example('$0 build --git-tag 7c6200265787f548eb2ba4db392833791b518310 --docs-version 3.8.1', 'Builds the mkdocs project using the tag/hash and docs-version.')
+  .example('$0 delete --docs-version 3.9.2', 'Removes the specified version.  Will throw an error if other versions link to the specified version.')
+  .example('$0 delete --docs-version 3.9.2 --delete-links', 'Removes the specified version.  Also removes all the verions linked to the specified version.')
+  .example('$0 link --docs-version 3.9.0 --target-version 3.9.2', 'Creates symbolic link in the "v" directory 3.9.0 -> 3.9.2 and adds the 3.9.0 version to the versions.json file.')
   .command('build', 'Builds a documentation version using the specified git-tag and makes contents available for testing in site folder.')
   .command('delete', 'Removes a version.  Note: Delete does not handle linked versions correctly.')
   .command('link', 'Links one version to another by creating a symbolic link in the "v" directory.  Also adds version (docs-version) to the versions.json file.')
@@ -43,8 +43,8 @@ var argv = yargs
     type: 'boolean',
     default: false
   })
-  .option('build-from-deploy-branch', {
-    describe: 'Set to true if you want to build specified version starting from deploy branch contents.  If false, new version is created into current site folder.',
+  .option('build-skip-deployed-versions', {
+    describe: 'Builds specified version without starting from deploy branch contents as base.  Contents of the site folder are preserved and used as the base for the build.',
     type: 'boolean',
     default: false
   })
@@ -109,16 +109,16 @@ function checkoutDeployBranch() {
  * Copy existing contents from deploy branch to build directory
  */
 function copyDeployBranchToBuildDir() {
-  // we want to create new build into existing gh-page contents,
-  // let's clean the buildDir before we copy files to it.
-  var cmd = 'rm -rf ' + buildDir + ' && mkdir -p ' + buildDir;
+  // Clean up the contents of build directory, but save the .custom folder (hence the /* pattern )
+  // and then copy the contents of the deploy branch into build directory
+  var cmd = 'rm -rf ' + buildDir + '/*';
   log('removing all contents from build directory:', cmd);
   execSync(cmd);
 
   checkoutDeployBranch();
 
   // copy files to build directory
-  cmd = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + buildDir;
+  cmd = 'rsync -av --exclude=".*" --exclude=".*/" --exclude="node_modules/" --exclude="site/" . ' + buildDir;
   log('copying contents to build dir:', cmd);
   execSync(cmd);
 
@@ -300,9 +300,9 @@ function copyLatestVersionToBuildRoot() {
 /*
  * Copy temp custom directory to root of build directory, ensuring the build always has the latest custom files
  */
-function copyCustomDirectoryToBuildRoot() {
-  var cmd = 'rm -rf ' + buildDir + '/custom && cp -rp ' + buildDir + '/.custom ' + buildDir + '/custom';
-  log('copying latest custom files to build root:', cmd);
+function moveCustomDirectoryToBuildRoot() {
+  var cmd = 'rm -rf ' + buildDir + '/custom && mv ' + buildDir + '/.custom ' + buildDir + '/custom';
+  log('moving custom files to build root:', cmd);
   execSync(cmd);  
 }
 
@@ -427,7 +427,7 @@ function build() {
   initBuildDir();
   copyCustomDirToBuildDir();
   
-  if (argv.buildFromDeployBranch) {
+  if (!argv.buildSkipDeployedVersions) {
     copyDeployBranchToBuildDir();
   }
 
@@ -439,7 +439,7 @@ function build() {
   cleanGitBranch();
   checkoutPrevBranch();
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
@@ -451,7 +451,7 @@ function deleteVersion() {
   initBuildDir();
   copyCustomDirToBuildDir();
 
-  if (argv.buildFromDeployBranch) {
+  if (!argv.buildSkipDeployedVersions) {
     copyDeployBranchToBuildDir();
   }
 
@@ -465,7 +465,7 @@ function deleteVersion() {
   });
 
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
@@ -476,13 +476,13 @@ function link() {
   initBuildDir();
   copyCustomDirToBuildDir();
 
-  if (argv.buildFromDeployBranch) {
+  if (!argv.buildSkipDeployedVersions) {
     copyDeployBranchToBuildDir();
   }
   createSymbolicLink();
   updateVersionsJson('link');
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
