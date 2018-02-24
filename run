@@ -10,21 +10,24 @@ var yargs = require('yargs');
 
 var argv = yargs
   .usage('Usage: $0 <command> [options]')
-  .example('$0 build --git-tag=3.10.0 --docs-version=3.10.0', 'Builds the mkdocs project using the tag/hash and docs-version.')
+  .example('$0 build --git-tag=v3.10.0 --docs-version=3.10.0', 'Builds the documents for version 3.10.0 using git tag v3.10.0.')
   .example('$0 build --git-tag=7c6200265787f548eb2ba4db392833791b518310 --docs-version=3.8.1', 'Builds the mkdocs project using the tag/hash and docs-version.')
   .example('$0 delete --docs-version', 'Removes specified version.  Throw error if specified version is linked by other versions.')
   .example('$0 delete --docs-version --delete-links', 'Removes specified version.  Also removes all verions linked to specified version as well.')
   .example('$0 link --docs-version --target-version', 'Creates symbolic link in the "v" directory and add a new version (docs-version) to the versions.json file.')
-  .demand(1)
   .command('build', 'Builds a documentation version using the specified git-tag and makes contents available for testing in site folder.')
   .command('delete', 'Removes a version.  Note: Delete does not handle linked versions correctly.')
   .command('link', 'Links one version to another by creating a symbolic link in the "v" directory.  Also adds version (docs-version) to the versions.json file.')
   .command('deploy', 'Deploy contents of build directory to the deploy branch and push the changes to Github.')
+  .demandCommand(1)
   .option('git-tag', {
-    describe: 'The tag to checkout.  docs-version is not necessary if tag is provided.'
+    describe: 'The git tag, hash, or branch to check out and use as the starting point for the docs build.',
+    type: 'string'
   })
   .option('docs-version', {
-    describe: 'The version to tag the build as.'
+    describe: 'The version to tag the build as.',
+    type: 'string',
+    demandOption: true
   })
   .option('target-version', {
     describe: 'The version which the symbolic link version is pointed to.  Typically, the target-version contains the actual documentation files.',
@@ -55,7 +58,6 @@ var argv = yargs
     type: 'string',
     default: 'origin'
   })
-  .demandOption(['docs-version'])
   .count('v')
   .alias('v', 'verbose')
   .help('h')
@@ -132,6 +134,11 @@ function copyDeployBranchToBuildDir() {
  * Checkout hash or tag to be built
  */
 function checkoutGitTag() {
+
+  if (!argv.gitTag || argv.gitTag.length < 1) {
+    throw new Error('Git tag was not provided.  See help for more details.'); 
+  }
+
   var cmd = 'git checkout ' + argv.gitTag;
   log('run git checkout:', cmd);
   execSync(cmd);
@@ -442,7 +449,7 @@ function build() {
     copyDeployBranchToBuildDir();
   }
 
-  checkoutGitTag()
+  checkoutGitTag();
   injectCustomDirectory();
   injectCustomLoaderJs();
   runMkdocsBuildCommand();
