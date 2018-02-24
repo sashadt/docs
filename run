@@ -300,9 +300,9 @@ function copyLatestVersionToBuildRoot() {
 /*
  * Copy temp custom directory to root of build directory, ensuring the build always has the latest custom files
  */
-function copyCustomDirectoryToBuildRoot() {
-  var cmd = 'rm -rf ' + buildDir + '/custom && cp -rp ' + buildDir + '/.custom ' + buildDir + '/custom';
-  log('copying latest custom files to build root:', cmd);
+function moveCustomDirectoryToBuildRoot() {
+  var cmd = 'rm -rf ' + buildDir + '/custom && mv ' + buildDir + '/.custom ' + buildDir + '/custom';
+  log('moving custom files to build root:', cmd);
   execSync(cmd);  
 }
 
@@ -439,7 +439,7 @@ function build() {
   cleanGitBranch();
   checkoutPrevBranch();
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
@@ -465,7 +465,7 @@ function deleteVersion() {
   });
 
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
@@ -482,7 +482,7 @@ function link() {
   createSymbolicLink();
   updateVersionsJson('link');
   copyLatestVersionToBuildRoot();
-  copyCustomDirectoryToBuildRoot();
+  moveCustomDirectoryToBuildRoot();
 
 }
 
