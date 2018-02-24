@@ -293,7 +293,6 @@ function updateVersionsJson(mode, version) {
   });
   log('latestVersion is ' + latestVersion);
 
-  // log('json', json);
   log('saving versions json to ' + file);
   fs.writeFileSync(file, JSON.stringify(json));
 }
@@ -301,7 +300,7 @@ function updateVersionsJson(mode, version) {
 /*
  * Copy latest version content to the root directory of build directory
  */
-function copyLatestVersionToRoot() {
+function copyLatestVersionToBuildRoot() {
   if (latestVersion) {
     var cmd = 'cp -r ' + buildDir + '/v/' + latestVersion + '/* ' + buildDir;
     log('copying latest version to root:', cmd);
@@ -310,12 +309,11 @@ function copyLatestVersionToRoot() {
 }
 
 /*
- * Copy custom directory to custom directory of build directory
- * This way, the root custom directory always has the latest custom codes
+ * Copy temp custom directory to root of build directory, ensuring the build always has the latest custom files
  */
-function copyCustomDirectoryToRoot() {
-  var cmd = 'cp ' + buildDir + '/.custom/* ' + buildDir + '/custom';
-  log('copying latest custom codes to root custom directory:', cmd);
+function copyCustomDirectoryToBuildRoot() {
+  var cmd = 'rm -rf ' + buildDir + '/custom && cp -rp ' + buildDir + '/.custom ' + buildDir + '/custom';
+  log('copying latest custom files to build root:', cmd);
   execSync(cmd);  
 }
 
@@ -339,14 +337,14 @@ function deployBuildDir() {
   // add and commit contents to deploy branch
   cmd = 'git add -A && git commit -m "deploying latest docs for v' + argv.docsVersion + '"';
   log('run git commit:', cmd);
-  //TESTING TODO REMOVE THIS COMMENT execSync(cmd);
+  execSync(cmd);
 
   // push changes to remote Github
   cmd = 'git push ' + argv.deployRemote + ' ' + argv.deployBranch;
   log('pushing deploy branch to Github:', cmd);
-  //TESTING TODO REMOVE THIS COMMENT execSync(cmd);
+  execSync(cmd);
 
-  // checkoutPrevBranch();
+  checkoutPrevBranch();
 }
 
 /*
@@ -451,8 +449,8 @@ function build() {
   updateVersionsJson('add');
   cleanGitBranch();
   checkoutPrevBranch();
-  copyLatestVersionToRoot();
-  copyCustomDirectoryToRoot();
+  copyLatestVersionToBuildRoot();
+  copyCustomDirectoryToBuildRoot();
 
 }
 
@@ -477,8 +475,8 @@ function deleteVersion() {
     updateVersionsJson('delete', version);
   });
 
-  copyLatestVersionToRoot();
-  copyCustomDirectoryToRoot();
+  copyLatestVersionToBuildRoot();
+  copyCustomDirectoryToBuildRoot();
 
 }
 
@@ -494,8 +492,8 @@ function link() {
   }
   createSymbolicLink();
   updateVersionsJson('link');
-  copyLatestVersionToRoot();
-  copyCustomDirectoryToRoot();
+  copyLatestVersionToBuildRoot();
+  copyCustomDirectoryToBuildRoot();
 
 }
 
