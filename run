@@ -98,7 +98,7 @@ function copyCustomDirToBuildDir() {
  * Run git checkout of branch used for deploys
  */
 function checkoutDeployBranch() {
-  var cmd = 'git checkout' + yargs.deployBranch;
+  var cmd = 'git checkout ' + argv.deployBranch;
   log('checking out deploy branch:', cmd);
   execSync(cmd);
 }
@@ -320,61 +320,33 @@ function copyCustomDirectoryToRoot() {
 }
 
 /*
- * Add changes and commit to deploy branch
- */
-function commitDeployBranch() {
-  // need to create an .gitignore file to site some items
-  var file = '.gitignore';
-  var content = 'site/\nnode_modules/\n.idea\n*.iml\n.DS_Store';
-  log('creating gitignore file:', file);
-  log('content:', content);
-  fs.writeFileSync(file, content);
-
-  // add files to branch
-  var cmd = 'git add .';
-  log('run git add:', cmd);
-  execSync(cmd);
-
-  // commit with message
-  cmd = 'git commit -m "saving build v' + argv.docsVersion + '"';
-  log('run git commit:', cmd);
-  execSync(cmd);
-}
-
-/*
  * Copy contents from build directory to deploy branch
  */
 function deployBuildDir() {
-  // write script file to clean the root of the deploy branch
-  var file = buildDir + '/.cleaner';
-  var content = 'shopt -s extglob\nrm -rf ./!(node_modules|site)';
-  log('creating cleaner, file:', file);
-  log('content:', content);
-  fs.writeFileSync(file, content);
 
-  // checkout branch
   checkoutDeployBranch();
 
-  // remove all files
-  var cmd = '/bin/bash ' + file;
-  log('executing cleaner script:', cmd);
+  // remove all files checked out from deploy branch
+  var cmd = 'ls | grep -v ^node_modules$ | grep -v ^site$ | xargs rm -rf';
+  log('removing contents of current deploy branch:', cmd);
   execSync(cmd);
 
   // copy files from build directory to branch
   cmd = 'cp -R ' + buildDir + '/* .';
-  log('copying files from build directory:', cmd);
+  log('adding files from build directory:', cmd);
   execSync(cmd);
 
-  // commit to branch
-  commitDeployBranch();
+  // add and commit contents to deploy branch
+  cmd = 'git add -A && git commit -m "deploying latest docs for v' + argv.docsVersion + '"';
+  log('run git commit:', cmd);
+  //TESTING TODO REMOVE THIS COMMENT execSync(cmd);
 
-  // push to Github
-  cmd = 'git push ' + argv.deployRemote + ' ' + yargs.deployBranch;
+  // push changes to remote Github
+  cmd = 'git push ' + argv.deployRemote + ' ' + argv.deployBranch;
   log('pushing deploy branch to Github:', cmd);
-  execSync(cmd);
+  //TESTING TODO REMOVE THIS COMMENT execSync(cmd);
 
-
-  checkoutPrevBranch();
+  // checkoutPrevBranch();
 }
 
 /*
