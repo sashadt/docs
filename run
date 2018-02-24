@@ -283,12 +283,14 @@ function updateVersionsJson(mode, version) {
   });
 
   // save latest version for later use
-  for(var i = 0; i < json.length; i++) {
-    if (json[i].released) {
-      latestVersion = json[i].version;
-      break;
+  _.each(json, function(row) {
+    if (!latestVersion && row.released) {
+      latestVersion = row.version;
+      row.latest = true;
+    } else {
+      row.latest = false;
     }
-  }
+  });
   log('latestVersion is ' + latestVersion);
 
   // log('json', json);
