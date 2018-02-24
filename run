@@ -109,9 +109,9 @@ function checkoutDeployBranch() {
  * Copy existing contents from deploy branch to build directory
  */
 function copyDeployBranchToBuildDir() {
-  // we want to create new build into existing gh-page contents,
-  // let's clean the buildDir before we copy files to it.
-  var cmd = 'rm -rf ' + buildDir + ' && mkdir -p ' + buildDir;
+  // Clean up the contents of build directory, but save the .custom folder (hence the /* pattern )
+  // and then copy the contents of the deploy branch into build directory
+  var cmd = 'rm -rf ' + buildDir + '/*';
   log('removing all contents from build directory:', cmd);
   execSync(cmd);
 
