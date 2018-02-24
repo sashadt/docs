@@ -118,7 +118,7 @@ function copyDeployBranchToBuildDir() {
   checkoutDeployBranch();
 
   // copy files to build directory
-  cmd = 'rsync -av --exclude="\\..*" --exclude="node_modules/*" --exclude="site" . ' + buildDir;
+  cmd = 'rsync -av --exclude=".*" --exclude=".*/" --exclude="node_modules/*" --exclude="site/" . ' + buildDir;
   log('copying contents to build dir:', cmd);
   execSync(cmd);
 
