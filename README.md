@@ -32,7 +32,7 @@ Currently docs.datatorrent.com is hosted on Github Pages.  The deployment requir
 
 ## Deployment
 
-**NOTE** Please make sure to use mkdocs v0.16.0 or later by running `mkdocs --version`.  If you have an older version of mkdocs installed upgrade with:
+**NOTE** Please make sure to use mkdocs v0.17.2 or later by running `mkdocs --version`.  If you have an older version of mkdocs installed upgrade with:
 
 ```bash
 sudo pip install --upgrade mkdocs
