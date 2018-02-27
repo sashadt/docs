@@ -235,7 +235,6 @@ The following known issues are included in RTS 3.10:
 - Proxy URL for newly created Superset service (from UI) does not work. (SPOI-13454)
 - GATEWAY\_CONNECT\_ADDRESS parameter is misspelt as GATEWAY\_CONNECT\_ADDRESSS. (SPOI-13449)
 - Fraud App: Physical DAG is broken (SPOI-13388)
-- Security vulnerability is caused due to Key tab copy and incorrect permission issues. (SPOI-13366)
 - Application fails when both replay and archive properties are set to True. ( SPOI-13202)
 Release date: Feb 21, 2018
 
