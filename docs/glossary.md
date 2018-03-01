@@ -35,7 +35,7 @@
 | **Drools** | Drools is a rules engine which is used to enable customers to set rules on data to achieve business outcomes. |
 | **DT Gateway** | This is the main component of DataTorrent RTS which is accessible through [dtManage](http://docs.datatorrent.com/dtmanage/). It is a Java-based multi-threaded web server that allows you to easily access information and perform various operations on DataTorrent RTS. dtGateway constantly communicates with all the running RTS App Masters (StrAM), as well as the Node Managers and the Resource Manager in the Hadoop cluster, to gather all the information and to perform all the operations. It can run on any node in a  Hadoop cluster or any other node that can access the Hadoop nodes, and is installed as a system service automatically by the RTS installer. |
 | **DT Malhar** | A private copy of Apache Apex Malhar code on which DataTorrent develop features. |
-| **dtConsole** | Collection of UI pages (dtManage, dtDashboard, dtAssemble) that is served by DT Gateway. |
+| **dtConsole** | Collection of UI pages (dtManage, dtDashboard) that is served from DT Gateway. |
 | **dtDashboard** | [dtDashboard](http://docs.datatorrent.com/dtdashboard/) is the visualization component of DataTorrent RTS and is seamlessly integrated with the metrics framework. |
 | **dtManage** | The web based interface to install/upload/import, configure, manage, and monitor Apex applications running in a Hadoop cluster. |
 | **Engines** | Engines are the frameworks that are used to deliver micro data services such as Apex, Druid, and Drools. |
