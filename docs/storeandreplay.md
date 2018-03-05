@@ -28,8 +28,8 @@ This step is optional and is used to create alternative rules for your what-if a
 
 To replay data, you must create an application configuration, add the applicable properties, apply the required rules, and launch the application with this configuration.  Using the properties, you specify the following:
 
-- **Enable replay**: The store function is set to false and the replay is set to true.
-- **SrcArchiveAppName**: Kafka time-offset mapping is read from DB related to SrcArchiveAppName. SrcArchiveAppName is the name of the separate instance of the application that stores the Kafka topic offset in HDFS.
+- **enableReplay**: The store function is set to false and the replay is set to true.
+- **srcArchiveAppName**: Kafka time-offset mapping is read from DB related to SrcArchiveAppName. SrcArchiveAppName is the name of the separate instance of the application that stores the Kafka topic offset in HDFS.
 
   **Note**: The "Instance name" is usually a different configured name of the same application.
 
