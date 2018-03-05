@@ -15,9 +15,9 @@
 
 3. Download the package, after DataTorrent Account Take Over Prevention Application package is imported.
    
-   i. Navigate to **Develop** > **Application Package** > **DataTorrent Account TakeOver Prevention Application**.
+    i. Navigate to **Develop** > **Application Package** > **DataTorrent Account TakeOver Prevention Application**.
    
-   i. Click **launch** drop-down and select **download package**.![](images/applications/quickstart_launch/atoapppackage.png)
+    ii. Click **launch** drop-down and select **download package**.![](images/applications/quickstart_launch/atoapppackage.png)
    
 4. Get the Geolite Maxmind Database (Use Hadoop user or user that has access to Hadoop). Getting the Geolite Maxmind Database using Bash:
   
@@ -35,26 +35,26 @@
   
 6. Create configuration for ATO.
    
-   i. Navigate to **Develop** > **ApplicationPackages** > **+ new configuration** ![](images/applications/quickstart_launch/atoapppacknewconfig.png)
+    i. Navigate to **Develop** > **ApplicationPackages** > **+ new configuration** ![](images/applications/quickstart_launch/atoapppacknewconfig.png)
    
-   ii. Click **create**. ![](images/applications/quickstart_launch/atonewconfig1.png)
+    ii. Click **create**. ![](images/applications/quickstart_launch/atonewconfig1.png)
    
 7. Enter the Required Properties. 
 
 8. Configure the **CEP Workbench Service**.
 
-   i. On the configuration page, scroll down.
+    i. On the configuration page, scroll down.
    
-   ii. Select the **drools-workbench** and click **configure**.
+    ii. Select the **drools-workbench** and click **configure**.
    
-   iii. Click **save** after specifying the configuration.
+    iii. Click **save** after specifying the configuration.
     **Note:** Ensure that the Proxy Address is set correctly.
     
 9. Configure **Online Analytics Services**.
 
-   i. Select the **ato-online-analytics-service** and click **configure**. ![](images/applications/quickstart_launch/atoconfigureservice1.png)
+    i. Select the **ato-online-analytics-service** and click **configure**. ![](images/applications/quickstart_launch/atoconfigureservice1.png)
    
-   ii. Click **save** after the configuration is set correctly.
+    ii. Click **save** after the configuration is set correctly.
    
    **Note:** Make sure **KafkaBrokers** and the **KafkaTopic** are set correctly.
    
@@ -84,10 +84,10 @@
 2. Add Optional Properties.
 
     i. In **Optional Properties**, click **+add** to add Optional Properties. ![](images/applications/quickstart_launch/atouseractivitynewconfig2.png) 
-   **Note:**   **Kafka** topic of the DataGenerator should be same as the **Transaction Receiver** topic of the Omni Channel Fraud Prevention Application.
-   
-   ii. Click **save**.
-   
-   iii. Click **launch** to launch the Data Generator.
+    **Note:**   **Kafka** topic of the DataGenerator should be same as the **Transaction Receiver** topic of the Omni Channel Fraud Prevention Application.
+    
+    ii. Click **save**.
+    
+    iii. Click **launch** to launch the Data Generator.
 
 
