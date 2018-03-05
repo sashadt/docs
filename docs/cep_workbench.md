@@ -96,10 +96,11 @@ To configure rules within the CEP Workbench, you must complete the following ste
 
 	1. In the same application configuration, add the following properties in the **Optional Properties** section.
 	
-	| **Property** |**Description** |**Example**|
-	| --- | --- | --- |
-	| dt.operator.FraudRulesExecutor.prop.kieSessionName |If rules are to be loaded from application classpath, then specify the name of the session to use. This is created using CEP Worknbench. |UserActivity-rules-session|
-	| dt.operator.FraudRulesExecutor.prop.kiebaseName |If rules are to be loaded from application classpath, then specify the name of the kie base (rule) to use . This is created using CEP Workbench. |ato-rules|
+		| **Property** |**Description** |**Example**|
+		| --- | --- | --- |
+		| dt.operator.FraudRulesExecutor.prop.kieSessionName |If rules are to be loaded from application classpath, then specify the name of the session to use. This is created using CEP Worknbench. |UserActivity-rules-session|
+		| dt.operator.FraudRulesExecutor.prop.kiebaseName |If rules are to be loaded from application classpath, then specify the name of the kie base (rule) to use . This is created using CEP Workbench. |ato-rules|
+	
 	
 	2. Click **Save** and launch the application.
 
