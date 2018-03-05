@@ -32,8 +32,7 @@
       
 7. Create a New Configuration for the OmniChannelFrudPreventationApp.
       1. Go to **Develop** > **Application Configurations** > **+ create new.**
-      2. Select a Source Application and enter the Configuration Name and then click **Create**. ![]  (images/applications/quickstart_launch/newappconfig.png)
-
+      2. Select a Source Application and enter the Configuration Name and then click **Create**. ![](images/applications/quickstart_launch/newappconfig.png)
 8. Enter the Required Properties. ![](images/applications/quickstart_launch/requiredpropertiesfpa.png)
 9. Configure the **CEP Workbench Service**.
       1. On the configuration page, scroll down.
