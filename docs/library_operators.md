@@ -18,8 +18,8 @@ The following operators, classified into four groups, are available:
       and [Java Doc](https://ci.apache.org/projects/apex-malhar/apex-malhar-javadoc-release-3.6/com/datatorrent/lib/io/jms/JMSStringInputOperator.html)
 
 - Process
-    + PMML Operator [Guide](PMML_operator.md)
-    + Drools Operator [Guide](drools_operator.md)
+    + PMML Operator [Guide](operators/PMML_operator.md)
+    + Drools Operator [Guide](operators/drools_operator.md)
     + Block Reader [Guide](http://apex.apache.org/docs/malhar/operators/block_reader/)
       and [Java Doc](https://ci.apache.org/projects/apex-malhar/apex-malhar-javadoc-release-3.6/com/datatorrent/contrib/parser/AbstractBlockReader.html)
     + CSV Parser [Guide](http://apex.apache.org/docs/malhar/operators/csvParserOperator/)
