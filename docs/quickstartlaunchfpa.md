@@ -14,22 +14,19 @@
 4. Navigate to **Develop** > **Application Package** > **Data Torrent Omni Channel Fraud Prevention Application.** Click **launch** drop-down and select **download package**. ![](images/applications/quickstart_launch/downloadpackage.png)
 5. Get the Geolite Maxmind Database (Use Hadoop user or user that has access to Hadoop). 
             Getting Geolite Maxmind Database using Bash: 
-      
-            ```
+            
             url http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz -o GeoLite2-City.tar.gz
             tar -zxvf GeoLite2-City.tar.gz 
             hdfs dfs put GeoLite2-City*/GeoLite2-City.mmdb city.mmdb
-            ```
+            
 6. Generate lookup data which will be used by enrichment operators in the DAG. Use Hadoop user or any user that has access to Hadoop.
             Generating sample lookup data using Bash: 
       
-            ```
             mkdir fpa_package
             cd fpa_package
             unzip ../dt-cep-omni-fraud-prevention-app-1.4.0.apa 
             java -cp app/*:lib/*:`hadoop classpath` com.datatorrent.cep.transactionGenerator.DumpLookupData lookupdata
-            ```
-      
+                  
 7. Create a New Configuration for the OmniChannelFrudPreventationApp.
             1. Go to **Develop** > **Application Configurations** > **+ create new.**
             2. Select a Source Application and enter the Configuration Name and then click **Create**. ![](images/applications/quickstart_launch/newappconfig.png)
