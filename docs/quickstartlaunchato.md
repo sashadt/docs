@@ -78,13 +78,15 @@
 ### Launch Test Data Generator Application
 
 1. Create new configuration for the **UserActivityGenerator**.
-   - Go to **Develop** > **Application Packages** > **+ new configuration**.![](images/applications/quickstart_launch/atouseractivitynewconfig.png) ![](images/applications/quickstart_launch/atouseractivitynewconfig1.png)
-2. Add Optional Properties.
-   1. In **Optional Properties** , click **+add** to add Optional Properties. ![](images/applications/quickstart_launch/atouseractivitynewconfig2.png) 
 
+   - Go to **Develop** > **Application Packages** > **+ new configuration**.![](images/applications/quickstart_launch/atouseractivitynewconfig.png) ![](images/applications/quickstart_launch/atouseractivitynewconfig1.png)
+   
+2. Add Optional Properties.
+    i. In **Optional Properties** , click **+add** to add Optional Properties. ![](images/applications/quickstart_launch/atouseractivitynewconfig2.png) 
    **Note:**   **Kafka** topic of the DataGenerator should be same as the **Transaction Receiver** topic of the Omni Channel Fraud Prevention Application.
    
-   2. Click **save**.
-   3. Click **launch** to launch the Data Generator.
+   ii. Click **save**.
+   
+  iii. Click **launch** to launch the Data Generator.
 
 
