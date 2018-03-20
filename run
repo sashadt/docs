@@ -174,7 +174,11 @@ function injectCustomTheme() {
  * Run the mkdocs build command, make sure we build the new contents into the version directory
  */
 function runMkdocsBuildCommand() {
-  var cmd = 'mkdocs build -c -d ' + versionDir;
+  var cmd = 'rm -rf ' + versionDir;
+  log('removing version directory before running build in case it is a symbolic link:', cmd);
+  execSync(cmd);
+
+  cmd = 'mkdocs build -c -d ' + versionDir;
   log('Executing mkdocs build:', cmd);
   execSync(cmd);
 }
@@ -225,6 +229,15 @@ function updateVersionsJson(mode, version) {
         // version already in array, set property
         json[idx].gitTag = argv.gitTag;
         json[idx].released = argv.released;
+        delete json[idx].link;
+        delete json[idx].targetVersion;
+
+        // update linked versions to have this gitTag if rebuilding existing version
+        _.each(json, function(row) {
+          if (row.targetVersion === json[idx].version) {
+            row.gitTag = json[idx].gitTag;
+          }
+        });
       }
       break;
     case 'link':
@@ -253,6 +266,7 @@ function updateVersionsJson(mode, version) {
       } else {
         // version already in array, set property
         json[idx].gitTag = json[targetIdx].gitTag;
+        json[idx].targetVersion = json[targetIdx].version;
         json[idx].released = argv.released;
         json[idx].link = true;
       }
@@ -473,6 +487,11 @@ function deleteVersion() {
  * creates a symbolic link from one version to another
  */
 function link() {
+  if (argv.docsVersion === argv.targetVersion) {
+    // docs-version and target-verion cannot be the same
+    throw new Error('Cannot link docs-version to itself.')
+  }
+
   initBuildDir();
   copyCustomDirToBuildDir();
 
