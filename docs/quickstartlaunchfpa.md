@@ -10,64 +10,65 @@
 
 1. Navigate to the **AppFactory page** > **Financial Services** > **Omni-Channel Payment Fraud Prevention.**
 2. In the DataTorrent Omni Channel Fraud Prevention Application box, click **import**. ![](images/applications/quickstart_launch/import.png)
-3. Download the application after DataTorrent Omni Channel Fraud Prevention Application package is imported.
-4. Navigate to **Develop** > **Application Package** > **Data Torrent Omni Channel Fraud Prevention Application.** Click **launch** drop-down and select **download package**. ![](images/applications/quickstart_launch/downloadpackage.png)
-5. Get the Geolite Maxmind Database (Use Hadoop user or user that has access to Hadoop). Getting Geolite Maxmind Database using Bash:
+3. Click on the **View Package** button to view the imported package, and click **download** button to download the package file.  The contents of the `.apa` will be used to generate lookup data. ![](images/applications/quickstart_launch/downloadpackage.png)
+4. Following steps will generate lookup data, which will be used by the enrichment operators.  Transfer the `.apa` file to the node where hadoop is installed, and execute the following commands on this node.  The last command needs to be executed as the user launching the application, which is `dtadmin` in the example below.
 
-            url http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz -o GeoLite2-City.tar.gz
-            tar -zxvf GeoLite2-City.tar.gz 
-            hdfs dfs put GeoLite2-City*/GeoLite2-City.mmdb city.mmdb
+        mkdir fpa_package && cd fpa_package
+        unzip ../dt-cep-omni-fraud-prevention-app-1.4.0.apa 
+        sudo -u dtadmin java -cp app/*:lib/*:`hadoop classpath` com.datatorrent.cep.transactionGenerator.DumpLookupData lookupdata
 
-6. Generate lookup data which will be used by enrichment operators in the DAG. Use Hadoop user or any user that has access to Hadoop. Generating sample lookup data using Bash:
+5. On the same node as in previous step, get the Geolite Maxmind Database and copy the city database to HDFS using the following commands:
 
-            mkdir fpa_package
-            cd fpa_package
-            unzip ../dt-cep-omni-fraud-prevention-app-1.4.0.apa 
-            java -cp app/*:lib/*:`hadoop classpath` com.datatorrent.cep.transactionGenerator.DumpLookupData lookupdata
+        curl http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz -o GeoLite2-City.tar.gz
+        tar -zxvf GeoLite2-City.tar.gz 
+        sudo -u dtadmin hdfs dfs put GeoLite2-City*/GeoLite2-City.mmdb city.mmdb
 
-7. Create a New Configuration for the OmniChannelFrudPreventationApp.
-
-    i. Go to **Develop** > **Application Configurations** > **+ create new.**
+6. Create a New Configuration for the OmniChannelFraudPreventationApp by clicking launch dropdown menu next to **OmniChannelFraudPreventionApp** and selecting **+ new configuration** option.
     
-    ii. Select a Source Application and enter the Configuration Name and then click **Create**. ![](images/applications/quickstart_launch/newappconfig.png)  
+    ![](images/applications/quickstart_launch/newappconfig.png)  
     
-8. Enter the Required Properties. ![](images/applications/quickstart_launch/requiredpropertiesfpa.png)
+7. Navigate to the newly created configuration and enter the following **Required Properties**.
 
-9. Configure the **CEP Workbench Service**.    
+    * Analytics Output Topic: `Analytics`
+    * Ato Facts Output Topic: `Ato`
+    * Facts Output Topic: `Facts`
+    * Fraud Transactions Output Topic: `Fraud`
+    * Transaction Receiver Topic: `Receiver`
+    * Kafka Broker List: `kafka-broker-adddress:kafka-broker-port` Ex: `node23:9092`
 
-    i. On the configuration page, scroll down.
+8. OPTIONAL: Configure the **CEP Workbench Service** if docker is configured on a different node from Gateway service.
+
+    a.  On configuration page in the **Services** section, select the **drools-workbench** and click **configure**.  
     
-    ii. Select the **drools-workbench** and click **configure**.![](images/applications/quickstart_launch/configservicefpa1.png)
+    b.  In the **Gateway Proxy Configuration** section replace the default **Proxy Address** with the location of the remote docker host.  ![](images/applications/quickstart_launch/configservicefpa1.png)
     
-    iii. Click **save** after specifying the configuration. **Note:** Ensure that the Proxy Address is set correctly.
+    c.  Click **save** after confirming the changes.
             
-10. Configure the **Online Analytics Service**.
+9. Configure the **OAS (Online Analytics Service)** to provide the correct **KafkaBrokers** and **KafkaTopic**
            
-    i. Select the **fpa-online-analytics-service** and click **configure**.![](images/applications/quickstart_launch/configservicefpa2.png)
+    a.  On configuration page in the **Services** section, select the **fpa-online-analytics-service** and click **configure**.  
     
-    ii. Click **save** after specifying the configuration. **Note** :Ensure that the **KafkaBrokers** and the **KafkaTopic** is set correctly.
+    b.  Provide the same values as Kafka Broker and Analytics Output Topic in step 7 for `apex.app-param.kafkaBrokers` and `apex.app-param.kafkaTopic` properties. ![](images/applications/quickstart_launch/configservicefpa2.png)
+    
+    c. Click **save** after confirming that the **KafkaBrokers** and the **KafkaTopic** values are set correctly.
             
-11. Configure the **OAS Dashboards** service.
+10. Configure the **OAS Dashboards** service to specify Gateway ip and port in **Docker Run**
             
-    i. Select **superset-fpa** and click **configure**![](images/applications/quickstart_launch/configservicefpa3.png)
+    a. On configuration page in the **Services** section, select the **superset-fpa** and click **configure**.   
     
-    ii. Click **save** after specifying the configuration. **Note** : Ensure to set correct druid\_cluster IP and the Proxy Address.
+    b.  Replace `<GATEWAY_IP>` and `PORT=9090` to match the current Gateway ip and port. ![](images/applications/quickstart_launch/configservicefpa3.png)
+    
+    c.  OPTIONAL: In the **Gateway Proxy Configuration** section replace the default **Proxy Address** with the location of the remote docker host, if it is on a different node from Gateway.
+    
+    d. Click **save** after confirming the changes.
             
-12. Configure the Dashboards.
+           
+11. Save the configuration by clicking the **Save** button on the top right of the configuration page.
     
-    i. Click **configure**.![](images/applications/quickstart_launch/configpackagedashboardfpa.png)
-    
-    ii. From the **Select Replacement Applications** drop down, select the corresponding configuration name for both the dashboards.
-    
-    iii. Click **Save**.
-            
-13. Save the configuration.
+12. Launch the application by clicking **launch** button.
 
-    i. Click **Save.**
-    
-    ii. Click **launch** to launch the application.![](images/applications/quickstart_launch/launchfpa.png)
-      
-## Launch Test Data Generator Application
+
+## Launch Demo Data Generator Application
 
 1. Create **New Configuration** for the OmniChannelFraudPreventationDataGenerator.
 2. Go to **Develop** > **Application Packages > + new configuration.**
