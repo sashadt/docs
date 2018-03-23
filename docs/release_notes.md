@@ -1,66 +1,47 @@
 DataTorrent RTS Release Notes
 ========================================================================================================================
-Version: 3.10
+Version: 3.9.2
 ------------------------------------------------------------------------------------------------------------------------
+
+Release date: Mar 26, 2018
 
 DataTorrent RTS 3.10.1 version includes the following resolved issues and known issues.
 
 ### Resolved Issues
 
-KafkaExactlyOnceOutput Operator does not work with Kerberised cluster.
-(SPOI-13182)
+- **KafkaExactlyOnceOutput Operator does not work with Kerberised cluster.** [SPOI-13182]
 
-Provide real time trend Visualization.
-SPOI-13116
+- **Unable to set properties for POJOToAvro operator.** [SPOI-13493]
 
-Unable to set properties for POJOToAvro operator.
-SPOI-13493
+- **Provide a clean implementation for operators using Kerberos to connect to external systems such as Kafka and Hbase.** [SPOI-13001]
 
-Provide a clean implementation for operators using Kerberos to connect to external systems such as Kafka and Hbase.
-SPOI-13001
+- **Notification tab is visible even when the users are not logged in.** [SPOI-12957]
 
-**Notification** tab is visible even when the users are not logged in.
-SPOI-12957
+- **Application does not shutdown even after consuming the end offset in Kafka.** [SPOI-12955]
 
-Application does not shutdown even after consuming the end offset in Kafka.
-SPOI-12955
+- **Gateway returns wrong expiration date for license.** [SPOI-12730]
 
-Gateway returns wrong expiration date for license.
-SPOI-12730
+- **Create an operator that can monitor HDFS files and provide the query and filter functionality.** [SPOI-12249]
 
-Create an operator that can monitor HDFS files and provide the query and filter functionality.
-SPOI-12249
+- **Provide real time trend Visualization.**  [SPOI-13116]
 
 
 ### Known Issues
 
-SPOI-13561
-Out of Memory issue is shown while uploading the .apa file into gateway.
 
-SPOI-13219
-When a query returns multiple results data, it is not visible on the multi bar chart.
+- **Out of Memory issue is shown while uploading the .apa file into gateway.** [SPOI-13561]
 
-SPOI-12868
-System alerts (email) do not function in High Availability (HA) mode.
+- **When a query returns multiple results data, it is not visible on the multi bar chart.** [SPOI-13219]
 
-SPOI-12708
-Container requests are not sent when the node report checks for memory requested by the container.
+- **System Alerts (email) do not function in High Availability (HA) mode.** [SPOI-12868]
 
-SPOI-11044
-Auto restart fails on the gateway for  killed or failed applications.
+- **Container requests are not sent when the node report checks for memory requested by the container.** [SPOI-12708]
 
+- **Auto restart fails on the gateway for killed or failed applications.** [SPOI-11044]
+ 
 
 Version: 3.10
------------------SPOI-13182
-
-RT Trend Visualization (no alerting)
-
-
-ActiveMQ operator is not partitionable
-
-Properties not able to set to POJOToAvro operator
-
--------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 Companies want to gain quick insights and take action on impacting events at the speed of their businesses. DataTorrent's Real-time Streaming (RTS) platform makes it easy to deliver fast data analytics applications that drive business outcomes using the latest innovation in data science and machine learning. It integrates best-of-breed open source technology innovation to provide all the features that a business needs to develop and deliver best-in-class, fast data applications.
 
