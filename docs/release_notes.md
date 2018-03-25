@@ -9,9 +9,9 @@ DataTorrent RTS 3.10.1 version includes the following features, resolved issues,
 
 ### Features
 
-**HDFS Tail and Filter Operator is created that can monitor HDFS files and provide the query and filter functionality.
+- **HDFS Tail and Filter operator is added that can monitor HDFS files and provide the query and filter functionality.**
 
-**Development patterns in place to Kerberize Kafka operator.**
+- **Development patterns in place to Kerberize Kafka operator.**
 
 
 ### Resolved Issues
