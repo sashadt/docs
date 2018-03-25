@@ -26,7 +26,7 @@ DataTorrent RTS 3.10.1 version includes the following features, resolved issues,
 
 - **Gateway returns wrong expiration date for license.** [SPOI-12730]
 
-- **Provide real time trend Visualization.**  [SPOI-13116]
+- **Provide real time trend visualization.**  [SPOI-13116]
 
 
 ### Known Issues
