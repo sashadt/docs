@@ -5,7 +5,14 @@ Version: 3.10.1
 
 Release date: Mar 26, 2018
 
-DataTorrent RTS 3.10.1 version includes the following resolved issues and known issues.
+DataTorrent RTS 3.10.1 version includes the following features, resolved issues, and known issues.
+
+### Features
+
+**HDFS Tail and Filter Operator is created that can monitor HDFS files and provide the query and filter functionality.
+
+**Development patterns in place to Kerberize Kafka operator.**
+
 
 ### Resolved Issues
 
@@ -13,21 +20,16 @@ DataTorrent RTS 3.10.1 version includes the following resolved issues and known 
 
 - **Unable to set properties for POJOToAvro operator.** [SPOI-13493]
 
-- **Provide a clean implementation for operators using Kerberos to connect to external systems such as Kafka and Hbase.** [SPOI-13001]
-
 - **Notification tab is visible even when the users are not logged in.** [SPOI-12957]
 
 - **Application does not shutdown even after consuming the end offset in Kafka.** [SPOI-12955]
 
 - **Gateway returns wrong expiration date for license.** [SPOI-12730]
 
-- **Create an operator that can monitor HDFS files and provide the query and filter functionality.** [SPOI-12249]
-
 - **Provide real time trend Visualization.**  [SPOI-13116]
 
 
 ### Known Issues
-
 
 - **Out of Memory issue is shown while uploading the .apa file into gateway.** [SPOI-13561]
 
