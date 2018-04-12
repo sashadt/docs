@@ -101,14 +101,12 @@ $(function() {
 $(function startHeaderScrollspy() {
 
   function unsetActive(navEl) {
-    $(navEl).attr('style', '');
+    $(navEl).removeClass('highlight-active');
+    $(navEl).closest('ul').removeClass('section-expanded');
   }
   function setActive(navEl) {
-    $(navEl).attr('style',
-      'color: #404040;' +
-      'font-weight: bold;' +
-      'background-color: #d6d6d6;'
-    );
+    $(navEl).addClass('highlight-active');
+    $(navEl).closest('ul').addClass('section-expanded');
   }
 
   try {

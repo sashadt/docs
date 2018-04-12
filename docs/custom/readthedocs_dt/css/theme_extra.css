@@ -299,3 +299,21 @@ div.footer {
   font-size: 0.9em;
   color: #999;
 }
+
+.wy-menu-vertical ul.nav-l4 {
+  visibility: hidden;
+  height: 0;
+}
+
+/* Active highlight */
+.highlight-active {
+  color: #404040 !important; 
+  font-weight: bold !important;
+  background-color: #d6d6d6 !important;
+}
+
+.wy-menu-vertical ul.section-expanded, .highlight-active + ul.nav-l4 {
+  height: auto;
+  visibility: visible;
+}
+

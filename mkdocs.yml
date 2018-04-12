@@ -1,6 +1,5 @@
 site_name: DataTorrent Documentation
 google_analytics: ['UA-44586211-2', 'docs.datatorrent.com']
-site_favicon: favicon.ico
 pages:
 - DataTorrent RTS: index.md
 - Demos:
@@ -106,6 +105,16 @@ pages:
 - Glossary: glossary.md
 - Resources: additional_docs.md
 
+# DataTorrent theme
 theme:
     name: readthedocs
     custom_dir: 'docs/custom/readthedocs_dt'
+extra_css: 
+    - 'custom/readthedocs_dt/css/highlight.css'
+    - 'custom/readthedocs_dt/css/theme.css'
+    - 'custom/readthedocs_dt/css/theme_extra.css'    
+extra_javascript:
+    - 'custom/readthedocs_dt/js/highlight.pack.js'
+    - 'custom/readthedocs_dt/js/jquery-2.1.1.min.js'
+    - 'custom/readthedocs_dt/js/modernizr-2.8.3.min.js'
+    - 'custom/readthedocs_dt/js/theme.js'

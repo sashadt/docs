@@ -1,6 +1,3 @@
-Troubleshooting Guide
-===============================
-
 # DataTorrent RTS Download
 
 ##  Where can I download DataTorrent RTS software?
